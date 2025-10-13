@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -12,6 +12,32 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <div class="mainLogo">
+                <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com: une explosion de poudres de différentes couleurs avec le nom Up'n'Com écrit en jaune, façon pierre">
+            </div>
+            <nav>
+                <ul class="navLink">
+                    <li class="navItems">Services</li>
+                    <li class="navItems">Blog</li>
+                    <li class="navItems">Contact</li>
+                    <li class="navItems">A Propos</li>
+                    <li class="navItems inactive">PortFolio</li>
+                </ul>
+                <ul class="socials">
+                    <li class="navSocials"><a href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class: 'socialsIcon'}) }}</a></li>
+                    <li class="navSocials"><a href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class: 'socialsIcon'}) }}</a></li>
+                    <li class="navSocials"><a href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class: 'socialsIcon'}) }}</a></li>
+                </ul>
+            </nav>
+        </header>
+       
         {% block body %}{% endblock %}
+
+        <footer>
+            <div class="microFooter">
+                youhou!!!
+            </div>
+        </footer>
     </body>
 </html>

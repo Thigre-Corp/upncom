@@ -1,3 +1,73 @@
+@font-face {
+    font-family: Noto;
+    src: url(../fonts/NotoSans-Black.ttf);
+}
+@font-face {
+    font-family: Glacial;
+    src: url(../fonts/GlacialIndifference-Regular.otf);
+}
+@font-face {
+    font-family: Glacial;
+    src: url(../fonts/GlacialIndifference-Bold.otf);
+    font-style: bold;
+}
+@font-face {
+    font-family: Glacial;
+    src: url(../fonts/GlacialIndifference-Italic.otf);
+    font-style: italic;
+}
+
+
+:root{
+    /*Couleurs*/
+    --bg-gradient: linear-gradient(135deg, #46A2AC , #003F5D );
+    --violet: #982873;
+    --orange: #FFA825;
+    --bleu: #46A2AC;
+    --noir: #020202;
+    --gris: #F1E9EE;
+    font-family: "Glacial" , sans-serif;
+    --menuHeight: 2em;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color: skyblue;
+    height: 100vh;
+    background: var(--bg-gradient) no-repeat;
+}
+
+nav>ul{
+    text-decoration: none;
+    list-style: none;
+}
+
+.navItems{
+    background-color: var(--gris);
+    width: calc(fit-content + 2em);
+    height: var(--menuHeight);
+    color: var(--bleu);
+    border-radius: calc(var(--menuHeight)/4);
+    &:hover{
+        background-color: var(--noir);
+    }
+}
+
+.myriad-font{
+    font-family: "Noto", sans-serif;
+}
+
+.inactive{
+    display: hidden !important;
+}
+
+.mainLogo>img{
+   /* aspect-ratio: 1;*/
+    width: 283px;
+}
+
+.socialsIcon{
+    height: var(--menuHeight);
+    color: var(--gris);
 }
