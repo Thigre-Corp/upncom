@@ -1,8 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Up'n'Com - Votre Agence 'Com à Mulhouse{% endblock %}
 
 {% block body %}
+
+    <div class="heroVideo">
+        <video autoplay muted loop>
+            <source src="{{ asset('img/upncom.mp4') }}" type="video/mp4" />
+        </video>
+    </div>
 
     <h1 class="myriad-font";>Hello {{ controller_name }}! ✅</h1>
 

@@ -21,7 +21,7 @@ framework:
             messenger.bus.default: []
 
         routing:
-            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
+            # Symfony\Component\Mailer\Messenger\SendEmailMessage: async // évite la surcharge de la BDD avec le stockage des mails par message.
             Symfony\Component\Notifier\Message\ChatMessage: async
             Symfony\Component\Notifier\Message\SmsMessage: async
 

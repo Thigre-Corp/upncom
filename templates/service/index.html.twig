@@ -22,7 +22,7 @@
                 <td>{{ service.id }}</td>
                 <td>{{ service.titre }}</td>
                 <td>{{ service.contenu }}</td>
-                <td>{{ service.mediaURL }}</td>
+                <td><img src="{{ asset(service.mediaURL)}}>"</td>
                 <td>{{ service.emplacement }}</td>
                 <td>
                     <a href="{{ path('app_service_show', {'id': service.id}) }}">show</a>

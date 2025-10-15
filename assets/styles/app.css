@@ -28,46 +28,174 @@
     --gris: #F1E9EE;
     font-family: "Glacial" , sans-serif;
     --menuHeight: 2em;
+}
+
+*{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-body {
-    height: 100vh;
-    background: var(--bg-gradient) no-repeat;
-}
-
-nav>ul{
-    text-decoration: none;
-    list-style: none;
-}
-
-.navItems{
-    background-color: var(--gris);
-    width: calc(fit-content + 2em);
-    height: var(--menuHeight);
-    color: var(--bleu);
-    border-radius: calc(var(--menuHeight)/4);
-    &:hover{
-        background-color: var(--noir);
-    }
-}
-
-.myriad-font{
-    font-family: "Noto", sans-serif;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 700ms;
 }
 
 .inactive{
-    display: hidden !important;
+    display: none !important;
 }
 
-.mainLogo>img{
-   /* aspect-ratio: 1;*/
-    width: 283px;
+a{
+    text-decoration: none;
 }
 
-.socialsIcon{
-    height: var(--menuHeight);
-    color: var(--gris);
+body {
+    height: 100dvh;
+    width: stretch;
+    background: var(--bg-gradient) no-repeat;
+}
+
+header{
+        display: flex;
+        position: fixed;
+        width: 100vw;
+        left: 0;
+        height: 2.5em;
+        z-index: 3;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+}
+
+.heroVideo{
+    width: 100vw;
+    height: 80vh;
+    background-color: #020202;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    video{
+        margin: auto;
+        height: 100%;
+        aspect-ratio: cover;
+    }
+}
+.mainLogo img{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 300px;
+    aspect-ratio: cover; 
+}
+
+#navbar{
+    font-size: 2em; 
+    display: inherit;
+    padding: 0.2em .5em;
+    input[type ="checkbox"]{
+        display: none;
+    }
+
+    li{
+        display: inline;
+        margin: auto;
+        list-style-type: none;
+    }
+    a{
+        background-color: var(--gris);
+        color: var(--bleu);
+        padding: 0 .5em;
+        border-radius: .25em;
+    }
+    a:hover{
+        background-color: var(--noir);
+        border: solid var(--gris);
+    }
+
+    .socials{
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 0;
+        right : 2rem; 
+        a{
+            background-color: transparent;
+            color:var(--gris);
+            padding: 2px;
+            .socialsIcon{
+                height: 2.5rem;
+            }
+        }
+        svg{
+            margin: .25em;
+        }
+        a:hover{
+            border: none;
+        }
+        svg:hover{
+            color: var(--bleu);
+            border: solid var(--gris);
+        }
+    }
+}
+
+
+/*-----RESPONSIVE------*/
+@media only screen and (max-width : 900px) {
+   
+    #toggleMenu{
+        background-color: var(--blackAlpha);
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: -15em;
+        right: 10vw;
+        transition: all 1.5s ease ;
+        ul>li{
+          display: inherit;
+            padding: 2px;
+            border-bottom: 2px solid var(--goldLight);
+        }
+        .socials{
+            position: static;
+        }
+    }
+    /*-----MENU BURGER-----*/
+    .burgerSign{
+        position: absolute;
+        z-index: 15;
+        background-color: var(--gris);
+        display: block;
+        height: 2em;
+        width: 2em ;
+        top: 0.2em;
+        right: 10vw;
+        border-radius: .4em;
+     }
+    .burgerLine{
+        background-color: var(--violet);
+        z-index: 16;
+        margin: 11% auto;
+        width: 90%;
+        border: .2em solid var(--noir);
+        border-radius: 1em;
+    }
+    #burgerQuizz{
+        opacity: 0;
+        cursor: pointer;
+    }
+    #burgerQuizz:checked ~ #toggleMenu{
+        display: block;
+        top: 2.5em;
+    }
+    #burgerQuizz:checked ~ .burgerSign .burgerLine:nth-child(1) {
+        border-color: var(--violet);
+        transform-origin: center;
+        transform:  translate(0, .6em) rotate(45deg);
+    }
+    #burgerQuizz:checked ~ .burgerSign .burgerLine:nth-child(2){
+        opacity: 0 ;
+    }
+    #burgerQuizz:checked ~ .burgerSign .burgerLine:nth-child(3) {
+        border-color: var(--violet);
+        transform-origin: center;
+        transform: translate(0em, -.6em)rotate(-45deg) ;
+    }
 }

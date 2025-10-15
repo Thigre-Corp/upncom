@@ -23,12 +23,8 @@ class Service
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mediaURL = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?int $emplacement = null;
-
-    #[ORM\ManyToOne(inversedBy: 'services')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $users = null;
 
     public function getId(): ?int
     {
@@ -76,21 +72,9 @@ class Service
         return $this->emplacement;
     }
 
-    public function setEmplacement(?int $emplacement): static
+    public function setEmplacement(int $emplacement): static
     {
         $this->emplacement = $emplacement;
-
-        return $this;
-    }
-
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?User $users): static
-    {
-        $this->users = $users;
 
         return $this;
     }
