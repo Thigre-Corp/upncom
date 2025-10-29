@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+        {# rel links for pagination #}
+        {{ knp_pagination_rel_links(pagination) }}
+{% endblock %}
+
+{% block title %}Up'n'Com : Le Blog{% endblock %}
+
+{% block body %}
+    <div class="heroImg">
+    </div>
+
+    <div class="mainContainer">
+        <h1>Up'n'Com : le Blog</h1>
+
+        <aside>
+            <div class="nuageTag">
+                <div class="search">
+                    {{ form_start(searchForm) }}
+                <span>{{ form_widget(searchForm.q) }}{{ form_row(searchForm.submit)}}</span>   
+                    {{ form_end(searchForm) }}
+                    {% for tag in tags %}
+                        <button class="tagButton">{{tag}}</button>
+                    {% endfor %}
+                </div>               
+            </div>
+
+            {{ knp_pagination_render(pagination) }}
+
+        </aside>
+
+        <div id="articleContainer">
+
+       {% if pagination is null  or pagination is empty %}
+            <article tabindex="0" class="articleCard">
+                    <div class="articleHeader">
+                        <h2>Aucun Article à afficher</h2>
+                    </div>
+                    <div class="articleBody">
+                        <p>Essayer une autre recherche</p>
+                    </div>
+            </article>
+        {% else %}
+
+       {% for article in pagination %}
+                <article tabindex="0" class="articleCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
+                    <div class="article__header">
+                        <div class="article__headerBg" style="--bgImg: url( {{ asset('img/articles/' ~ article.mediaURL) }} )">
+                        </div>
+                        
+                    {% if article.mediaURL is not null %}
+                        <img class="article__headerImg" src="{{ asset('img/articles/' ~ article.mediaURL) }}">
+                            
+                    {% endif %}
+                        <div class="article__headerBandeau">
+                            <img src="{{ asset('img/upncom.png') }}" class="miniIMG">
+                            <div class="article__headerTitre" >
+                                <h2>{{ article.titre }}</h2>
+                            </div>
+                            <img  src=" {{ asset('icons/mics/micro' ~ loop.index0 ~ '.svg') }} " class="miniIMG miniMIC">
+                        </div>
+                    </div>
+
+ 
+                    <div class="article__body">
+                        
+                        <div class="article__resume">
+                            {{ article.contenu | raw }}
+                        </div>
+
+                        <div class="article__cta">
+                            <button class="cta">lire la suite</button>
+                        </div>
+
+                        <cite>
+                            <span>{{article.users.prenom}}&nbsp{{article.users.nom}}</span>
+                            <small>{{article.users.fonction}}</small>
+                            <time>{{ article.dateCreation ? article.dateCreation|date('d/m/Y') : '' }}</time>
+                        </cite>
+                    </div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+                {% endif %}
+                </article>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+    {# <a href="{{ path('app_service_new') }}">Create new</a> #}
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            getTagButtons();
+        });
+
+        function getTagButtons(){
+            const searchBar = document.getElementById('search_q');
+            const submitBtn = document.getElementById('search_submit');
+            const tags = document.querySelectorAll('.tagButton');
+            tags.forEach(tag =>{
+                tag.addEventListener('click', (e) =>{
+                    searchBar.value= e.target.innerText;
+                    submitBtn.click();
+                } )
+            });
+        }
+    </script>
+{% endblock %}

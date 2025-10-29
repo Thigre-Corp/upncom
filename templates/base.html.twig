@@ -11,59 +11,76 @@
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
+
     </head>
     <body>
-        {% block bodyheader %}
-<header class="bgBlackAlpha">
-            <div id="navbar" class="textCenter">
+        {% block bodyheader %}                    
+            
+            <header>
                 <div class="mainLogo">
-                    <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com: une explosion de poudres de différentes couleurs avec le nom Up'n'Com écrit en jaune, façon pierre">
+                    <a href="{{ path('home') }}">
+                        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com: une explosion de poudres de différentes couleurs avec le nom Up'n'Com écrit en jaune, façon pierre">
+                    </a>    
                 </div>
-                <input type="checkbox" id="burgerQuizz">
-                <label for="burgerQuizz" class="burgerSign" >
-                    <div class="burgerLine"></div>
-                    <div class="burgerLine"></div>
-                    <div class="burgerLine"></div>
-                </label>
-                <div id="toggleMenu">
-                    <nav class="menu">
-                        <ul>
-                            <li>
-                                <a href="#navbar">HOME</a>
-                            </li>
-                            <li>
-                                <a href="#tradition">SERVICES</a>
-                            </li>
-                            <li>
-                                <a href="#services">BLOG</a>
-                            </li>
-                            <li>
-                                <a href="#navbar">CONTACT</a>
-                            </li>
-                            <li>
-                                <a href="#galerie">A PROPOS</a>
-                            </li>
-                            <li class="inactive">
-                                <a href="#galerie">PORTFOLIO</a>
-                            </li>
-                        </ul>
-                        <div class="socials">
-                            <a href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class: 'socialsIcon'}) }}</a>
-                            <a href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class: 'socialsIcon'}) }}</a>
-                            <a href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class: 'socialsIcon'}) }}</a>
-                        </div>
-                    </nav>
+                <div id="navbar" class="textCenter">
+
+                    <input type="checkbox" id="burgerQuizz">
+                    <label for="burgerQuizz" class="burgerSign" >
+                        <div class="burgerLine"></div>
+                        <div class="burgerLine"></div>
+                        <div class="burgerLine"></div>
+                    </label>
+
+                    <div id="toggleMenu">
+                        <nav class="menu">
+                            <ul>
+                                <li>
+                                    <a href="{{ path('home')}}">ACCUEIL</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_service_index')}}">SERVICES</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_article_index')}}">BLOG</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('app_contact')}}">CONTACT</a>
+                                </li>
+                                <li>
+                                    <a href="#galerie">A PROPOS</a>
+                                </li>
+                                <li class="inactive">
+                                    <a href="#galerie">PORTFOLIO</a>
+                                </li>
+                            </ul>
+                            <div class="socials">
+                                <a href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class: 'socialsIcon'}) }}</a>
+                                <a href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class: 'socialsIcon'}) }}</a>
+                                <a href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class: 'socialsIcon'}) }}</a>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </header>
-        {% endblock %}
-
-        {% block body %}{% endblock %}
-
-        <footer>
-            <div class="microFooter">
-                youhou!!!
-            </div>
-        </footer>
+            </header>
+            {% endblock %}
+            <main>
+            {% block body %}
+            <p>No...body</p>
+            {% endblock %}
+            </main>
+            <footer>
+                <a href="{{ path('home') }}">
+                        <img class="footer__img" src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com: une explosion de poudres de différentes couleurs avec le nom Up'n'Com écrit en jaune, façon pierre">
+                </a>   
+                <div class="footer__content">
+                    <a>mentions legales</a>
+                    <a>RGPD et confidentialité</a>
+                    <a>plan du site</a>
+                    <small>© Up'n'Com 2025 - tous droits réservés</small>
+                </div>
+                <a href="{{ path('app_contact') }}">
+                        <img class="footer__img micLeft"src="{{ asset('icons/mics/microIncline.svg') }}" alt="Logo d'un micro fortement inspiré du Shure 55'">
+                </a>   
+            </footer> 
     </body>
 </html>

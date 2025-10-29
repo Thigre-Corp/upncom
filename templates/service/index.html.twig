@@ -1,41 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Service index{% endblock %}
+{% block title %}Up'n'Com : Nos Services{% endblock %}
 
 {% block body %}
-    <h1>Service index</h1>
+    <div class="heroImg">
+    </div>
+    <div>
+        <h1>Nos Services</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>MediaURL</th>
-                <th>Emplacement</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for service in services %}
-            <tr>
-                <td>{{ service.id }}</td>
-                <td>{{ service.titre }}</td>
-                <td>{{ service.contenu }}</td>
-                <td><img src="{{ asset(service.mediaURL)}}>"</td>
-                <td>{{ service.emplacement }}</td>
-                <td>
-                    <a href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
-                    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div id="servicesContainer">
 
+
+       {% for service in services %}
+                <div tabindex="{{ service.emplacement }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
+                    <div class="services__card">
+                        <div class="services__svg">
+                           <img class="services__icon" src="{{ asset('icons/services/' ~ service.mediaURL  ~ '.svg') }}"> 
+                        </div>
+                        <div classe="services__title">
+                            <h2>{{ service.titre }}</h2>
+                        </div>
+                        <div classe="services__content">
+                            <p>{{ service.contenu }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     <a href="{{ path('app_service_new') }}">Create new</a>
 {% endblock %}

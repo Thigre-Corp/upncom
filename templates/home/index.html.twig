@@ -5,17 +5,31 @@
 {% block body %}
 
     <div class="heroVideo">
-        <video autoplay muted loop>
+        {# <video autoplay muted loop>
             <source src="{{ asset('img/upncom.mp4') }}" type="video/mp4" />
-        </video>
+        </video> #}
+        <p>void</p>
     </div>
 
-    <h1 class="myriad-font";>Hello {{ controller_name }}! ✅</h1>
+    <div>
+        <p style="font-size: var(--fs-sm)">AZERTY azerty 123 FontSize --fs-sm</p>
+        <p style="font-size: var(--fs-nm)">AZERTY azerty 123 FontSize --fs-nm</p>
+        <p style="font-size: var(--fs-lg)">AZERTY azerty 123 FontSize --fs-lg</p>
+        <p style="font-size: var(--fs-xl)">AZERTY azerty 123 FontSize --fs-xl</p>
+        <p style="font-size: var(--fs-xxl)">AZERTY azerty 123 FontSize --fs-xxl</p>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/sfUpnCom/upncom/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/sfUpnCom/upncom/templates/home/index.html.twig</code></li>
-    </ul>
+    <section id="services">
+            {% for service in services %}
+                <div tabindex="{{ service.emplacement }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
+                    <div class="serviceCardImg">
+                        <div class="services__svg">
+                           <img class="services__icon" src="{{ asset('icons/services/' ~ service.mediaURL  ~ '.svg') }}"> 
+                        </div>
+                        <h2>{{ service.titre }}</h2>
+                    4</div>
+                </div>
+            {% endfor %}
+    </section>
 
 {% endblock %}
