@@ -3,23 +3,90 @@
 {% block title %}Up'n'Com - Votre Agence 'Com à Mulhouse{% endblock %}
 
 {% block body %}
-
     <div class="heroVideo">
-        {# <video autoplay muted loop>
-            <source src="{{ asset('img/upncom.mp4') }}" type="video/mp4" />
-        </video> #}
-        <p>void</p>
+         <video autoplay muted loop>
+            {# <source src="{{ asset('videos/heroLynx.mp4') }}" type="video/mp4" /> #}
+        </video> 
     </div>
-
-    <div>
-        <p style="font-size: var(--fs-sm)">AZERTY azerty 123 FontSize --fs-sm</p>
-        <p style="font-size: var(--fs-nm)">AZERTY azerty 123 FontSize --fs-nm</p>
-        <p style="font-size: var(--fs-lg)">AZERTY azerty 123 FontSize --fs-lg</p>
-        <p style="font-size: var(--fs-xl)">AZERTY azerty 123 FontSize --fs-xl</p>
-        <p style="font-size: var(--fs-xxl)">AZERTY azerty 123 FontSize --fs-xxl</p>
+    <div id="sections_Navbar">
+        <ul>
+            <li>
+                <a id="section1_navBar" class="index_navBar" href="#section1">Section 1</a>
+            </li>
+            <li>
+                <a id="section2_navBar" class="index_navBar" href="#section2">Section 2</a>
+            </li>
+            <li>
+                <a id="section3_navBar" class="index_navBar" href="#section3">Section 3</a>
+            </li>
+            <li>
+                <a id="section4_navBar" class="index_navBar" href="#section4">Section 4</a>
+            </li>
+            <li>
+                <a id="section5_navBar" class="index_navBar" href="#section5">Section 5</a>
+            </li>
+            <li>
+                <a id="section6_navBar" class="index_navBar" href="#section6">Section 6</a>
+            </li>
+            <li>
+                <a id="section7_navBar" class="index_navBar" href="#section7">Section 7</a>
+            </li>
+        </ul>
     </div>
+    <h1>
+        Up'n'Com, votre agence de communication à Mulhouse
+    </h1>
+<section id="section1">
+    <div class="grid__2">
+        <div class="grid__ch_gauche">
+            <h2>
+                Présentation ...
+            </h2>
+            <p>
+                bla<br>
+                blabla
+            </p>
+            <p>blablabla</p>
+        </div>
+        
+        <img class="grid__ch_droite" src="{{ asset('img/home/section1.jpg')}}" alt="le texte alternatif de l'image de la section 1">
+        
+    </div>
+</section>
+{{ include('_modules/_contact.html.twig') }}
 
-    <section id="services">
+<section id="section2">
+    <div class="grid__2">
+        <div class="grid__ch_droite">
+            <h2>
+                great place to work ...
+            </h2>
+            <p>
+                bla<br>
+                blabla
+            </p>
+            <p>blablabla</p>
+        </div>
+        <img class="grid__ch_gauche" src="{{ asset('img/home/section1.jpg')}}" alt="le texte alternatif de l'image de la section 1">
+    </div>
+</section>
+{{ include('_modules/_contact.html.twig') }}
+<section id="section3"></section>
+{{ include('_modules/_contact.html.twig') }}
+<section id="section4"></section>
+{{ include('_modules/_contact.html.twig') }}
+<section id="section5"></section>
+{{ include('_modules/_contact.html.twig') }}
+<section id="section6"></section>
+{{ include('_modules/_contact.html.twig') }}
+<section id="section7"></section>
+
+
+
+
+
+
+    {# <section id="services">
             {% for service in services %}
                 <div tabindex="{{ service.emplacement }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
                     <div class="serviceCardImg">
@@ -30,6 +97,53 @@
                     4</div>
                 </div>
             {% endfor %}
-    </section>
+    </section> #}
+<div id="nada"></div>
 
+<script>
+ // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+
+
+        const sections = document.querySelectorAll('section');
+
+
+        const indexes = document.querySelectorAll('.index_navBar');
+
+    const options = {
+        root: null,
+        rootMargin: "0px",
+        scrollMargin: "0px",
+        threshold: 0.5,
+    };
+
+    const intersectionCallback = (entries) => {
+        
+        entries.forEach((entry) => {
+            
+            if (entry.isIntersecting) {
+                let elem = '#'+entry.target.id+'_navBar';
+                console.log("go" + elem);
+                if (entry.intersectionRatio >= 0.75) {
+                    indexes.forEach((element) => {
+                        element.classList.remove("select");
+                    });
+                    
+                    document.querySelector(elem).classList.add("select");
+                    }
+                }
+            else{
+                //document.querySelector(latest).classList.remove("select");
+                console.log("retire");
+                }
+            });
+        };
+
+    const observer = new IntersectionObserver(intersectionCallback, options);
+
+      sections.forEach((element ) => {
+                        console.log(element.id);
+                        observer.observe(element);
+                    });
+
+</script>
 {% endblock %}

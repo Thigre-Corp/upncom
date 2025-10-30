@@ -25,3 +25,6 @@ ENTITIES :
 
 SVG:
 - normaliser les viewports des micros.
+
+HOME:
+- revoir JS intersection observer.
