@@ -7,7 +7,7 @@
     --noir: oklch(from #020202 l c h);
     --gris: oklch(from #F1E9EE l c h);
     --blanc: oklch(from #EEEEEE l c h);
-    --grisAlpha: oklch(from #f1e9eee0 l c h / calc(alpha));
+    --grisAlpha: oklch(from #eeeeeee0 l c h / calc(alpha));
     --contour: var(--grisAlpha);
     --bg-gradient: linear-gradient(135deg in oklch , var(--blanc));
     /*Dimensions*/
@@ -115,21 +115,33 @@ header{
         --spin: 359deg;
     }
 }     
-.upncom_top{
+.upncom_top{   
+     background: conic-gradient(from var(--spin) in hsl shorter hue, var(--violet), var(--bleu), var(--orange), var(--bleu),var(--violet),var(--violet), var(--orange),var(--violet) ) center ; 
+
     position: relative;
     top:0.5rem;
     left: 3rem;
     font-size: var(--menuHeight);
-    font-family: "Road Rage", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: yellow;
-    text-shadow: 
+    font-family:  "Road Rage", sans-serif;
+   // font-weight: 400;
+    // font-style: normal;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+   // text-shadow: 
         1px 1px 1px var(--noir),
         -1px -1px 1px var(--noir),
         -1px 1px 1px var(--noir),
         1px -1px 1px var(--noir)    
     ;
+   // &::after{
+        content:"";
+        position: absolute;
+        inset: 0;
+        background: conic-gradient(from var(--spin) in hsl shorter hue, var(--violet), var(--bleu), var(--orange), var(--bleu),var(--violet),var(--violet), var(--orange),var(--violet) ) center ; 
+        z-index: -1;
+    }
 }
 .mainLogo{
     position: absolute;
@@ -217,7 +229,7 @@ footer{
     position:  relative;
     bottom: 0;
     left: 0;
-    width: 100dvw;
+    width: stretch;
     background: 
         linear-gradient(var(--grisAlpha)),
         linear-gradient(var(--gris), var(--grisAlpha), var(--gris)), 
@@ -285,39 +297,63 @@ footer{
                 width: 100%;
             }
         }
+        &:has(.select){
+            &::after{
+                content:'';
+                width: 100%;
+                background-color: var(--bleu);
+            }
+        }
+        &:not(:has(.select)){
+            &::after{
+                content:'';
+                width: 0%;
+                background-color: var(--noir);
+            }
+        }
     }
-    .select{
-            border: 3px solid green;
+    .select li{
+        background-color: red;
+            &::after{
+                width: 100%;
+            }
         }
 }
 
 
 section{
     background-color: transparent;
+    min-height: 20vw;
+
 }
 
 .grid__2{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     place-items: center;
 }
 
-.grid__ch_gauche{
+.grid__ch_gauche,
+.grid__ch_droite {
     order: 1;
     overflow: hidden;
     height: 340px;
+    width: 100%;
     object-fit: cover;
+    place-self: center / center;
 }
 
 .grid__ch_droite{
     order: 2;   
-    overflow: hidden;
-    height: 340px;
-    object-fit: cover;
 }
 
 .home_spacer{
     border-block: 3px solid var(--noir);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-block: var(--fs-xl);
 }
 
 .home_contact{
@@ -325,11 +361,13 @@ section{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    div{
+    *{
         display: flex;
         flex-direction: column;
+        text-justify: center;
     }
 }
+
 
 /*services------------------------------------------------------------------------------------------------------------------------------------*/
 #servicesContainer{

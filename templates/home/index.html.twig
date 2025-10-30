@@ -5,24 +5,24 @@
 {% block body %}
     <div class="heroVideo">
          <video autoplay muted loop>
-            {# <source src="{{ asset('videos/heroLynx.mp4') }}" type="video/mp4" /> #}
+            <source src="{{ asset('videos/herovideo.mp4') }}" type="video/mp4" />
         </video> 
     </div>
     <div id="sections_Navbar">
         <ul>
             <li>
-                <a id="section1_navBar" class="index_navBar" href="#section1">Section 1</a>
+                <a id="section1_navBar" class="index_navBar" href="#section1">Up'n'Com: Votre agence à Mulhouse</a>
             </li>
             <li>
-                <a id="section2_navBar" class="index_navBar" href="#section2">Section 2</a>
+                <a id="section2_navBar" class="index_navBar" href="#section2">Notre offre</a>
             </li>
             <li>
-                <a id="section3_navBar" class="index_navBar" href="#section3">Section 3</a>
+                <a id="section3_navBar" class="index_navBar" href="#section3">Nos réalisations</a>
             </li>
             <li>
-                <a id="section4_navBar" class="index_navBar" href="#section4">Section 4</a>
+                <a id="section4_navBar" class="index_navBar" href="#section4">Derniers Articles</a>
             </li>
-            <li>
+            {# <li>
                 <a id="section5_navBar" class="index_navBar" href="#section5">Section 5</a>
             </li>
             <li>
@@ -30,7 +30,7 @@
             </li>
             <li>
                 <a id="section7_navBar" class="index_navBar" href="#section7">Section 7</a>
-            </li>
+            </li> #}
         </ul>
     </div>
     <h1>
@@ -53,13 +53,14 @@
         
     </div>
 </section>
+
 {{ include('_modules/_contact.html.twig') }}
 
 <section id="section2">
     <div class="grid__2">
         <div class="grid__ch_droite">
             <h2>
-                great place to work ...
+                Notre offre
             </h2>
             <p>
                 bla<br>
@@ -74,44 +75,17 @@
 <section id="section3"></section>
 {{ include('_modules/_contact.html.twig') }}
 <section id="section4"></section>
-{{ include('_modules/_contact.html.twig') }}
-<section id="section5"></section>
-{{ include('_modules/_contact.html.twig') }}
-<section id="section6"></section>
-{{ include('_modules/_contact.html.twig') }}
-<section id="section7"></section>
-
-
-
-
-
-
-    {# <section id="services">
-            {% for service in services %}
-                <div tabindex="{{ service.emplacement }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
-                    <div class="serviceCardImg">
-                        <div class="services__svg">
-                           <img class="services__icon" src="{{ asset('icons/services/' ~ service.mediaURL  ~ '.svg') }}"> 
-                        </div>
-                        <h2>{{ service.titre }}</h2>
-                    4</div>
-                </div>
-            {% endfor %}
-    </section> #}
-<div id="nada"></div>
 
 <script>
  // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 
 
         const sections = document.querySelectorAll('section');
-
-
         const indexes = document.querySelectorAll('.index_navBar');
 
     const options = {
         root: null,
-        rootMargin: "0px",
+        rootMargin: "100px",
         scrollMargin: "0px",
         threshold: 0.5,
     };
@@ -123,7 +97,7 @@
             if (entry.isIntersecting) {
                 let elem = '#'+entry.target.id+'_navBar';
                 console.log("go" + elem);
-                if (entry.intersectionRatio >= 0.75) {
+                if (entry.intersectionRatio >= 0.5) {
                     indexes.forEach((element) => {
                         element.classList.remove("select");
                     });
