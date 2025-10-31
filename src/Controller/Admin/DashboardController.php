@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Tag;
 use App\Entity\Article;
 use App\Entity\Contact;
+use App\Entity\Newsletters\Newsletter;
+use App\Entity\Newsletters\Subscriber;
 use App\Entity\Service;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +55,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
         yield MenuItem::section('Contacts');
-        yield MenuItem::linkToCrud('Contacts', 'fas fa-paper', Contact::class);
+        yield MenuItem::linkToCrud('Contacts', 'fas fa-phone', Contact::class);
 
         yield MenuItem::section('Blog');
         yield MenuItem::linkToCrud('Articles', 'fas fa-blog', Article::class);
@@ -63,5 +65,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Services');
         yield MenuItem::linkToCrud('Services', 'fas fa-euro', Service::class);
 
+        yield MenuItem::section('NewsLetter');
+        yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', Subscriber::class);
+        yield MenuItem::linkToCrud('Newsletters', 'fas fa-newspaper', Newsletter::class);
+    
     }
 }

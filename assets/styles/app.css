@@ -7,7 +7,7 @@
     --noir: oklch(from #020202 l c h);
     --gris: oklch(from #F1E9EE l c h);
     --blanc: oklch(from #EEEEEE l c h);
-    --grisAlpha: oklch(from #eeeeeee0 l c h / calc(alpha));
+    --grisAlpha: oklch(from #eeeeeee0 l c h / a);
     --contour: var(--grisAlpha);
     --bg-gradient: linear-gradient(135deg in oklch , var(--blanc));
     /*Dimensions*/
