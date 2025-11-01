@@ -16,20 +16,19 @@ class SubscriberRepository extends ServiceEntityRepository
         parent::__construct($registry, Subscriber::class);
     }
 
-    //    /**
-    //     * @return subscriber[] Returns an array of subscriber objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+    * @return subscriber[] Returns an array of subscriber objects
+    */
+    public function findAllByValid(bool $value): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.isValid = :val')
+            ->setParameter('val', $value)
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     //    public function findOneBySomeField($value): ?subscriber
     //    {

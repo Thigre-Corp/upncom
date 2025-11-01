@@ -1,30 +1,30 @@
 dans articles/index:
-- faire un truc sympa avec la recherche/nuage de TAG et pagination.
-
-
+  - faire un truc sympa avec la recherche/nuage de TAG et pagination. 
 
 retravailler la fonction de recherche:
-- OK dans titre et tag, mais bug - voir csrf/GET (reprendre code <select> villes ??? )
-- contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
+  - OK dans titre et tag, mais bug - voir csrf/GET (reprendre code <select> villes ??? )
+  - contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
 
 dans articles/new|edit:
-- mise en page
-- ajout éditeur WYSIWYG
-- upload photos ?
-- inclure créateur/éditeur de TAG (form in form)
+  - mise en page
+  - ajout éditeur WYSIWYG
+  - upload photos ?
+  - inclure créateur/éditeur de TAG (form in form)
 
 CSS: 
-- reprendre ce putain de header.... grid !!
+  - reprendre ce putain de header.... grid !!
 
 MAIL:
-- basculer en templated
+  - basculer en templated
 
 ENTITIES :
-- contact/datetime à la création
-- tout ce qui reçoit une image: prévoir text alternatif
+  - update selon V3
 
 SVG:
-- normaliser les viewports des micros.
+  - normaliser les viewports des micros.
 
 HOME:
-- revoir JS intersection observer.
+  - revoir JS intersection observer.
+
+FLASH:
+  - yen a pas . A ajouter. -> modal pour la forme.....
