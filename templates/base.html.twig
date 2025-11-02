@@ -17,6 +17,11 @@
 
     </head>
     <body>
+        {% for message in app.flashes('message') %}
+            <div class="alert alert-success" style="background-color: yellow;">
+                {{ message }}
+            </div>
+        {% endfor %}
         {% block bodyheader %}                    
             <header>
                 <div class="mainLogo">

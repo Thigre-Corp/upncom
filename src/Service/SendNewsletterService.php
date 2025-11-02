@@ -1,5 +1,10 @@
 <?php
-
+/*
+            Service d'envoi de la newsletter
+            génére l'envoi d'un email selon le template ('emails/newsletter.html.twig')
+            envoyer à: Subscriber
+            contenu : Newsletter 
+*/
 namespace App\Service;
 
 use App\Entity\Newsletters\Newsletter;
@@ -18,7 +23,7 @@ class SendNewsletterService{
             $email = (new TemplatedEmail())
                 ->from('contact@upncom.fr')
                 ->to($subscriber->getEmail())
-                ->subject('NewsLetter Up\'n\'Com: pensez à valider votre adresse mail !')
+                ->subject('NewsLetter Up\'n\'Com: '.$newsletter->getTitre())
                 ->htmlTemplate('emails/newsletter.html.twig')
                 ->context([
                     'subscriber' => $subscriber,

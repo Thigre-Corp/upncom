@@ -7,21 +7,21 @@ retravailler la fonction de recherche:
 
 dans articles/new|edit:
   - mise en page
-  - ajout éditeur WYSIWYG
   - upload photos ?
   - inclure créateur/éditeur de TAG (form in form)
 
 CSS: 
-  - reprendre ce putain de header.... grid !!
+  - faire autres page
+  - structurer selon BEM
 
 MAIL:
-  - basculer en templated
+  - basculer en templated pour la subscription
 
 ENTITIES :
   - update selon V3
 
 SVG:
-  - normaliser les viewports des micros.
+  - normaliser les viewports des micros -> non, récupérer le micro normalisé, mettre des classes pour les couleurs et utilisé style global
 
 HOME:
   - revoir JS intersection observer.
