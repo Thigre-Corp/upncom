@@ -6,6 +6,7 @@ use App\Entity\Service;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ServiceType extends AbstractType
 {
@@ -14,8 +15,13 @@ class ServiceType extends AbstractType
         $builder
             ->add('titre')
             ->add('contenu')
-            ->add('mediaURL')
+            //->add('mediaURL')
             ->add('emplacement')
+            ->add('images', FileType::class, [
+                'multiple' => true,
+                'mapped' => false,
+                'required' => false,
+            ])
         ;
     }
 

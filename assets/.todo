@@ -26,5 +26,11 @@ SVG:
 HOME:
   - revoir JS intersection observer.
 
-FLASH:
-  - yen a pas . A ajouter. -> modal pour la forme.....
+MESSAGE FLASH:
+  - yen a pas . A ajouter. 
+  //////////////////////////////////
+
+EZADMIN:
+  - mise en forme/theme
+  - Subscribers : génération du TOKEN
+  - nettoyage des champs / renommer labels

@@ -116,8 +116,7 @@ header{
     }
 }     
 .upncom_top{   
-    background: conic-gradient(from var(--spin) in hsl shorter hue, var(--gris), var(--grisAlpha), var(--gris) ) center repeat ; 
-    animation: rotate 15s infinite linear;
+    background: linear-gradient(black ) center ; 
     position: relative;
     top: 0.5rem;
     left: 3rem;

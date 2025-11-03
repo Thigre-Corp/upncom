@@ -30,6 +30,10 @@ final class ServiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $images = $form->get('images')->getData();
+            dd($images);
+            
             $entityManager->persist($service);
             $entityManager->flush();
 

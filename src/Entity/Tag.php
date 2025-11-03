@@ -24,9 +24,16 @@ class Tag
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'tags')]
     private Collection $articles;
 
+    /**
+     * @var Collection<int, Service>
+     */
+    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'tag')]
+    private Collection $services;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->services = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,5 +83,32 @@ class Tag
     public function __toString()
     {
         return $this->tagName;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        if ($this->services->removeElement($service)) {
+            $service->removeTag($this);
+        }
+
+        return $this;
     }
 }

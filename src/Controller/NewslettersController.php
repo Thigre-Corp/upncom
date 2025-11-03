@@ -89,7 +89,7 @@ final class NewslettersController extends AbstractController
     }
 
     #[Route('/newsletters/sedesabonner/{id}/{token}', name: 'app_newsletters_unsubscribe')]
-    public function unsubscribe(Subscriber $subscriber, $token, EntityManagerInterface $entityManager): Response
+    public function unsubscribe(Subscriber $subscriber, string $token, EntityManagerInterface $entityManager): Response
     {
         if ($subscriber->getToken() != $token) {
             $this->addFlash('message', 'Votre demande \'a pu être réalisée.

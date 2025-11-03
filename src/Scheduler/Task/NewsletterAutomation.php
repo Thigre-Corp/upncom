@@ -19,7 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Scheduler\Attribute\AsPeriodicTask;
 
-#[AsPeriodicTask(frequency: '1 day')]
+#[AsPeriodicTask(frequency: 30)] // ('1 day')
 class NewsletterAutomation
 {
     public function __construct(

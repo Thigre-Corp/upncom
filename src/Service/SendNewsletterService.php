@@ -14,10 +14,15 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class SendNewsletterService{
     private $mailer;
+    private $bodyRenderer;
 
-    public function __construct(MailerInterface $mailer){
+    public function __construct(
+        MailerInterface $mailer,
+        ){
         $this->mailer = $mailer;
+        $this->bodyRenderer = $bodyRenderer;
     }
+
     public function sendNlSub(Newsletter $newsletter, Subscriber $subscriber ): void {
 
             $email = (new TemplatedEmail())
@@ -29,7 +34,6 @@ class SendNewsletterService{
                     'subscriber' => $subscriber,
                     'newsletter' => $newsletter,
                     ]);
-            
             $this->mailer->send($email);
     }
 }
