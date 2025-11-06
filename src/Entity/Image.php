@@ -30,9 +30,23 @@ class Image
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'images', cascade: ['persist', 'remove'])]
     private Collection $articles;
 
+    /**
+     * @var Collection<int, Realisation>
+     */
+    #[ORM\OneToMany(targetEntity: Realisation::class, mappedBy: 'imageCouverture')]
+    private Collection $realistationCouverture;
+
+    /**
+     * @var Collection<int, Realisation>
+     */
+    #[ORM\ManyToMany(targetEntity: Realisation::class, mappedBy: 'images')]
+    private Collection $realisations;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->realistationCouverture = new ArrayCollection();
+        $this->realisations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,5 +120,62 @@ class Image
     public function __toString()
     {
         return $this->mediaURL ?? 'null';
+    }
+
+    /**
+     * @return Collection<int, Realisation>
+     */
+    public function getRealistationCouverture(): Collection
+    {
+        return $this->realistationCouverture;
+    }
+
+    public function addRealistationCouverture(Realisation $realistationCouverture): static
+    {
+        if (!$this->realistationCouverture->contains($realistationCouverture)) {
+            $this->realistationCouverture->add($realistationCouverture);
+            $realistationCouverture->setImageCouverture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRealistationCouverture(Realisation $realistationCouverture): static
+    {
+        if ($this->realistationCouverture->removeElement($realistationCouverture)) {
+            // set the owning side to null (unless already changed)
+            if ($realistationCouverture->getImageCouverture() === $this) {
+                $realistationCouverture->setImageCouverture(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Realisation>
+     */
+    public function getRealisations(): Collection
+    {
+        return $this->realisations;
+    }
+
+    public function addRealisation(Realisation $realisation): static
+    {
+        if (!$this->realisations->contains($realisation)) {
+            $this->realisations->add($realisation);
+            $realisation->addImage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRealisation(Realisation $realisation): static
+    {
+        if ($this->realisations->removeElement($realisation)) {
+            $realisation->removeImage($this);
+        }
+
+        return $this;
     }
 }

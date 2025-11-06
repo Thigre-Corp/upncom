@@ -35,9 +35,8 @@ EZADMIN:
   - Subscribers : génération du TOKEN
   - nettoyage des champs / renommer labels
 
-
-
-  upload multiple et OK
-  on fait un service d'image!!!!!!!!
-
-  virer vich uploader....
+-----------------------------------------------
+mettre logique suivante:
+EASYAdmin --> image -> new : upload uniquement via drop...
+EASYAdmin --> image -> edit : alt Text seulement (puis Mask_SVG plus tard)
+EASYAdmin --> Articles/service/client : selection d'image depuis images existantes.
