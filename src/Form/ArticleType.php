@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class ArticleType extends AbstractType
 {
@@ -17,7 +18,9 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('contenu')
-            ->add('mediaURL')
+            ->add('mediaURL', DropzoneType::class, [
+                "multiple" => true,
+            ])
             ->add('dateCreation')
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,

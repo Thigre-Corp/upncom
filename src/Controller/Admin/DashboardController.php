@@ -3,13 +3,17 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Tag;
+use App\Entity\User;
+use App\Entity\Image;
 use App\Entity\Article;
 use App\Entity\Contact;
+use App\Entity\Service;
 use App\Entity\Newsletters\Newsletter;
 use App\Entity\Newsletters\Subscriber;
-use App\Entity\Service;
-use App\Entity\User;
+use Symfony\Component\AssetMapper\AssetMapper;
 use Symfony\Component\HttpFoundation\Response;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -69,5 +73,18 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', Subscriber::class);
         yield MenuItem::linkToCrud('Newsletters', 'fas fa-newspaper', Newsletter::class);
     
+        yield MenuItem::section('Images');
+        yield MenuItem::linkToCrud('Liste des images', 'fas fa-images', Image::class);
+    }
+    
+
+    /*
+        Ajout des assets css/js (stimulus UX dropzone...)
+    */
+    public function configureAssets(): Assets
+    {
+        return parent::configureAssets()
+            ->addAssetMapperEntry('app');
+        ;
     }
 }

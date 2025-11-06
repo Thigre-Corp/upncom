@@ -19,3 +19,7 @@
 /assets/vendor/
 /assets/img/
 ###< symfony/asset-mapper ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

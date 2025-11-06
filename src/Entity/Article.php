@@ -22,9 +22,6 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $mediaURL = null;
-
     #[ORM\Column]
     private ?\DateTime $dateCreation = null;
 
@@ -37,9 +34,16 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $users = null;
 
+    /**
+     * @var Collection<int, Image>
+     */
+    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles', cascade: ['persist', 'remove'])]
+    private Collection $images;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,18 +71,6 @@ class Article
     public function setContenu(string $contenu): static
     {
         $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    public function getMediaURL(): ?string
-    {
-        return $this->mediaURL;
-    }
-
-    public function setMediaURL(?string $mediaURL): static
-    {
-        $this->mediaURL = $mediaURL;
 
         return $this;
     }
@@ -127,6 +119,30 @@ class Article
     public function setUsers(?User $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        $this->images->removeElement($image);
 
         return $this;
     }

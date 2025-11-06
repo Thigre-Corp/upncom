@@ -23,10 +23,7 @@ class Service
     private ?string $contenu = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $mediaURL = null;
-
-    #[ORM\Column]
-    private ?int $emplacement = null;
+    private ?string $imageCouvertureURL = null;
 
     /**
      * @var Collection<int, Tag>
@@ -68,26 +65,14 @@ class Service
         return $this;
     }
 
-    public function getMediaURL(): ?string
+    public function getImageCouvertureURL(): ?string
     {
-        return $this->mediaURL;
+        return $this->imageCouvertureURL;
     }
 
-    public function setMediaURL(?string $mediaURL): static
+    public function setImageCouvertureURL(?string $ImageCouvertureURL): static
     {
-        $this->mediaURL = $mediaURL;
-
-        return $this;
-    }
-
-    public function getEmplacement(): ?int
-    {
-        return $this->emplacement;
-    }
-
-    public function setEmplacement(int $emplacement): static
-    {
-        $this->emplacement = $emplacement;
+        $this->imageCouvertureURL = $ImageCouvertureURL;
 
         return $this;
     }
