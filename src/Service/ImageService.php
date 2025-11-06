@@ -7,20 +7,22 @@
 */
 namespace App\Service;
 
+use App\Entity\Image;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ImageService{
 
     public function __construct(
-        private ParameterBagInterface $params // récupérer les paramètres depuis ParametreBag (chemin Dossier upload)
+        private ParameterBagInterface $params , // récupérer les paramètres depuis ParametreBag (chemin Dossier upload)
+        private EntityManagerInterface $entityManager ,
     ){
 
     }
 
-    public function standardizator(UploadedFile $image, ?string $origine='', ?int $max_width = 1920 ): string {
+    public function standardizator(UploadedFile $image, ?string $origine='', ?int $max_width = 1920 ): Image {
     /*  -> formater toutes uploader en webp
         -> limiter leur largeur à 1920px max (std full HD) par défaut
         -> pas de limite en hauteur (cas d'images scrollable)
@@ -28,6 +30,7 @@ class ImageService{
         -> on les déplace vers le dossier ad-hoc..
         -> on persiste et signe.
     */
+
         // créer chemin de stockage
         $path = $this->params->get('uploads_directory');
 
@@ -37,15 +40,16 @@ class ImageService{
         }
 
         //donner un nom à l'image:
-        $file = $origine.'-'.Uuid::v4(); //ajouter webp ou svg en fin de course // prévoir modification du nom pour SEO.
+        $file = $origine.'-'.uniqid(); //ajouter webp ou svg en fin de course // prévoir modification du nom pour SEO.
 
         // si fichier vectoriel
         if($image->guessExtension() === 'svg'){ 
-            $image->move($path, $file . '.svg');
-            return $file . '.svg';
+            $file = $file . '.svg';
+            $image->move($path, $file);
         }
         // si fichier matriciel
         else{
+            $file = $file . '.webp';
             //récuper les infos du fichie
             $imageInfos = getimagesize($image);
             
@@ -90,9 +94,16 @@ class ImageService{
             );
 
             //stocker et convertir en webP
-            imagewebp($resizedImage, $path . $file . '.webp');
-
-            return $file. '.webp';
+            imagewebp($resizedImage, $path . $file);
         }
+
+        $instanceImage = new Image();
+        $instanceImage->setMediaURL($path.$file);
+        $instanceImage->setAltText($origine);
+
+        $this->entityManager->persist($instanceImage);
+        $this->entityManager->flush($instanceImage);
+
+        return $instanceImage;
     }
 }
