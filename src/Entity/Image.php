@@ -2,15 +2,12 @@
 
 namespace App\Entity;
 
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ImageRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
-#[Vich\Uploadable]
 class Image
 {
     #[ORM\Id]
@@ -19,16 +16,7 @@ class Image
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
-
-    #[ORM\Column]
-    private ?int $size = null;
-
-    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'name', size: 'size')]
-    private ?File $file = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageMod = null;
+    private ?string $mediaURL = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $altText = null;
@@ -42,9 +30,6 @@ class Image
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'images' , cascade: ['persist', 'remove'])]
     private Collection $articles;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -55,52 +40,14 @@ class Image
         return $this->id;
     }
 
-    public function getname(): ?string
+    public function getMediaURL(): ?string
     {
-        return $this->name;
+        return $this->mediaURL;
     }
 
-    public function setname(string $name): static
+    public function setMediaURL(string $mediaURL): static
     {
-        $this->name = $name;
-
-        return $this;
-    }
-    public function getSize(): ?int
-    {
-        return $this->size;
-    }
-
-    public function setSize(int $size): static
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-    public function getFile(): ?File
-    {
-        return $this->file;
-    }
-
-    public function setFile(File $file): static
-    {
-        $this->file = $file;
-
-        if (null !== $file)
-        {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-        return $this;
-    }
-
-    public function getImageMod(): ?string
-    {
-        return $this->imageMod;
-    }
-
-    public function setImageMod(?string $imageMod): static
-    {
-        $this->imageMod = $imageMod;
+        $this->mediaURL = $mediaURL;
 
         return $this;
     }
@@ -158,18 +105,6 @@ class Image
 
     public function __toString()
     {
-        return $this->name;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
+        return $this->mediaURL;
     }
 }

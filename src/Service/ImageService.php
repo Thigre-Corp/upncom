@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class ImageService{
 
     public function __construct(
-        private ParameterBagInterface $params // récupérer les paramètre depuis ParametreBag
+        private ParameterBagInterface $params // récupérer les paramètres depuis ParametreBag (chemin Dossier upload)
     ){
 
     }
