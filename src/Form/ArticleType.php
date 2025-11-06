@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Article;
 use App\Entity\Tag;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Image;
+use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\UX\Dropzone\Form\DropzoneType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ArticleType extends AbstractType
 {
@@ -18,18 +19,22 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('contenu')
-            ->add('mediaURL', DropzoneType::class, [
-                "multiple" => true,
-            ])
             ->add('dateCreation')
+            ->add('isPublished')
             ->add('tags', EntityType::class, [
                 'class' => Tag::class,
-                'choice_label' => 'id',
+                'choice_label' => 'tag_name',
                 'multiple' => true,
             ])
             ->add('users', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
+            ])
+            ->add('images', EntityType::class, [
+                'class' => Image::class,
+                'choice_label' => 'mediaURL',
+                'mapped' => false,
+    
             ])
         ;
     }

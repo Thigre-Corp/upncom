@@ -1,10 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ImageController!{% endblock %}
+{% block title %}Image index{% endblock %}
 
 {% block body %}
-<div>
-    {{form_start(form)}}
-    {{form_end(form)}}
-</div>
+    <h1>Image index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>MediaURL</th>
+                <th>AltText</th>
+                <th>MaskSVG</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if images is defined %}
+            
+
+        {% for image in images %}
+            <tr>
+                <td>{{ image.id }}</td>
+                <td>{{ image.mediaURL }}</td>
+                <td>{{ image.altText }}</td>
+                <td>{{ image.maskSVG }}</td>
+                <td>
+                    <a href="{{ path('app_image_show', {'id': image.id}) }}">show</a>
+                    <a href="{{ path('app_image_edit', {'id': image.id}) }}">edit</a>
+                </td>
+            </tr>
+        
+        {# {% else %} #}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_new') }}">Create new</a>
 {% endblock %}

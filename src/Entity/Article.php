@@ -40,6 +40,9 @@ class Article
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles', cascade: ['persist', 'remove'])]
     private Collection $images;
 
+    #[ORM\Column]
+    private ?bool $isPublished = false;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -145,5 +148,22 @@ class Article
         $this->images->removeElement($image);
 
         return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function __toString() : string
+    {
+        return $this->titre;
     }
 }

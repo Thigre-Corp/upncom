@@ -26,7 +26,7 @@ final class HomeController extends AbstractController
     }
 
     #[Route('/image', name: 'app_image')]
-    public function image(Request $request, EntityManagerInterface $entityManager, ImageService $imageService ): Response
+    public function image(Request $request, ImageService $imageService ): Response
     {
         $image = new Image() ;
         $form = $this->createForm(ImageType::class, $image);

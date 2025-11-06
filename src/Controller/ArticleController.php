@@ -47,7 +47,7 @@ final class ArticleController extends AbstractController
             // 'articles' => $articleRepository->findAll(),
             'pagination' => $pagination,
             'tags'=>$tagRepository->findAll(),
-            'searchForm' => $form->createView(),
+            // 'searchForm' => $form->createView(),
 
         ]);
     }

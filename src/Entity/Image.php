@@ -27,7 +27,7 @@ class Image
     /**
      * @var Collection<int, Article>
      */
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'images' , cascade: ['persist', 'remove'])]
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'images', cascade: ['persist', 'remove'])]
     private Collection $articles;
 
     public function __construct()
@@ -105,6 +105,6 @@ class Image
 
     public function __toString()
     {
-        return $this->mediaURL;
+        return $this->mediaURL ?? 'null';
     }
 }

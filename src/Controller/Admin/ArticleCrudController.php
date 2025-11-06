@@ -7,6 +7,7 @@ use App\Entity\Article;
 use App\Form\ImageType;
 use Symfony\UX\Dropzone\Form\DropzoneType;
 use App\Controller\Admin\ImageCrudController;
+use Dom\Entity;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Symfony\Component\Validator\Constraints\File;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -33,13 +34,14 @@ class ArticleCrudController extends AbstractCrudController
         yield TextField::new('titre');
         yield TextEditorField::new('contenu')->formatValue(fn (string $value) => new Markup($value, 'UTF-8'));
         yield DateField::new('dateCreation');
-        yield CollectionField::new('images')
+       // yield AssociationField::new('user');
+                yield CollectionField::new('images')
                 //->onlyOnForms()
-                ->setEntryType(ImageType::class);
-               // ->useEntryCrudForm(ImageCrudController::class)
-               // ->setFormTypeOption('multiple', true) 
-                //->addFormTheme('@Dropzone/form_theme.html.twig')
-            //->addAssetMapperEntries('@symfony/stimulus-bundle' )
+                //->setEntryType(ImageType::class)
+                ->useEntryCrudForm(ImageCrudController::class)
+                //->setFormTypeOption('multiple', true) 
+                ->addFormTheme('@Dropzone/form_theme.html.twig')
+           // ->addAssetMapperEntries('@symfony/stimulus-bundle' )
             //->addCssFiles('@symfony/ux-dropzone/style.min.css')
             //->setHelp('Fichiers images (Jpeg, png, svg webP) uniquement')
             /* ->setFormTypeOption('constraints', [
@@ -54,6 +56,6 @@ class ArticleCrudController extends AbstractCrudController
                         'mimeTypesMessage' => 'Please upload a valid image. '
                     ])
             ])*/
-
+        ;
     }
 }

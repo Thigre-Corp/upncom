@@ -13,7 +13,7 @@
 
     <div class="mainContainer">
         <h1>Up'n'Com : le Blog</h1>
-
+{# 
         <aside>
             <div class="nuageTag">
                 <div class="search">
@@ -28,7 +28,7 @@
 
             {{ knp_pagination_render(pagination) }}
 
-        </aside>
+        </aside> #}
 
         <div id="articleContainer">
 
@@ -46,13 +46,13 @@
        {% for article in pagination %}
                 <article tabindex="0" class="articleCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
                     <div class="article__header">
-                        <div class="article__headerBg" style="--bgImg: url( {{ asset('img/articles/' ~ article.mediaURL) }} )">
+                        <div class="article__headerBg" style="--bgImg: linear-gradient(blue);">
                         </div>
                         
-                    {% if article.mediaURL is not null %}
-                        <img class="article__headerImg" src="{{ asset('img/articles/' ~ article.mediaURL) }}">
+                    {# {% if article.mediaURL is defined %}
+                        <img class="article__headerImg" src="">
                             
-                    {% endif %}
+                    {% endif %} #}
                         <div class="article__headerBandeau">
                             <img src="{{ asset('img/upncom.png') }}" class="miniIMG">
                             <div class="article__headerTitre" >
