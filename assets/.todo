@@ -17,9 +17,6 @@ CSS:
 MAIL:
   - basculer en templated pour la subscription
 
-ENTITIES :
-  - update selon V3
-
 SVG:
   - normaliser les viewports des micros -> non, récupérer le micro normalisé, mettre des classes pour les couleurs et utilisé style global
 
@@ -27,8 +24,7 @@ HOME:
   - revoir JS intersection observer.
 
 MESSAGE FLASH:
-  - yen a pas . A ajouter. 
-  //////////////////////////////////
+  - mise en forme
 
 EZADMIN:
   - mise en forme/theme
@@ -40,3 +36,6 @@ mettre logique suivante:
 EASYAdmin --> image -> new : upload uniquement via drop...
 EASYAdmin --> image -> edit : alt Text seulement (puis Mask_SVG plus tard)
 EASYAdmin --> Articles/service/client : selection d'image depuis images existantes.
+
+
+/*/ service image surcharge l'URL

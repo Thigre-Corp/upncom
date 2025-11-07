@@ -35,12 +35,12 @@ class ArticleCrudController extends AbstractCrudController
         yield TextEditorField::new('contenu')->formatValue(fn (string $value) => new Markup($value, 'UTF-8'));
         yield DateField::new('dateCreation');
        // yield AssociationField::new('user');
-                yield CollectionField::new('images')
-                //->onlyOnForms()
+                yield AssociationField::new('images')        
+                        //->onlyOnForms()
                 //->setEntryType(ImageType::class)
-                ->useEntryCrudForm(ImageCrudController::class)
+                //->useEntryCrudForm(ImageCrudController::class)
                 //->setFormTypeOption('multiple', true) 
-                ->addFormTheme('@Dropzone/form_theme.html.twig')
+                //->addFormTheme('@Dropzone/form_theme.html.twig')
            // ->addAssetMapperEntries('@symfony/stimulus-bundle' )
             //->addCssFiles('@symfony/ux-dropzone/style.min.css')
             //->setHelp('Fichiers images (Jpeg, png, svg webP) uniquement')

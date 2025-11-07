@@ -25,18 +25,23 @@ class ImageCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        return [
-            MyImageField::new('mediaURL')
-                ->setFormType(ImageType::class)
-                
+        
+        yield ImageField::new('mediaURL')
+                ->setBasePath('assets/uploads/')
+                -> onlyOnIndex()
+                ;
+        yield ImageField::new('mediaURL')
+                ->setBasePath('assets/uploads/')
+                -> onlyOnDetail()
+                ;
                 /*->setFormTypeOptions([
                         'data_class' => null,
                     ])*/
-                ,
+                
            // TextField::new('altText'),
             // TextField::new('name'),
             //TextEditorField::new('description'),
-        ];
+        
     }
     
 }

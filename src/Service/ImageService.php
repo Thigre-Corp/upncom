@@ -46,6 +46,12 @@ class ImageService{
         if($image->guessExtension() === 'svg'){ 
             $file = $file . '.svg';
             $image->move($path, $file);
+            /* @TODO
+            Sanitization des fichiers SVG: 
+            - supprimer balises <script></script>
+            - retirer références au fichiers/URL externes
+            - voir si plus nécessaire. 
+            */
         }
         // si fichier matriciel
         else{
@@ -98,7 +104,7 @@ class ImageService{
         }
 
         $instanceImage = new Image();
-        $instanceImage->setMediaURL($path.$file);
+        $instanceImage->setMediaURL($file);
         $instanceImage->setAltText($origine);
 
         $this->entityManager->persist($instanceImage);
