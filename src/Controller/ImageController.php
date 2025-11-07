@@ -12,21 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/image')]
 final class ImageController extends AbstractController
 {
-    #[Route(name: 'app_image_index', methods: ['GET'])]
-    public function index(ImageRepository $imageRepository): Response
-    {
-        return $this->render('image/index.html.twig', [
-            'images' => $imageRepository->findAll(),
-        ]);
-    }
 
-    #[Route('/new', name: 'app_image_new', methods: ['GET', 'POST'])]
+    #[Route('/image', name: 'app_image', methods: ['GET', 'POST'])]
     public function new(
         Request $request,
-        EntityManagerInterface $entityManager,
         ImageService $imageService,
         ): Response
     {
@@ -40,7 +31,7 @@ final class ImageController extends AbstractController
             foreach ($dataFiles as $dataFile) {
                 $images[] = $imageService->standardizator($dataFile, 'service', 1000);
             }
-            return $this->redirectToRoute('app_image_index', [ 'images' => $images ], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('image/new.html.twig', [

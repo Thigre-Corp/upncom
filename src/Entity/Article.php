@@ -37,7 +37,7 @@ class Article
     /**
      * @var Collection<int, Image>
      */
-    #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'articles', cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class, cascade: ['persist', 'remove'])]
     private Collection $images;
 
     #[ORM\Column]
@@ -137,18 +137,24 @@ class Article
     public function addImage(Image $image): static
     {
         if (!$this->images->contains($image)) {
-            $this->images->add($image);
+        $this->images->add($image);
+        $image->setArticle($this);
+    }
+
+    return $this;
+
+        return $this;
+    }
+
+public function removeImage(Image $image): static
+{
+    if ($this->images->removeElement($image)) {
+        if ($image->getArticle() === $this) {
+            $image->setArticle(null);
         }
-
-        return $this;
     }
-
-    public function removeImage(Image $image): static
-    {
-        $this->images->removeElement($image);
-
-        return $this;
-    }
+    return $this;
+}
 
     public function isPublished(): ?bool
     {

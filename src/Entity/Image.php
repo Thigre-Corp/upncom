@@ -24,11 +24,8 @@ class Image
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $maskSVG = null;
 
-    /**
-     * @var Collection<int, Article>
-     */
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'images', cascade: ['persist', 'remove'])]
-    private Collection $articles;
+    #[ORM\ManyToOne(inversedBy: 'images', cascade:['persist'])]
+    private ?Article $article = null;
 
     /**
      * @var Collection<int, Realisation>
@@ -44,7 +41,6 @@ class Image
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
         $this->realistationCouverture = new ArrayCollection();
         $this->realisations = new ArrayCollection();
     }
@@ -90,30 +86,14 @@ class Image
         return $this;
     }
 
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getArticles(): Collection
+    public function getArticle(): ?Article
     {
-        return $this->articles;
+        return $this->article;
     }
 
-    public function addArticle(Article $article): static
+    public function setArticle(?Article $article): static
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->addImage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            $article->removeImage($this);
-        }
-
+        $this->article = $article;
         return $this;
     }
 

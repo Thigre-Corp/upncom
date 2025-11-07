@@ -25,7 +25,7 @@ final class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/image', name: 'app_image')]
+  /*  #[Route('/image', name: 'app_image')]
     public function image(Request $request, ImageService $imageService ): Response
     {
         $image = new Image() ;
@@ -46,5 +46,5 @@ final class HomeController extends AbstractController
         return $this->render('image/index.html.twig', [
             'form' => $form,
         ]);
-    }
+    }*/
 }

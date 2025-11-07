@@ -74,7 +74,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Newsletters', 'fas fa-newspaper', Newsletter::class);
     
         yield MenuItem::section('Images');
-        yield MenuItem::linkToCrud('Liste des images', 'fas fa-images', Image::class);
+        yield MenuItem::linkToRoute('Ajouter des images', 'fas fa-images', 'app_image');
+        yield MenuItem::linkToCrud('Image', 'fas fa-image', Image::class);
     }
     
 
