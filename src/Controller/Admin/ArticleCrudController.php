@@ -34,28 +34,7 @@ class ArticleCrudController extends AbstractCrudController
         yield TextField::new('titre');
         yield TextEditorField::new('contenu')->formatValue(fn (string $value) => new Markup($value, 'UTF-8'));
         yield DateField::new('dateCreation');
-       // yield AssociationField::new('user');
-                yield AssociationField::new('images')        
-                        //->onlyOnForms()
-                //->setEntryType(ImageType::class)
-                //->useEntryCrudForm(ImageCrudController::class)
-                //->setFormTypeOption('multiple', true) 
-                //->addFormTheme('@Dropzone/form_theme.html.twig')
-           // ->addAssetMapperEntries('@symfony/stimulus-bundle' )
-            //->addCssFiles('@symfony/ux-dropzone/style.min.css')
-            //->setHelp('Fichiers images (Jpeg, png, svg webP) uniquement')
-            /* ->setFormTypeOption('constraints', [
-                    new File([
-                        'maxSize' => '5M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/svg',
-                            'image/webp'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image. '
-                    ])
-            ])*/
-        ;
+
+        yield AssociationField::new('images');
     }
 }

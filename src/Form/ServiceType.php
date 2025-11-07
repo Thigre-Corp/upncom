@@ -15,7 +15,6 @@ class ServiceType extends AbstractType
         $builder
             ->add('titre')
             ->add('contenu')
-            //->add('mediaURL')
             ->add('emplacement')
             ->add('images', FileType::class, [
                 'multiple' => true,
