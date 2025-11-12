@@ -7,7 +7,7 @@ use App\Entity\Article;
 use App\Entity\User;
 
 use Symfony\Bundle\SecurityBundle\Security;
-use App\Service\ImageService; // service de TAG !!!
+use App\Service\TaggelService; // service de TAG !!!
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
@@ -17,6 +17,7 @@ class ArticleTagSubscriber implements EventSubscriberInterface
 
     public function __construct(
         private Security $security,
+        private TaggelService $taggle,
         )
     {
         
@@ -40,14 +41,15 @@ class ArticleTagSubscriber implements EventSubscriberInterface
             return;
         }
 
-        // Si pas de date de création, en imposé une à now() et créé l'auteur
+        // Si pas de date de création, en imposé une à now() et créé l'auteur (User actuel)
         if ($entity->getDateCreation() === null) {
             $entity->setDateCreation( new \dateTime() );
-            $entity->setAuteur( CurrentUser::getUser()->getId());
+            $entity->setAuteur( $this->security->getUser());
         }
         // mettre à jour dateModification à now()
         $entity->setDateModification( new \dateTime() );
-        $entity->setAuteur( $this->security->getUser());
+        
+        $this->taggle->taggelizator($entity->getContenu(), $entity);
         
             // 3. Mettre à jour la propriété persistée de l'entité
             

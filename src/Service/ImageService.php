@@ -2,8 +2,10 @@
 /*
             Service de gestion des images
             reçoit des fichiers images
-            envoyer à: Subscriber
-            contenu : Newsletter 
+            standardise les JPEG/PNG en webp
+            passthrough pour le SVG (sanitization à prévoir)
+            retourne le nom du fichier
+
 */
 namespace App\Service;
 
@@ -108,7 +110,7 @@ class ImageService{
             imagewebp($resizedImage, $path . $file);
         }
 
-        $instanceImage = new Image();
+        //$instanceImage = new Image();
         /*$instanceImage->setMediaURL($file);
         $instanceImage->setAltText($origine);
 
