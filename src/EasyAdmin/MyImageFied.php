@@ -2,7 +2,6 @@
 namespace App\EasyAdmin;
 
 use App\Form\ImageType;
-use Symfony\UX\Dropzone\Form\DropzoneType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FieldTrait;
 use EasyCorp\Bundle\EasyAdminBundle\Contracts\Field\FieldInterface;
 
@@ -17,7 +16,8 @@ class MyImageField implements FieldInterface
             ->setFormType(ImageType::class)
             ->setProperty($propertyName)
             ->setLabel($label)
-            ->addFormTheme('@Dropzone/form_theme.html.twig')
+            //->addFormTheme('@Dropzone/form_theme.html.twig')
             ;
     }
+
 }

@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Article>
      */
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'users')]
+    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'auteur')]
     private Collection $articles;
 
     public function __construct()
@@ -210,25 +210,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->articles;
     }
 
-    public function addArticle(Article $article): static
+    public function addArticles(Article $articles): static
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->setUsers($this);
+        if (!$this->articles->contains($articles)) {
+            $this->articles->add($articles);
+            $articles->setAuteur($this);
         }
 
         return $this;
     }
 
-    public function removeArticle(Article $article): static
+    public function removeArticles(Article $articles): static
     {
-        if ($this->articles->removeElement($article)) {
+        if ($this->articles->removeElement($articles)) {
             // set the owning side to null (unless already changed)
-            if ($article->getUsers() === $this) {
-                $article->setUsers(null);
+            if ($articles->getAuteur() === $this) {
+                $articles->setAuteur(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getPrenom().' '.$this->getNom();
     }
 }

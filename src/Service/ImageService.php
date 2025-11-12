@@ -12,17 +12,20 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ImageService{
 
     public function __construct(
         private ParameterBagInterface $params , // récupérer les paramètres depuis ParametreBag (chemin Dossier upload)
         private EntityManagerInterface $entityManager ,
+        private SluggerInterface $slugger,
     ){
 
     }
 
-    public function standardizator(UploadedFile $image, ?string $origine='', ?int $max_width = 1920 ): Image {
+    public function standardizator(UploadedFile $image, ?string $origine='aRenommer', ?int $max_width = 1920 ): string // was Image
+    {
     /*  -> formater toutes uploader en webp
         -> limiter leur largeur à 1920px max (std full HD) par défaut
         -> pas de limite en hauteur (cas d'images scrollable)
@@ -34,11 +37,13 @@ class ImageService{
         // créer chemin de stockage
         $path = $this->params->get('uploads_directory');
 
+       // dd('on y est');
+
         //créer dossier si null avec droits
         if(!file_exists($path)){
             mkdir($path, 0755, true);
         }
-
+        $origine = $this->slugger->slug($origine);
         //donner un nom à l'image:
         $file = $origine.'-'.uniqid(); //ajouter webp ou svg en fin de course // prévoir modification du nom pour SEO.
 
@@ -104,12 +109,12 @@ class ImageService{
         }
 
         $instanceImage = new Image();
-        $instanceImage->setMediaURL($file);
+        /*$instanceImage->setMediaURL($file);
         $instanceImage->setAltText($origine);
 
         $this->entityManager->persist($instanceImage);
-        $this->entityManager->flush($instanceImage);
+        $this->entityManager->flush($instanceImage);*/
 
-        return $instanceImage;
+        return $file; // was $instanceImage;
     }
 }

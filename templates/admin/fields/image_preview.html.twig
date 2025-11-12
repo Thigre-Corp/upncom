@@ -1,7 +1,7 @@
 {# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
 {# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
 {# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
-{# {% set images = field.formattedValue %}
+{% set images = field.formattedValue %}
 {{ dump(field) }}
 {% if images is not iterable %}
     {% set images = [images] %}
@@ -16,5 +16,5 @@
     <div id="{{ html_id }}" class="ea-lightbox">
         <img src="{{ asset(image) }}">
     </div>
-{% endfor %} #}
+{% endfor %} 
 <img class="image-avatar" height="{{ field.customOptions.get('height') }}" width="{{ field.customOptions.get('height') }}" src="{{ field.mediaURL }}">

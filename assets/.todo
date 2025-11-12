@@ -36,6 +36,7 @@ mettre logique suivante:
 EASYAdmin --> image -> new : upload uniquement via dropZone -> réorienter vers le service...
 EASYAdmin --> image -> edit : alt Text seulement (puis Mask_SVG plus tard)
 EASYAdmin --> Articles/service/client : selection d'image depuis images existantes.
+-> attention: problème 
 
 
 /*/ service image surcharge l'URL

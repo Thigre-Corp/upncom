@@ -19,21 +19,21 @@ class Tag
     private ?string $tagName = null;
 
     /**
-     * @var Collection<int, Article>
-     */
-    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'tags')]
-    private Collection $articles;
-
-    /**
      * @var Collection<int, Service>
      */
     #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'tag')]
     private Collection $services;
 
+    /**
+     * @var Collection<int, Article>
+     */
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'tags')]
+    private Collection $articles;
+
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
         $this->services = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -49,33 +49,6 @@ class Tag
     public function setTagName(string $tagName): static
     {
         $this->tagName = $tagName;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): static
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->addTag($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            $article->removeTag($this);
-        }
 
         return $this;
     }
@@ -107,6 +80,33 @@ class Tag
     {
         if ($this->services->removeElement($service)) {
             $service->removeTag($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getarticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addarticles(Article $articles): static
+    {
+        if (!$this->articles->contains($articles)) {
+            $this->articles->add($articles);
+            $articles->addTag($this);
+        }
+
+        return $this;
+    }
+
+    public function removearticles(Article $articles): static
+    {
+        if ($this->articles->removeElement($articles)) {
+            $articles->removeTag($this);
         }
 
         return $this;

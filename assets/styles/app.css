@@ -7,7 +7,7 @@
     --noir: oklch(from #020202 l c h);
     --gris: oklch(from #F1E9EE l c h);
     --blanc: oklch(from #EEEEEE l c h);
-    --grisAlpha: oklch(from #eeeeeee0 l c h / a);
+    --grisAlpha: oklch(from #5c5c5c41 l c h);
     --contour: var(--grisAlpha);
     --bg-gradient: linear-gradient(135deg in oklch , var(--blanc));
     /*Dimensions*/
@@ -69,11 +69,13 @@ header{
     width: stretch;
     left: 0;
     height:var(--menuHeight);
-    .padding:var(--fs-xl);
+    padding:var(--fs-xl);
     flex-direction: row;
     justify-content: space-around;
     align-items: center;    
-    background-color: transparent;
+    background-color: var( --grisAlpha);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid oklch( from var(--gris) l c h / 0.3);
 }
 
 .heroVideo{
@@ -92,9 +94,9 @@ header{
 }
 
 @property --spin {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
 
 .heroImg{
@@ -118,7 +120,7 @@ header{
 .upncom_top{   
     background: linear-gradient(black ) center ; 
     position: relative;
-    top: 0.5rem;
+    top: 0.0rem;
     left: 3rem;
     font-size: var(--menuHeight);
     font-family:  "Road Rage", sans-serif;
@@ -126,19 +128,19 @@ header{
     background-clip: text;
     -webkit-background-clip: text;
 
-   // text-shadow: 
+   /* text-shadow: 
         1px 1px 1px var(--noir),
         -1px -1px 1px var(--noir),
         -1px 1px 1px var(--noir),
         1px -1px 1px var(--noir)    
     ;
-   // &::after{
+    &::after{
         content:"";
         position: absolute;
         inset: 0;
         background: conic-gradient(from var(--spin) in hsl shorter hue, var(--violet), var(--bleu), var(--orange), var(--bleu),var(--violet),var(--violet), var(--orange),var(--violet) ) center ; 
         z-index: -1;
-    }
+    }*/
 }
 .mainLogo{
     position: absolute;

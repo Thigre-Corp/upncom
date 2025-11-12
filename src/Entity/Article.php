@@ -19,11 +19,32 @@ class Article
     #[ORM\Column(length: 100)]
     private ?string $titre = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $contenu = null;
 
     #[ORM\Column]
     private ?\DateTime $dateCreation = null;
+
+    #[ORM\Column]
+    private ?\DateTime $dateModification = null;
+
+    #[ORM\Column]
+    private ?bool $estPublie = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?User $auteur = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Image $imagePrincipale = null;
+
+    #[ORM\ManyToOne]
+    private ?Image $imageDeux = null;
+
+    #[ORM\ManyToOne]
+    private ?Image $imageTrois = null;
+
+    #[ORM\ManyToOne]
+    private ?Image $imageQuatre = null;
 
     /**
      * @var Collection<int, Tag>
@@ -31,22 +52,9 @@ class Article
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
     private Collection $tags;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?User $users = null;
-
-    /**
-     * @var Collection<int, Image>
-     */
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Image::class, cascade: ['persist', 'remove'])]
-    private Collection $images;
-
-    #[ORM\Column]
-    private ?bool $isPublished = false;
-
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,7 +79,7 @@ class Article
         return $this->contenu;
     }
 
-    public function setContenu(string $contenu): static
+    public function setContenu(?string $contenu): static
     {
         $this->contenu = $contenu;
 
@@ -86,6 +94,90 @@ class Article
     public function setDateCreation(\DateTime $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getDateModification(): ?\DateTime
+    {
+        return $this->dateModification;
+    }
+
+    public function setDateModification(\DateTime $dateModification): static
+    {
+        $this->dateModification = $dateModification;
+
+        return $this;
+    }
+
+    public function isEstPublie(): ?bool
+    {
+        return $this->estPublie;
+    }
+
+    public function setEstPublie(bool $estPublie): static
+    {
+        $this->estPublie = $estPublie;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): static
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getImagePrincipale(): ?Image
+    {
+        return $this->imagePrincipale;
+    }
+
+    public function setImagePrincipale(?Image $imagePrincipale): static
+    {
+        $this->imagePrincipale = $imagePrincipale;
+
+        return $this;
+    }
+
+    public function getImageDeux(): ?Image
+    {
+        return $this->imageDeux;
+    }
+
+    public function setImageDeux(?Image $imageDeux): static
+    {
+        $this->imageDeux = $imageDeux;
+
+        return $this;
+    }
+
+    public function getImageTrois(): ?Image
+    {
+        return $this->imageTrois;
+    }
+
+    public function setImageTrois(?Image $imageTrois): static
+    {
+        $this->imageTrois = $imageTrois;
+
+        return $this;
+    }
+
+    public function getImageQuatre(): ?Image
+    {
+        return $this->imageQuatre;
+    }
+
+    public function setImageQuatre(?Image $imageQuatre): static
+    {
+        $this->imageQuatre = $imageQuatre;
 
         return $this;
     }
@@ -112,64 +204,5 @@ class Article
         $this->tags->removeElement($tag);
 
         return $this;
-    }
-
-    public function getUsers(): ?User
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?User $users): static
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Image>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): static
-    {
-        if (!$this->images->contains($image)) {
-        $this->images->add($image);
-        $image->setArticle($this);
-    }
-
-    return $this;
-
-        return $this;
-    }
-
-public function removeImage(Image $image): static
-{
-    if ($this->images->removeElement($image)) {
-        if ($image->getArticle() === $this) {
-            $image->setArticle(null);
-        }
-    }
-    return $this;
-}
-
-    public function isPublished(): ?bool
-    {
-        return $this->isPublished;
-    }
-
-    public function setIsPublished(bool $isPublished): static
-    {
-        $this->isPublished = $isPublished;
-
-        return $this;
-    }
-
-    public function __toString() : string
-    {
-        return $this->titre;
     }
 }
