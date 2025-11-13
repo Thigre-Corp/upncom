@@ -29,38 +29,57 @@ class TaggelService{
 
     public function taggelizator(string $textToAnalyse, Object $toReceive)
     {
-        //dd($toReceive);
+        // récupérer les Tags déjà associés à l'objet passé (si existants)
         $toReceiveTags = $toReceive->getTags();
+        // instancier un Crawler sur le texte à analyser
         $crawler = new Crawler($textToAnalyse, useHtml5Parser: true);
+        // extraire du texte les éléments entre balises <strong> pour lister les tags
         $tags = $crawler
             ->filter('strong')
-            ->each(function (Crawler $node, $i): string 
+            ->each(function (Crawler $node, $i): string  // var $i nécessaire à each()
                 {
-                    return $node->text();
+                    //retourne le texte contenu entre les balises strong, mise en forme sans caratères unicode éronnés ( 'Â' et ' ' - caractère trnasparent.) et esapces en trop.
+                    return preg_replace(
+                        ['/\s\s+/', '/\xc2\xa0/'],  //[RegEx]
+                        [' ', ''],      //[valeurs de remplacement]
+                        strtolower($node->innerText()));
                 });
+        // virer les doublons, c'est çà de gagner sur la boucle.
+        $tags = array_unique($tags);
+        // contrôler les tags reçus un à un
+        $i =0;
         foreach ($tags as $tag) {
+            // comparer si le tag existe en BDD 
             $persistedTag = $this->em->getRepository(Tag::class)->findOneByTagName($tag);
-            if ($persistedTag !== null){
-                // on ne rentre pas dans forEach. Pk ??? Voir collection
-                // c'est NULL, il n'y a rien a itéré......
-                dd($toReceiveTags);
-
-                foreach($toReceiveTags as $toReceiveTag){
-                    var_dump($toReceiveTags);
-                    dd($toReceiveTag);
-                    if ($persistedTag === $toReceiveTag){
-                        echo ('y en a');
-                    }
-                    else {
-                        $toReceive->addTag($persistedTag);
-                        dd($toReceive);
+            // si le tag exsite en BDD , verifier qu'il n'est pas déjà lié à l'objet passé
+            dump($i++);
+            if ($persistedTag != null){
+                // si aucun tag, l'ajouter
+                if ($toReceiveTags->isEmpty()){
+                    dump($toReceive->addTag($persistedTag));
+                }
+                // si un ou plusieurs tags existe, contrôler un à un
+                else{
+                    foreach($toReceiveTags as $toReceiveTag){
+                        dump($toReceiveTag);
+                        dump($persistedTag);
+                        if ($persistedTag == $toReceiveTag){
+                           // dd('stop');
+                        }
+                        else {
+                            $toReceive->addTag($persistedTag);
+                            dump($toReceive);
+                        }
                     }
                 }
             }
+            // si le tag est absent de la BDD , l'y créé et l'ajouter à l'objet passé
             else 
                 {
-                echo($tag);
+                //dump($persistedTag);
             }
+            // mettre à jour la liste des tags associés
+            $toReceiveTags = $toReceive->getTags();
         }
         //die;
     }

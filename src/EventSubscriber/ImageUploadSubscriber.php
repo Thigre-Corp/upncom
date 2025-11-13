@@ -20,7 +20,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        // Écoute les événements avant la création et la mise à jour
+        // Écouter les événements avant la création et la mise à jour
         return [
             BeforeEntityPersistedEvent::class => ['uploadImage'],
             BeforeEntityUpdatedEvent::class => ['uploadImage'],
@@ -31,24 +31,22 @@ class ImageUploadSubscriber implements EventSubscriberInterface
     {
         $entity = $event->getEntityInstance();
 
-        //dd('subscriber');
-        // Assurez-vous que l'entité traitée est bien celle avec le champ d'upload
+        // si l'entité conncernée n'est pas de type Image, s'arrêter là.
         if (!($entity instanceof Image)) {
             return;
         }
 
-        // 1. Vérifier si un nouveau fichier a été uploadé
+        // Vérifier si un nouveau fichier a été uploadé
         if ($entity->getImageFile() !== null) {
-            // 2. Appeler votre service d'upload personnalisé
+            // faire appel au service d'uploaderService->standardizator() , avec en retour le nom de fichier.
             $newFileName = $this->uploaderService->standardizator($entity->getImageFile(), $entity->getAltText());
 
-            // 3. Mettre à jour la propriété persistée de l'entité
+            // passer le nom du fichier dans l'attribut de l'entité
             $entity->setMediaURL($newFileName);
             
-            // 4. (Optionnel) Vider le fichier temporaire après traitement
+            // Vider le fichier temporaire après traitement
             $entity->setImageFile(null); 
         }
-
-        // L'entité est maintenant prête à être persistée par EasyAdmin/Doctrine
     }
+    // persister au retour grâce à EasyAdmin/Doctrine
 }

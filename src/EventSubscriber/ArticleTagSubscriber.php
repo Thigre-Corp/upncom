@@ -20,12 +20,11 @@ class ArticleTagSubscriber implements EventSubscriberInterface
         private TaggelService $taggle,
         )
     {
-        
     }
 
     public static function getSubscribedEvents(): array
     {
-        // Écoute les événements avant la création et la mise à jour
+        // Écouter les événements avant la création et la mise à jour
         return [
             BeforeEntityPersistedEvent::class => ['createOrModArticle'],
             BeforeEntityUpdatedEvent::class => ['createOrModArticle'],
@@ -36,12 +35,12 @@ class ArticleTagSubscriber implements EventSubscriberInterface
     {
         $entity = $event->getEntityInstance();
 
-        // Assurez-vous que l'entité traitée est bien celle avec le champ d'upload
+        // si l'entité conncernée n'est pas de type Article, s'arrêter là.
         if (!($entity instanceof Article)) {
             return;
         }
 
-        // Si pas de date de création, en imposé une à now() et créé l'auteur (User actuel)
+        // Si pas de date de création, en imposer une à now() et créé l'auteur (User actuel)
         if ($entity->getDateCreation() === null) {
             $entity->setDateCreation( new \dateTime() );
             $entity->setAuteur( $this->security->getUser());
@@ -49,16 +48,8 @@ class ArticleTagSubscriber implements EventSubscriberInterface
         // mettre à jour dateModification à now()
         $entity->setDateModification( new \dateTime() );
         
+        // faire appel au service taggel pour création/indexation des TAGS.
         $this->taggle->taggelizator($entity->getContenu(), $entity);
-        
-            // 3. Mettre à jour la propriété persistée de l'entité
-            
-            
-            // 4. (Optionnel) Vider le fichier temporaire après traitement
-        //dd($entity);
     }
-
-
-        // L'entité est maintenant prête à être persistée par EasyAdmin/Doctrine
-
+    // persister au retour grâce à EasyAdmin/Doctrine
 }

@@ -39,4 +39,8 @@ EASYAdmin --> Articles/service/client : selection d'image depuis images existant
 -> attention: problème 
 
 
-/*/ service image surcharge l'URL
+-------------------
+réécrire TWIG  articles
+------------------
+
+
