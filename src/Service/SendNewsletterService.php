@@ -20,7 +20,7 @@ class SendNewsletterService{
         MailerInterface $mailer,
         ){
         $this->mailer = $mailer;
-        $this->bodyRenderer = $bodyRenderer;
+       //$this->bodyRenderer = $bodyRenderer;
     }
 
     public function sendNlSub(Newsletter $newsletter, Subscriber $subscriber ): void {

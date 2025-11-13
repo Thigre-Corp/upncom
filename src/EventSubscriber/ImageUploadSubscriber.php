@@ -4,10 +4,11 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Image;
-use App\Service\ImageService; // Votre service d'upload
-use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
-use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use App\Service\ImageService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityDeletedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 
 class ImageUploadSubscriber implements EventSubscriberInterface
 {
@@ -24,6 +25,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
         return [
             BeforeEntityPersistedEvent::class => ['uploadImage'],
             BeforeEntityUpdatedEvent::class => ['uploadImage'],
+            BeforeEntityDeletedEvent::class => ['cleanImage'],
         ];
     }
 
@@ -47,6 +49,19 @@ class ImageUploadSubscriber implements EventSubscriberInterface
             // Vider le fichier temporaire après traitement
             $entity->setImageFile(null); 
         }
+    }
+
+    public function CleanImage($event): void
+    {
+        $entity = $event->getEntityInstance();
+
+        // si l'entité conncernée n'est pas de type Image, s'arrêter là.
+        if (!($entity instanceof Image)) {
+            return;
+        }
+        // appel du service de suppression du fichier image
+        $this->uploaderService->removator($entity->getMediaURL());
+
     }
     // persister au retour grâce à EasyAdmin/Doctrine
 }

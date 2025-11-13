@@ -5,25 +5,21 @@
             standardise les JPEG/PNG en webp
             passthrough pour le SVG (sanitization à prévoir)
             retourne le nom du fichier
-
 */
 namespace App\Service;
 
-use App\Entity\Image;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ImageService{
 
     public function __construct(
         private ParameterBagInterface $params , // récupérer les paramètres depuis ParametreBag (chemin Dossier upload)
-        private EntityManagerInterface $entityManager ,
         private SluggerInterface $slugger,
     ){
-
     }
 
     public function standardizator(UploadedFile $image, ?string $origine='aRenommer', ?int $max_width = 1920 ): string // was Image
@@ -38,8 +34,6 @@ class ImageService{
 
         // créer chemin de stockage
         $path = $this->params->get('uploads_directory');
-
-       // dd('on y est');
 
         //créer dossier si null avec droits
         if(!file_exists($path)){
@@ -98,8 +92,8 @@ class ImageService{
                 $imageSource,   // source
                 0,              // décallage en X sur destination
                 0,              // décallage en Y sur destination
-                0,          // décallage en X depuis source
-                0,          // décallage en Y depuis source
+                0,              // décallage en X depuis source
+                0,              // décallage en Y depuis source
                 $imageDestWidth,         // largeur destination
                 $imageDestHeight,         // hauteur destination
                 $imageSourceWidth,    // largeur source prélevée
@@ -109,14 +103,15 @@ class ImageService{
             //stocker et convertir en webP
             imagewebp($resizedImage, $path . $file);
         }
+        return $file; 
+    }
 
-        //$instanceImage = new Image();
-        /*$instanceImage->setMediaURL($file);
-        $instanceImage->setAltText($origine);
-
-        $this->entityManager->persist($instanceImage);
-        $this->entityManager->flush($instanceImage);*/
-
-        return $file; // was $instanceImage;
+    public function removator(string $filenameToDelete): void
+    {
+        $path = $this->params->get('uploads_directory');
+        $filesystem = new Filesystem();
+        if($filesystem->exists($path.$filenameToDelete)){
+            $filesystem->remove($path.$filenameToDelete);
+        }
     }
 }

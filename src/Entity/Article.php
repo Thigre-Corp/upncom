@@ -29,21 +29,25 @@ class Article
     private ?\DateTime $dateModification = null;
 
     #[ORM\Column]
-    private ?bool $estPublie = null;
+    private ?bool $estPublie = false;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $auteur = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imagePrincipale = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imageDeux = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imageTrois = null;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imageQuatre = null;
 
     /**

@@ -23,8 +23,6 @@ class TaggelService{
         private EntityManagerInterface $em,
     )
         {
-            
-            //throw new \Exception('Not implemented');
         }
 
     public function taggelizator(string $textToAnalyse, Object $toReceive)
@@ -46,41 +44,38 @@ class TaggelService{
                 });
         // virer les doublons, c'est çà de gagner sur la boucle.
         $tags = array_unique($tags);
+
         // contrôler les tags reçus un à un
-        $i =0;
         foreach ($tags as $tag) {
             // comparer si le tag existe en BDD 
             $persistedTag = $this->em->getRepository(Tag::class)->findOneByTagName($tag);
+            
             // si le tag exsite en BDD , verifier qu'il n'est pas déjà lié à l'objet passé
-            dump($i++);
             if ($persistedTag != null){
-                // si aucun tag, l'ajouter
+                // si aucun tag dans la collection, l'ajouter
                 if ($toReceiveTags->isEmpty()){
-                    dump($toReceive->addTag($persistedTag));
+                    $toReceive->addTag($persistedTag);
                 }
-                // si un ou plusieurs tags existe, contrôler un à un
+                // si un ou plusieurs tags existe dans l'objet passé,
                 else{
-                    foreach($toReceiveTags as $toReceiveTag){
-                        dump($toReceiveTag);
-                        dump($persistedTag);
-                        if ($persistedTag == $toReceiveTag){
-                           // dd('stop');
-                        }
-                        else {
-                            $toReceive->addTag($persistedTag);
-                            dump($toReceive);
-                        }
+                    // verifier s'il ne fait pas déjà parti de la collection,
+                    if( !($toReceiveTags->contains($persistedTag))){
+                        //et l'y ajouter
+                        $toReceive->addTag($persistedTag);
                     }
                 }
             }
             // si le tag est absent de la BDD , l'y créé et l'ajouter à l'objet passé
-            else 
-                {
-                //dump($persistedTag);
+            else{
+                //créer le Tag en BDD -> sera flush() avec l'objet passé par EasyAdmin/Doctrine
+                $newTag = new Tag;
+                $newTag->setTagName($tag);
+                $this->em->persist($newTag);
+                //l'ajouter 
+                $toReceive->addTag($newTag);
             }
-            // mettre à jour la liste des tags associés
+            // mettre à jour la liste des tags associés - anti-doublette.
             $toReceiveTags = $toReceive->getTags();
         }
-        //die;
     }
 }

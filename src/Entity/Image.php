@@ -27,7 +27,7 @@ class Image
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $maskSVG = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images', cascade:['persist'])]
+    #[ORM\ManyToOne(inversedBy: 'images', cascade:['all'])] // removed 
     private ?Article $article = null;
 
     /**
