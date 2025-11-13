@@ -3,21 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Form\ArticleType;
 use App\Form\SearchType;
 use App\Model\SearchData;
 use App\Repository\TagRepository;
 use App\Repository\ArticleRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-use function PHPUnit\Framework\isNull;
-
-#[Route('/article')]
+#[Route('/blog')]
 final class ArticleController extends AbstractController
 {
     #[Route(name: 'app_article_index', methods: ['GET'])]
