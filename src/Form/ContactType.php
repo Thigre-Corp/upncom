@@ -29,8 +29,7 @@ class ContactType extends AbstractType
             ->add('ville', ChoiceType::class,[
                     'choices'  => [
                         ],
-                    
-               'attr' => ['placeholder' => 'Choisir une ville dans la liste'],
+                'attr' => ['placeholder' => 'Choisir une ville dans la liste'],
             ] )
             ->add('envoyer', SubmitType::class)
             ->get('ville')->resetViewTransformers()

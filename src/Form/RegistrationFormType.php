@@ -53,7 +53,7 @@ class RegistrationFormType extends AbstractType
                 'first_options'  => [
                     'toggle' => true,
                     'label' => 'Password',
-                    'attr' => [           // pas bon !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    'attr' => [
                         'class' => 'form-control',
                         'placeholder' => 'Mot de Passe',                        
                     ],
@@ -61,7 +61,7 @@ class RegistrationFormType extends AbstractType
                 'second_options' => [
                     'toggle' => true,
                     'label' => 'Password',
-                    'attr' => [           // pas bon !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    'attr' => [
                         'class' => 'form-control',
                         'placeholder' => 'Répéter le mot de Passe',                        
                     ],

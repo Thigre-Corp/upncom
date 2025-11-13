@@ -107,20 +107,3 @@ final class ContactController extends AbstractController
         return $this->redirectToRoute('home');
     }
 }
-
-
-
-
-/* //çà sert plus à rien.... 
-    #[Route('/contact/ville_ud', name:'app_city_update' , methods: ['POST'])]
-    public function cityUpdate(Request $request): JsonResponse //|Response
-    {
-       $jsonInside = new IsJsonRequestMatcher();
-       if($jsonInside->matches($request)) {
-            $data = json_decode($request->getContent(), true);
-            //send $data somewhere, over the rainbow.
-            return new JsonResponse(['yes' => $data]);
-       }
-
-        return new JsonResponse(['oups' => 'oupa']);
-    }*/
