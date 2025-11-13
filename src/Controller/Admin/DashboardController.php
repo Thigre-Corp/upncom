@@ -51,7 +51,8 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Up\'n\'Com');
+            ->setTitle('Up\'n\'Com')
+            ;
     }
 
     public function configureMenuItems(): iterable
@@ -63,21 +64,23 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Blog');
         yield MenuItem::linkToCrud('Articles', 'fas fa-blog', Article::class);
+
+        yield MenuItem::section('Tags');
         yield MenuItem::linkToCrud('Tags', 'fas fa-tag', Tag::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
- 
+
         yield MenuItem::section('Services');
         yield MenuItem::linkToCrud('Services', 'fas fa-euro', Service::class);
-
+        
         yield MenuItem::section('NewsLetter');
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', Subscriber::class);
         yield MenuItem::linkToCrud('Newsletters', 'fas fa-newspaper', Newsletter::class);
     
         yield MenuItem::section('Images');
-        yield MenuItem::linkToRoute('Ajouter des images', 'fas fa-images', 'app_image');
         yield MenuItem::linkToCrud('Image', 'fas fa-image', Image::class);
+
+        yield MenuItem::section('Staf');
+        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
     }
-    
 
     /*
         Ajout des assets css/js (stimulus UX dropzone...)
@@ -85,7 +88,10 @@ class DashboardController extends AbstractDashboardController
     public function configureAssets(): Assets
     {
         return parent::configureAssets()
-          //  ->addAssetMapperEntry('app');
+            //->addAssetMapperEntry('app');
+                //
+                //
+            //
         ;
     }
 }

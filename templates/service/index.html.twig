@@ -10,12 +10,11 @@
 
         <div id="servicesContainer">
 
-
-       {% for service in services %}
-                <div tabindex="0" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
+            {% for service in services %}
+                <div tabindex="{{loop.index0 + 1 }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
                     <div class="services__card">
                         <div class="services__svg">
-                           <img class="services__icon" src="{{ asset('icons/services/' ~ service.mediaURL  ~ '.svg') }}"> 
+                            <img class="services__icon" src="{{ asset('icons/services/' ~ service.imageCouvertureURL) }}"> 
                         </div>
                         <div classe="services__title">
                             <h2>{{ service.titre }}</h2>
@@ -28,5 +27,4 @@
             {% endfor %}
         </div>
     </div>
-    <a href="{{ path('app_service_new') }}">Create new</a>
 {% endblock %}

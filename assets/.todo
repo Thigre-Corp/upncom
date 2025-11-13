@@ -43,4 +43,4 @@ EASYAdmin --> Articles/service/client : selection d'image depuis images existant
 réécrire TWIG  articles
 ------------------
 
-
+rajouter toggle password sur login (faire un form?)

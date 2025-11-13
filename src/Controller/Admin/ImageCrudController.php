@@ -18,20 +18,27 @@ class ImageCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        
-        yield ImageField::new('mediaURL')
-            ->setBasePath('assets/uploads/')
-            ->setUploadDir('public/assets/uploads/')
-            ->onlyOnIndex()
-            ;
-        yield Field::new('imageFile', 'Images à uploader')
-            ->setFormType(DropzoneType::class)
-            ->setFormTypeOptions([
-                'required' => false,
-                ])
-                ->onlyOnForms()
+        if($pageName != "new"){
+            yield ImageField::new('mediaURL', "Nom du Fichier Image sur le Serveur")
+                ->setBasePath('assets/uploads/')
+                ->setHelp('non modifiable')
+                ->setUploadDir('public/assets/uploads/')
+                ->setDisabled(true)
                 ;
-        yield TextField::new('altText');
+        }
+        else{
+            yield Field::new('imageFile', 'Images à uploader')
+                ->setFormType(DropzoneType::class)
+                ->setFormTypeOptions([
+                    'required' => true,
+                    ])
+                    ->onlyOnForms()
+                    ;
+        }
+        yield TextField::new('altText', 'Texte Alternatif')
+            ->setFormTypeOptions([
+                    'required' => true,
+            ]);
     }
     
 }
