@@ -43,16 +43,16 @@
             </article>
         {% else %}
 
-       {% for article in pagination %}
+        {% for article in pagination %}
                 <article tabindex="0" class="articleCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
                     <div class="article__header">
-                        <div class="article__headerBg" style="--bgImg: linear-gradient(blue);">
+                        <div class="article__headerBg" style="--bgImg: url({{ asset('assets/uploads/'~ article.imagePrincipale)}});">
                         </div>
                         
-                    {# {% if article.mediaURL is defined %}
-                        <img class="article__headerImg" src="">
+                    {% if article.imagePrincipale is defined %}
+                        <img class="article__headerImg" src="{{ asset('assets/uploads/'~ article.imagePrincipale)}}">
                             
-                    {% endif %} #}
+                    {% endif %}
                         <div class="article__headerBandeau">
                             <img src="{{ asset('img/upncom.png') }}" class="miniIMG">
                             <div class="article__headerTitre" >

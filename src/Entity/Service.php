@@ -22,18 +22,19 @@ class Service
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contenu = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageCouvertureURL = null;
-
     /**
      * @var Collection<int, Tag>
      */
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'services')]
-    private Collection $tag;
+    private Collection $tags;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
+    private ?Image $imageService = null;
 
     public function __construct()
     {
-        $this->tag = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,30 +66,18 @@ class Service
         return $this;
     }
 
-    public function getImageCouvertureURL(): ?string
-    {
-        return $this->imageCouvertureURL;
-    }
-
-    public function setImageCouvertureURL(?string $ImageCouvertureURL): static
-    {
-        $this->imageCouvertureURL = $ImageCouvertureURL;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Tag>
      */
-    public function getTag(): Collection
+    public function getTags(): Collection
     {
-        return $this->tag;
+        return $this->tags;
     }
 
     public function addTag(Tag $tag): static
     {
-        if (!$this->tag->contains($tag)) {
-            $this->tag->add($tag);
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
         }
 
         return $this;
@@ -96,7 +85,19 @@ class Service
 
     public function removeTag(Tag $tag): static
     {
-        $this->tag->removeElement($tag);
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getImageService(): ?Image
+    {
+        return $this->imageService;
+    }
+
+    public function setImageService(?Image $imageService): static
+    {
+        $this->imageService = $imageService;
 
         return $this;
     }

@@ -18,7 +18,7 @@ Controller de la Newsletter
             - si incohérent, on informe d'une erreur en Flash en retournant vers 'home'
 */
 
-namespace App\Controller;
+namespace App\Controller\Main;
 
 use App\Form\SubscriberType;
 use Symfony\Component\Uid\Uuid;

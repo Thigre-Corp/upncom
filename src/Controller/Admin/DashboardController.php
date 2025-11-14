@@ -63,23 +63,23 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Contacts', 'fas fa-phone', Contact::class);
 
         yield MenuItem::section('Blog');
-        yield MenuItem::linkToCrud('Articles', 'fas fa-blog', Article::class);
+        yield MenuItem::linkToCrud('Liste des articles', 'fas fa-blog', Article::class);
 
         yield MenuItem::section('Tags');
-        yield MenuItem::linkToCrud('Tags', 'fas fa-tag', Tag::class);
+        yield MenuItem::linkToCrud('Liste des tags', 'fas fa-tag', Tag::class);
 
         yield MenuItem::section('Services');
-        yield MenuItem::linkToCrud('Services', 'fas fa-euro', Service::class);
+        yield MenuItem::linkToCrud('Liste des services', 'fas fa-euro', Service::class);
         
         yield MenuItem::section('NewsLetter');
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', Subscriber::class);
-        yield MenuItem::linkToCrud('Newsletters', 'fas fa-newspaper', Newsletter::class);
+        yield MenuItem::linkToCrud('Détail des newsletters', 'fas fa-newspaper', Newsletter::class);
     
-        yield MenuItem::section('Images');
-        yield MenuItem::linkToCrud('Image', 'fas fa-image', Image::class);
+        yield MenuItem::section('Banque d\'images');
+        yield MenuItem::linkToCrud('Liste des images', 'fas fa-images', Image::class);
 
         yield MenuItem::section('Staf');
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Liste du personnel', 'fas fa-users', User::class);
     }
 
     /*

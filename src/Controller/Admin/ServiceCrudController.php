@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Service;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ServiceCrudController extends AbstractCrudController
 {
@@ -15,14 +16,22 @@ class ServiceCrudController extends AbstractCrudController
         return Service::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+
+        yield TextField::new('titre', 'Titre');
+        yield TextEditorField::new('contenu', 'Contenu');
+        // Afficher les images en back-office (liste)
+        yield ImageField::new('imageService', 'Logo')
+            ->setUploadDir('public\assets\uploads')
+            ->setBasePath('assets\uploads')
+            ->onlyOnIndex()
+        ;
+        // afficher le choix depuis la banque d'image dans les formulaires
+        yield AssociationField::new('imageService', 'Logo')
+            ->onlyOnForms();
+
     }
-    */
+    
 }

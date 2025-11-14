@@ -533,8 +533,8 @@ aside{
     aspect-ratio: 1;
         background: var(--bgImg) center no-repeat;
         /* linear-gradient(var(--noir), transparent, var(--violet)); */
-    background-size: cover;
-    filter: blur(20px) brightness(55%);
+    background-size: 100% 100%;
+    filter: blur(15px) brightness(55%);
     clip-path: inset(0);
 }
 
