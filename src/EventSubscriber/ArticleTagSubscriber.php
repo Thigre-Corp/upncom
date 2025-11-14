@@ -4,7 +4,6 @@
 namespace App\EventSubscriber;
 
 use App\Entity\Article;
-use App\Entity\User;
 
 use Symfony\Bundle\SecurityBundle\Security;
 use App\Service\TaggelService; // service de TAG !!!
@@ -50,6 +49,7 @@ class ArticleTagSubscriber implements EventSubscriberInterface
         
         // faire appel au service taggel pour création/indexation des TAGS.
         $this->taggle->taggelizator($entity->getContenu(), $entity);
+        return;
     }
     // persister au retour grâce à EasyAdmin/Doctrine
 }

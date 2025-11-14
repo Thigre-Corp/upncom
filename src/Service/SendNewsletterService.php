@@ -20,7 +20,6 @@ class SendNewsletterService{
         MailerInterface $mailer,
         ){
         $this->mailer = $mailer;
-       //$this->bodyRenderer = $bodyRenderer;
     }
 
     public function sendNlSub(Newsletter $newsletter, Subscriber $subscriber ): void {
@@ -35,5 +34,6 @@ class SendNewsletterService{
                     'newsletter' => $newsletter,
                     ]);
             $this->mailer->send($email);
+            return;
     }
 }

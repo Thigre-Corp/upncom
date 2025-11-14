@@ -27,9 +27,6 @@ class Image
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $maskSVG = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images', cascade:['all'])] // removed 
-    private ?Article $article = null;
-
     /**
      * @var Collection<int, Realisation>
      */
@@ -42,17 +39,11 @@ class Image
     #[ORM\ManyToMany(targetEntity: Realisation::class, mappedBy: 'images')]
     private Collection $realisations;
 
-    /**
-     * @var Collection<int, Article>
-     */
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'imagePrincipale')]
-    private Collection $articles;
 
     public function __construct()
     {
         $this->realistationCouverture = new ArrayCollection();
         $this->realisations = new ArrayCollection();
-        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,17 +84,6 @@ class Image
     {
         $this->maskSVG = $maskSVG;
 
-        return $this;
-    }
-
-    public function getArticle(): ?Article
-    {
-        return $this->article;
-    }
-
-    public function setArticle(?Article $article): static
-    {
-        $this->article = $article;
         return $this;
     }
 
@@ -189,33 +169,4 @@ class Image
         return $this;
     }
 
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): static
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles->add($article);
-            $article->setImagePrincipale($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): static
-    {
-        if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getImagePrincipale() === $this) {
-                $article->setImagePrincipale(null);
-            }
-        }
-
-        return $this;
-    }
 }

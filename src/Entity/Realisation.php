@@ -26,6 +26,7 @@ class Realisation
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'realistationCouverture')]
+    #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imageCouverture = null;
 
     /**
@@ -34,9 +35,19 @@ class Realisation
     #[ORM\ManyToMany(targetEntity: Image::class, inversedBy: 'realisations')]
     private Collection $images;
 
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'realisations')]
+    private Collection $tags;
+
+    #[ORM\ManyToOne(inversedBy: 'realisations')]
+    private ?Client $clients = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,6 +123,47 @@ class Realisation
     public function removeImage(Image $image): static
     {
         $this->images->removeElement($image);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): static
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getAccroche();
+    }
+
+    public function getClients(): ?Client
+    {
+        return $this->clients;
+    }
+
+    public function setClients(?Client $clients): static
+    {
+        $this->clients = $clients;
 
         return $this;
     }

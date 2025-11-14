@@ -49,6 +49,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
             // Vider le fichier temporaire après traitement
             $entity->setImageFile(null); 
         }
+        return;
     }
 
     public function CleanImage($event): void
@@ -61,7 +62,7 @@ class ImageUploadSubscriber implements EventSubscriberInterface
         }
         // appel du service de suppression du fichier image
         $this->uploaderService->removator($entity->getMediaURL());
-
+        return;
     }
     // persister au retour grâce à EasyAdmin/Doctrine
 }

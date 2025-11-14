@@ -13,8 +13,10 @@ namespace App\Service;
 use Symfony\Component\DomCrawler\Crawler;
 use App\Entity\Tag;
 
-use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+
+use function PHPUnit\Framework\throwException;
 
 class TaggelService{
     
@@ -25,8 +27,11 @@ class TaggelService{
         {
         }
 
-    public function taggelizator(string $textToAnalyse, Object $toReceive)
+    public function taggelizator(?string $textToAnalyse, ?Object $toReceive)
     {
+        if($textToAnalyse === null || $toReceive === null){
+            throw new Exception("Une erreur est survenue !");
+        }
         // récupérer les Tags déjà associés à l'objet passé (si existants)
         $toReceiveTags = $toReceive->getTags();
         // instancier un Crawler sur le texte à analyser
@@ -36,7 +41,7 @@ class TaggelService{
             ->filter('strong')
             ->each(function (Crawler $node, $i): string  // var $i nécessaire à each()
                 {
-                    //retourne le texte contenu entre les balises strong, mise en forme sans caratères unicode éronnés ( 'Â' et ' ' - caractère trnasparent.) et esapces en trop.
+                    //retourne le texte contenu entre les balises strong, mise en forme sans caratères unicode éronnés ( 'Â' et ' ' - caractère transparent.) et esapces en trop.
                     return preg_replace(
                         ['/\s\s+/', '/\xc2\xa0/'],  //[RegEx]
                         [' ', ''],      //[valeurs de remplacement]
@@ -77,5 +82,6 @@ class TaggelService{
             // mettre à jour la liste des tags associés - anti-doublette.
             $toReceiveTags = $toReceive->getTags();
         }
+        return;
     }
 }

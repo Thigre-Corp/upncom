@@ -9,6 +9,7 @@
 namespace App\Service;
 
 use Exception;
+use enshrined\svgSanitize\Sanitizer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -39,24 +40,28 @@ class ImageService{
         if(!file_exists($path)){
             mkdir($path, 0755, true);
         }
-        $origine = $this->slugger->slug($origine);
-        //donner un nom à l'image:
-        $file = $origine.'-'.uniqid(); //ajouter webp ou svg en fin de course // prévoir modification du nom pour SEO.
+        //génére la première partie du nom à partir du texte alternatif, limité à 30 caractères.
+        $origine = substr($this->slugger->slug($origine),0,30);
+        //rendre unique le nom de l'image:
+        $file = $origine.'-'.uniqid();
 
         // si fichier vectoriel
         if($image->guessExtension() === 'svg'){ 
-            $file = $file . '.svg';
-            $image->move($path, $file);
-            /* @TODO
-            Sanitization des fichiers SVG: 
-            - supprimer balises <script></script>
-            - retirer références au fichiers/URL externes
-            - voir si plus nécessaire. 
-            */
+            $file= $file.".svg";
+            // instancier un objet Sanitizer et le paramètrer: pas de lien externe, miniaturiser
+            $svgSanitizer = new Sanitizer;
+            $svgSanitizer->removeRemoteReferences(true);
+            $svgSanitizer->minify(true);
+            //récupérer le contenu du SVG sous forme de string
+            $dirtySVG = file_get_contents($image);
+            // Sanitizer le svg            
+            $cleanSVG = $svgSanitizer->sanitize($dirtySVG);
+            //convertir le SVG de string à fichier
+            file_put_contents($path.$file, $cleanSVG);
         }
         // si fichier matriciel
         else{
-            $file = $file . '.webp';
+            $file=$file.".webp";
             //récuper les infos du fichie
             $imageInfos = getimagesize($image);
             
@@ -113,5 +118,6 @@ class ImageService{
         if($filesystem->exists($path.$filenameToDelete)){
             $filesystem->remove($path.$filenameToDelete);
         }
+        return;
     }
 }

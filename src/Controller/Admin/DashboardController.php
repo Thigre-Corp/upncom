@@ -5,14 +5,15 @@ namespace App\Controller\Admin;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Image;
+use App\Entity\Client;
 use App\Entity\Article;
 use App\Entity\Contact;
 use App\Entity\Service;
+use App\Entity\Realisation;
 use App\Entity\Newsletters\Newsletter;
 use App\Entity\Newsletters\Subscriber;
 use Symfony\Component\AssetMapper\AssetMapper;
 use Symfony\Component\HttpFoundation\Response;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -59,8 +60,14 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::section('Contacts');
-        yield MenuItem::linkToCrud('Contacts', 'fas fa-phone', Contact::class);
+        yield MenuItem::section('Communication');
+        yield MenuItem::linkToCrud('Détails des demande de contact', 'fas fa-phone', Contact::class);
+        yield MenuItem::linkToCrud('Liste des inscrits aux newsletter', 'fas fa-users', Subscriber::class);
+        yield MenuItem::linkToCrud('Détail des newsletters', 'fas fa-newspaper', Newsletter::class);
+
+        yield MenuItem::section('Clients et Realisations');
+        yield MenuItem::linkToCrud('Liste des clients', 'fas fa-user', Client::class);
+        yield MenuItem::linkToCrud('Liste des réalisations', 'fas fa-gauge-high', Realisation::class);
 
         yield MenuItem::section('Blog');
         yield MenuItem::linkToCrud('Liste des articles', 'fas fa-blog', Article::class);
@@ -70,11 +77,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section('Services');
         yield MenuItem::linkToCrud('Liste des services', 'fas fa-euro', Service::class);
-        
-        yield MenuItem::section('NewsLetter');
-        yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', Subscriber::class);
-        yield MenuItem::linkToCrud('Détail des newsletters', 'fas fa-newspaper', Newsletter::class);
-    
+
         yield MenuItem::section('Banque d\'images');
         yield MenuItem::linkToCrud('Liste des images', 'fas fa-images', Image::class);
 
