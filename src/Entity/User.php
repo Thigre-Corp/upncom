@@ -30,6 +30,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
+     * @var bool unmapped property to allow access to the roles in EasyAdmin
+     */
+    private bool $isAdmin = false;
+
+    /**
      * @var string The hashed password
      */
     #[ORM\Column]
@@ -86,6 +91,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
+    }
+
+    public function setIsAdmin(bool $isAdmin)
+    {
+        if ($isAdmin){
+            $this->isAdmin = true;
+            $this->setRoles(["ROLE_ADMIN"]);
+        }
+        else{
+            $this->isAdmin = false;
+            $this->setRoles(["ROLE_USER"]);
+        }
+        return $this;
+    }
+
+    public function getIsAdmin(): bool{
+        if (in_array("ROLE_ADMIN", $this->getRoles()))
+        {
+            $this->isAdmin = true;
+        }
+        else $this->isAdmin = false;
+        return $this->isAdmin;
     }
 
     /**

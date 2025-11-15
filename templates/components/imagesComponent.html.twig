@@ -1,0 +1,18 @@
+    {# imagesComponent : propose une image par défaut si absente, et selection le web ou svg en fonction. Ajoute l'altText ou le title et aria-role #}
+
+    {% if image is null %}
+        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com" class="{{class}}"> 
+    {% else %}
+        {% if '.webp' in image.mediaURL  %}
+            <img src="{{ asset('assets/uploads/'~ image.mediaURL )}}" alt="{{image.altText}}" class="{{class}}">
+        {% elseif '.svg' in image.mediaURL %}
+            <object
+                data="{{ asset('assets/uploads/'~ image.mediaURL )}}"
+                title="{{image.altText}}"
+                class="{{class}}"
+                role="img"
+            </object>
+        {% else %}
+            <div role="img" aria-label="image absente symbolysé par une croix rouge">❌</div>
+        {% endif %}
+    {% endif %}

@@ -14,7 +14,8 @@
                 <div tabindex="{{loop.index0 + 2 }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
                     <div class="services__card">
                         <div class="services__svg">
-                            <img class="services__icon" src="{{ asset('assets/uploads/' ~ service.imageService) }}"> 
+                            {# <img class="services__icon" src="{{ asset('assets/uploads/' ~ service.imageService) }}">  #}
+                            <twig:ImagesComponent image='{{service.imageService}}' class="services__icon"></twig:ImagesComponent>
                         </div>
                         <div classe="services__title">
                             <h2>{{ service.titre }}</h2>

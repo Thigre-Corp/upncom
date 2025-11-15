@@ -50,8 +50,8 @@
                         </div>
                         
                     {% if article.imagePrincipale is defined %}
-                        <img class="article__headerImg" src="{{ asset('assets/uploads/'~ article.imagePrincipale)}}">
-                            
+                        {# <img class="article__headerImg" src="{{ asset('assets/uploads/'~ article.imagePrincipale)}}"> #}
+                            <twig:ImagesComponent image='{{article.imagePrincipale}}' class="article__headerImg"></twig:ImagesComponent>
                     {% endif %}
                         <div class="article__headerBandeau">
                             <img src="{{ asset('img/upncom.png') }}" class="miniIMG">

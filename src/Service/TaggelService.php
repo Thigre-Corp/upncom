@@ -16,11 +16,8 @@ use App\Entity\Tag;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
-use function PHPUnit\Framework\throwException;
-
 class TaggelService{
     
-
     public function __construct(
         private EntityManagerInterface $em,
     )

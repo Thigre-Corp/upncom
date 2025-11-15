@@ -81,8 +81,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Banque d\'images');
         yield MenuItem::linkToCrud('Liste des images', 'fas fa-images', Image::class);
 
-        yield MenuItem::section('Staf');
-        yield MenuItem::linkToCrud('Liste du personnel', 'fas fa-users', User::class);
+        if ($this->isGranted('ROLE_ADMIN')){
+            yield MenuItem::section('Staf');
+            yield MenuItem::linkToCrud('Liste du personnel', 'fas fa-users', User::class);
+        }
     }
 
     /*
