@@ -40,10 +40,9 @@ final class ArticleController extends AbstractController
 
 
         return $this->render('article/index.html.twig', [
-            // 'articles' => $articleRepository->findAll(),
             'pagination' => $pagination,
             'tags'=>$tagRepository->findAll(),
-            // 'searchForm' => $form->createView(),
+            'searchForm' => $form->createView(),
 
         ]);
     }

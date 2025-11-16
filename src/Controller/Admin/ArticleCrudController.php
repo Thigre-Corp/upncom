@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints\File as FileConstraint;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -42,8 +43,11 @@ class ArticleCrudController extends AbstractCrudController
             ->onlyOnIndex();
         yield DateField::new('dateModification')
             ->onlyOnIndex();
-        yield BooleanField::new('estPublie')
-            ->onlyOnIndex();
+        if($this->isGranted('ROLE_ADMIN')){
+                    yield BooleanField::new('estPublie');
+            //->onlyOnIndex();
+        }
+
         yield TextField::new('auteur')
             ->onlyOnIndex();
 

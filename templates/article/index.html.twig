@@ -13,7 +13,7 @@
 
     <div class="mainContainer">
         <h1>Up'n'Com : le Blog</h1>
-{# 
+
         <aside>
             <div class="nuageTag">
                 <div class="search">
@@ -28,7 +28,7 @@
 
             {{ knp_pagination_render(pagination) }}
 
-        </aside> #}
+        </aside>
 
         <div id="articleContainer">
 
@@ -62,7 +62,7 @@
                         </div>
                     </div>
 
- 
+
                     <div class="article__body">
                         
                         <div class="article__resume">
@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="article__cta">
-                            <button class="cta">lire la suite</button>
+                            <a class="cta button" href="{{path(name = 'app_article_show', parameters = {id : article.id} )}}">lire la suite</a>
                         </div>
 
                         <cite>
@@ -79,17 +79,12 @@
                             <time>{{ article.dateCreation ? article.dateCreation|date('d/m/Y') : '' }}</time>
                         </cite>
                     </div>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
-                {% endif %}
                 </article>
             {% endfor %}
             {% endif %}
         </div>
 
     </div>
-    {# <a href="{{ path('app_service_new') }}">Create new</a> #}
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {

@@ -1,12 +1,6 @@
 * @TODO list
 
 
-dans articles/index:
-  - faire un truc sympa avec la recherche/nuage de TAG et pagination. 
-
-retravailler la fonction de recherche:
-  - OK dans titre et tag, mais bug - voir csrf/GET (reprendre code <select> villes ??? )
-  - contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
 
 dans articles/new|edit:
   - mise en page
@@ -41,19 +35,25 @@ EASYAdmin --> image -> edit : alt Text seulement (puis Mask_SVG plus tard)
 EASYAdmin --> Articles/service/client : selection d'image depuis banque images existantes.
 -> attention: problème 
 
+
+
+LOGIN:
+  - toggle password sur login (pas faire un form!)
+
+TEST SVG Corrompu:
+  - OK
+
+liimpImage:
+  - à implémenter ou pas.
+=====================================================================================
 -------------------
 réécrire TWIG  articles
 ------------------
+dans articles/index:
+  - faire un truc sympa avec la recherche/nuage de TAG et pagination. 
 
-LOGIN:
-  - toggle password sur login (faire un form!)
-
-TEST SVG Corrompu:
-  - à faire
-
-liimpImage:
-  - à implémenter.
-
-
+retravailler la fonction de recherche:
+  - OK dans titre et tag, mais bug - voir csrf/GET (reprendre code <select> villes ??? )
+  - contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
 
 

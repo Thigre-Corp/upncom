@@ -16,15 +16,15 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function findBySearch( string $q)
+    public function findBySearch( string $q ='*')
     {
-        $q ?? $q='*';
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.dateCreation', 'ASC')
-            ->leftJoin('a.tags', 't')
-            ->andWhere('a.titre LIKE :q')
-            ->orWhere('t.tagName LIKE :q')
-            ->setParameter('q', "%{$q}%")
+        return $this->createQueryBuilder('Article')
+            ->orderBy('Article.dateCreation', 'DESC') // on c
+            ->Where('Article.estPublie = 1 ')
+            ->andWhere('Article.titre LIKE :query')
+            ->leftJoin('Article.tags', 't')
+            ->orWhere('t.tagName LIKE :query')
+            ->setParameter('query', '%'.$q.'%')
             ->getQuery()
             ;
     }
