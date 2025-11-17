@@ -1,0 +1,10 @@
+<div class="nuageTag">
+                <div class="search">
+                    {{ form_start(searchForm) }}
+                <span>{{ form_widget(searchForm.q) }}{{ form_row(searchForm.submit)}}</span>   
+                    {{ form_end(searchForm) }}
+                    {% for tag in tags %}
+                        <button class="tagButton">{{tag}}</button>
+                    {% endfor %}
+                </div>               
+            </div>

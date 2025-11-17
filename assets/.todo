@@ -57,3 +57,4 @@ retravailler la fonction de recherche:
   - contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
 
 
+searchType dans form -> plus nécessaire.

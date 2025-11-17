@@ -1,0 +1,37 @@
+<div{{ attributes }}>
+    <article tabindex="0" class="articleCard" id="{{id}}">
+        <div class="article__header">
+            <div class="article__headerBg"
+                style="--bgImg: url({{ asset('assets/uploads/'~ article.imagePrincipale)}});">
+            </div>
+
+            {% if article.imagePrincipale is defined %}
+            <twig:ImagesComponent image='{{article.imagePrincipale}}' class="article__headerImg"></twig:ImagesComponent>
+            {% endif %}
+            <div class="article__headerBandeau">
+                <img src="{{ asset('img/upncom.png') }}" class="miniIMG">
+                <div class="article__headerTitre">
+                    <h2>{{ article.titre }}</h2>
+                </div>
+                <img src=" {{ asset('icons/mics/micro.svg') }} " class="miniIMG miniMIC">
+            </div>
+        </div>
+        <div class="article__body">
+
+            <div class="article__resume">
+                {{ article.contenu | raw }}
+            </div>
+
+            <div class="article__cta">
+                <a class="cta button" href="{{path(name = 'app_article_show', parameters = {id : article.id} )}}">lire
+                    la suite</a>
+            </div>
+
+            <cite>
+                <span>{{article.auteur.prenom}}&nbsp{{article.auteur.nom}}</span>
+                <small>{{article.auteur.fonction}}</small>
+                <time>{{ article.dateCreation ? article.dateCreation|date('d/m/Y') : '' }}</time>
+            </cite>
+        </div>
+    </article>
+    </div>

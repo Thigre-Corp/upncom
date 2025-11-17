@@ -79,6 +79,5 @@ class TaggelService{
             // mettre à jour la liste des tags associés - anti-doublette.
             $toReceiveTags = $toReceive->getTags();
         }
-        return;
     }
 }

@@ -7,6 +7,7 @@
         - met une croix rouge si le fichier ne correspond pas à ces deux possibilités 
             ->(fichiers autres que webp et svg ne peuvent pas sortir de ImageUploadService...)
 */
+namespace App\Twig\Components;
 
 use App\Entity\Image;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
