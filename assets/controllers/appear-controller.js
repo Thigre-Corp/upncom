@@ -9,6 +9,7 @@ export default class extends Controller {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.dispatchEvent(new CustomEvent('appear', {detail: {entry}}));
+                    console.log('go!\n')
                 }
             });
         });

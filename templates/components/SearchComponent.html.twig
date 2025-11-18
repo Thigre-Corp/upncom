@@ -7,43 +7,49 @@
         <input type="search" data-model="debounce(1000)|query" name="recherche">
 
         <div id="results--{{ this.query }}">
-           {% if page > 1 %}
+            {# {% if page > 1 %}
             {# 🦊 #}
             {# Adding a fake "previous page" div is enough to trick the system #}
             {# It must have the same ID than the original page #}
-            <div class="ProductGrid_page" id="page--{{ page - 1 }}" data-live-ignore="true"></div>
+            {# <div class="ProductGrid_page" id="page--{{ page - 1 }}" data-live-ignore="true"></div>
 
-            {% endif %}
-            {# <div id="page--{{ page }}"> #}
-                <div data-live-ignore="true">
+            {% endif %} #}
+            {% set lastItem = 0 %}
+            
+                {# <div data-live-ignore="true"> #}
                     {% for article in this.articles %}
-                    <twig:ArticleComponent article='{{article}}' class="{{loop.index0}}" id="article--page-{{page}}-{{loop.index0}}" />
+                    {# <div id="page--{{ this.page }}"> #}
+                    <twig:ArticleComponent article='{{article}}' class="{{loop.index}}"
+                        id="article--page-{{page}}-{{loop.index}}" />
+                    {% set lastItem = lastItem + loop.index %}
+                    {# </div> #}
                     {% endfor %}
-{# c'est là que la magie opère... prévoire une petite animation ! 
-avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les nouvelles infos reçues.#}
+                
+                {# c'est là que la magie opère... prévoire une petite animation !
+                avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les
+                nouvelles infos reçues.#}
                 {% if this.hasMore %}
-                    {% for i in 1..per_page %}
-                    <article id="article--{{ page + 1 }}-{{loop.index0}}"
-                        {# 🦁 - The trigger #}
-                        {% if loop.first %}
-                            data-appear-target="loader"
-                            data-action="appear->live#action"
-                            data-live-action-param="more"
-                        {% endif %}
-                    >
+                {# <div id="page--{{ this.page + 1 }}"> #}
+                    {# {% for i in 1..per_page %} #}
+                    <div>
+                        <article id="article--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {# {% if loop.first
+                            %} #} data-appear-target="loader" data-action="appear->live#action"
+                            data-live-action-param="more" {# {% endif %} #}>
                             {# 🐹 - Loading bar #}
                             {# Animated progress bar shown during page load #}
-                            <span class="ProductGrid_loader"
-                                    style="--delay: {{ (loop.index + 1) / per_page }};"></span>
-                    </article>
-                {% endfor %}
+                            <span>LOADING</span>
+                        </article>
+                    </div>
+                    {# {% endfor %} #}
+                {# </div> #}
                 {% endif %}
                 {% if not this.hasMore %}
                 <div>
                     <p>Plus d'autres articles en stock !!!</p>
                 </div>
                 {% endif %}
-                </div>
-            {# </div> #}
+                {#
+            </div> #}
         </div>
     </div>
+</div>

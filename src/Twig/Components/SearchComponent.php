@@ -9,11 +9,9 @@
 */
 namespace App\Twig\Components;
 
-use App\Entity\Article;
+
 use App\Repository\ArticleRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
@@ -35,16 +33,26 @@ class SearchComponent{
     public int $page = 1;
 
     #[LiveProp]
-    public int $magicalId;
+    public int $magicalId = 1 ;
 
-    public $articlesArray = [];
+    public array $articlesArray = [];
+
+    private int $nbArticles = 0;
 
     public function __construct(
         private ArticleRepository $articleRepository,
     )
     {
-        $this->magicalId =1;
-        $this->getArticles();
+        //$this->magicalId =1;
+                $articles = $this->articleRepository
+                    ->findBySearchQb($this->query)
+                    ->setFirstResult(0)
+                    ->setMaxResults(self::PER_PAGE);
+
+        $listArticles = new Paginator($articles, true);
+        $this->nbArticles = $listArticles->count();
+       // dd($this->nbArticles);
+        $this->articlesArray  = $listArticles->getQuery()->getResult();
     }
 
     #[LiveAction]
@@ -53,32 +61,39 @@ class SearchComponent{
         ++$this->page;
     }
 
-    #[LiveAction]
-    public function reset(): void
-    {
-        $this->page = 1;
-    }
-
     public function getArticles() : array
     {
-        $articles = $this->articleRepository->findBySearchQb($this->query) ;
-        
-        $articles
-            ->setFirstResult(($this->page - 1) * self::PER_PAGE)
-            ->setMaxResults(self::PER_PAGE);
-
-        $listArticles = new Paginator($articles, true);
-        //$articlesArray = [];
-
-        $this->articlesArray  = array_merge( $this->articlesArray , $listArticles->getQuery()->getResult());
-        return $this->articlesArray 
-        ;
+        if($this->page > 1)
+        {
+            $articles = $this->articleRepository->findBySearchQb($this->query) ;
+            
+            $articles
+                ->setFirstResult(($this->page - 1) * self::PER_PAGE)
+                ->setMaxResults(self::PER_PAGE);
+    
+            //$listArticles = new Paginator($articles, true);
+    
+            $this->articlesArray  = array_merge( $this->articlesArray , $articles->getQuery()->getResult());
+        }
+        return $this->articlesArray ;
     }
-        public function onQueryUpdated(): void // méthode pour forcer le rendering de la div contenant les articles lors du changement de $this->query
+
+    public function onQueryUpdated(): void // méthode pour forcer le rendering de la div contenant les articles lors du changement de $this->query
     {
         $this->magicalId++ ;
         $this->page = 1;
+
+                        $articles = $this->articleRepository
+                    ->findBySearchQb($this->query)
+                    ->setFirstResult(0)
+                    ->setMaxResults(self::PER_PAGE);
+
+        $listArticles = new Paginator($articles, true);
+        $this->nbArticles = $listArticles->count();
+       // dd($this->nbArticles);
+        $this->articlesArray  = $listArticles->getQuery()->getResult();
     }
+    
 
     #[ExposeInTemplate('per_page')]
     public function getPerPage(): int
@@ -86,10 +101,12 @@ class SearchComponent{
         return self::PER_PAGE;
     }
 
-    #[ExposeInTemplate('hasMore')]
+   // #[ExposeInTemplate('hasMore')]
     public function hasMore(): bool
     {
-        return \count($this->articlesArray) > ($this->page * self::PER_PAGE);
+        dump('nbArticles='.$this->nbArticles);
+        dump('nbPages='.$this->page * self::PER_PAGE);
+        return (($this->nbArticles) > ($this->page * self::PER_PAGE));
     }
 
 }

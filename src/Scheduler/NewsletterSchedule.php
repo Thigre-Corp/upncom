@@ -13,7 +13,7 @@ use Symfony\Component\Scheduler\ScheduleProviderInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
 #[AsSchedule('default')]
-final class MainSchedule implements ScheduleProviderInterface
+final class NewsletterSchedule implements ScheduleProviderInterface
 {
     public function __construct(
         private CacheInterface $cache,
