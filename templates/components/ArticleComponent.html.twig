@@ -6,7 +6,10 @@
             </div>
 
             {% if article.imagePrincipale is defined %}
-            <twig:ImagesComponent image='{{article.imagePrincipale}}' class="article__headerImg"></twig:ImagesComponent>
+                {% if article.imagePrincipale is not null %}
+                    {# {% define (article.imagePrincipale) = 'nada' %} #}
+                {% endif %}
+            <twig:ImagesComponent image='{{article.imagePrincipale | '.none'}}' class="article__headerImg"></twig:ImagesComponent>
             {% endif %}
             <div class="article__headerBandeau">
                 <img src="{{ asset('img/upncom.png') }}" class="miniIMG">

@@ -12,6 +12,7 @@ namespace App\Twig\Components;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\ObjectMapper\ObjectMapperInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
@@ -41,13 +42,14 @@ class SearchComponent{
 
     public function __construct(
         private ArticleRepository $articleRepository,
+        private readonly ObjectMapperInterface $objectMapper,
     )
     {
         //$this->magicalId =1;
-                $articles = $this->articleRepository
-                    ->findBySearchQb($this->query)
-                    ->setFirstResult(0)
-                    ->setMaxResults(self::PER_PAGE);
+        $articles = $this->articleRepository
+            ->findBySearchQb($this->query)
+            ->setFirstResult(0)
+            ->setMaxResults(self::PER_PAGE);
 
         $listArticles = new Paginator($articles, true);
         $this->nbArticles = $listArticles->count();
@@ -92,6 +94,7 @@ class SearchComponent{
         $this->nbArticles = $listArticles->count();
        // dd($this->nbArticles);
         $this->articlesArray  = $listArticles->getQuery()->getResult();
+        
     }
     
 

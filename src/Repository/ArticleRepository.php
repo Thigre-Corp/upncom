@@ -34,21 +34,30 @@ class ArticleRepository extends ServiceEntityRepository
 {
     // On normalise et nettoie la query
     $query = trim(strtolower($query));
-
+    $items = explode(' ', $query,'5');
     $qb = $this->createQueryBuilder('a')
+        //
         ->leftJoin('a.tags', 't')
         ->distinct()
-        ->where('a.estPublie = 1'); // On affiche uniquement les articles publiés
-
+        ->where('a.estPublie = 1') // On affiche uniquement les articles publiés
+        ->select('partial a.{id , dateCreation, titre, contenu}')
+        ;
     // Si l'utilisateur a tapé quelque chose, on filtre
     if ($query !== '') {
-        $qb->andWhere('
-            LOWER(a.titre) LIKE :q
-            OR LOWER(a.contenu) LIKE :q
-            OR LOWER(t.tagName) LIKE :q
-        ')
-        ->setParameter('q', '%'.$query.'%');
+        $items = explode(' ', $query,'5');
+        
+        foreach($items as $item){
+            static $i=0;
+            $qb->andWhere('
+                LOWER(a.titre) LIKE :q'.$i.'
+                OR LOWER(a.contenu) LIKE :q'.$i.'
+                OR LOWER(t.tagName) LIKE :q'.$i.'
+            ')
+            ->setParameter('q'.$i, '%'.$item.'%');
+            $i++;
+        }
     }
+    //dd($qb->getQuery()->getResult());
 
     // Tri final
     return $qb

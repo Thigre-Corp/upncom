@@ -11,7 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class ArticleController extends AbstractController
 {
     #[Route(name: 'app_article_index')]
-    public function index(): Response
+    public function index(
+    ): Response
     {
         return $this->render('article/index.html.twig');
     }
