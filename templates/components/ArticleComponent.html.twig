@@ -7,7 +7,7 @@
 
             {% if article.imagePrincipale is defined %}
                 {% if article.imagePrincipale is null %}
-                    {% set image = 'nada' %}
+                    {% set image = null %}
                 {% else %}
                     {% set image = article.imagePrincipale %}
                 {% endif %}

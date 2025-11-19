@@ -23,12 +23,11 @@
             </div>
         {% endfor %}
         {% block bodyheader %}                    
-            <header>
+            <header class="frostedGlass">
+                <div id="fullHeader"  class="frostedGlass">
+
                 <div class="mainLogo">
-                    <a href="{{ path('home') }}">
-                        <span class="upncom_top">Up'n'Com</span>
-                        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com: une explosion de poudres de différentes couleurs avec le nom Up'n'Com écrit en jaune, façon pierre">
-                    </a>    
+                    <a href="{{ path('home') }}" class="upncom_top">Up'n'Com</a>    
                 </div>
                 <div id="navbar" class="textCenter">
 
@@ -69,6 +68,7 @@
                         </nav>
                     </div>
                 </div>
+            </div>
             </header>
             {% endblock %}
             <main>
