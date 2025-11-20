@@ -3,85 +3,134 @@
 {% block title %}Up'n'Com - Votre Agence 'Com à Mulhouse{% endblock %}
 
 {% block body %}
-    <div class="heroVideo">
+<section class="hero">
+    <div class="hero-content">
         <video autoplay muted loop>
             <source src="{{ asset('videos/herovideo.mp4') }}" type="video/mp4" />
-        </video> 
+        </video>
     </div>
-    <div id="sections_Navbar">
-        <ul>
-            <li>
-                <a id="section1_navBar" class="index_navBar" href="#section1">Up'n'Com: Votre agence à Mulhouse</a>
-            </li>
-            <li>
-                <a id="section2_navBar" class="index_navBar" href="#section2">Notre offre</a>
-            </li>
-            <li>
-                <a id="section3_navBar" class="index_navBar" href="#section3">Nos réalisations</a>
-            </li>
-            <li>
-                <a id="section4_navBar" class="index_navBar" href="#section4">Derniers Articles</a>
-            </li>
-            {# <li>
-                <a id="section5_navBar" class="index_navBar" href="#section5">Section 5</a>
-            </li>
-            <li>
-                <a id="section6_navBar" class="index_navBar" href="#section6">Section 6</a>
-            </li>
-            <li>
-                <a id="section7_navBar" class="index_navBar" href="#section7">Section 7</a>
-            </li> #}
-        </ul>
-    </div>
-    <h1>
-        Up'n'Com, votre agence de communication à Mulhouse
-    </h1>
-<section id="section1">
-    <div class="grid__2">
-        <div class="grid__ch_gauche">
-            <h2>
-                Présentation ...
-            </h2>
-            <p>
-                bla<br>
-                blabla
-            </p>
-            <p>blablabla</p>
+</section>
+<div id="sections_Navbar">
+    <ul class="frostedGlass">
+        <li>
+            <a id="section1_navBar" class="index_navBar" href="#section1">Up'n'Com: Votre agence à Mulhouse</a>
+        </li>
+        <li>
+            <a id="section2_navBar" class="index_navBar" href="#section2">Notre offre</a>
+        </li>
+        <li>
+            <a id="section3_navBar" class="index_navBar" href="#section3">Nos réalisations</a>
+        </li>
+        <li>
+            <a id="section4_navBar" class="index_navBar" href="#section4">Derniers Articles</a>
+        </li>
+        {# <li>
+            <a id="section5_navBar" class="index_navBar" href="#section5">Section 5</a>
+        </li>
+        <li>
+            <a id="section6_navBar" class="index_navBar" href="#section6">Section 6</a>
+        </li>
+        <li>
+            <a id="section7_navBar" class="index_navBar" href="#section7">Section 7</a>
+        </li> #}
+    </ul>
+</div>
+<h1>
+    Bienvenue dans votre agence
+</h1>
+<section id="section1" class="section section-with-image">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2 class="section-title">
+                    Up'n'Com, votre agence de communication à Mulhouse
+                </h2>
+                <p>
+                    Après plusieurs années passées dans la gestion d’entreprise, j’ai créé Up’n’Com pour mettre ma
+                    créativité et mon sens stratégique au service des dirigeants.
+                    </p>    <p>
+                    Ma mission : vous aider à prendre du recul, vous démarquer et gagner en visibilité grâce à une
+                    communication originale, personnalisée… et ancrée dans la réalité de votre quotidien.
+                    </p>    <p>
+                    <strong>Grell-Wirtz, fondatrice d'Up’n’Com</strong> 
+                </p>
+            </div>
+            <div class="image-column">
+                <div class="parallax-image" style="background-image: url('https://picsum.photos/seed/agency/800/600');">
+                </div>
+            </div>
         </div>
-        
-        <img class="grid__ch_droite" src="{{ asset('img/home/section1.jpg')}}" alt="le texte alternatif de l'image de la section 1">
-        
+    </div>
+</section>
+<section id="section2" class="section section-with-image flex-row-reverse">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2 class="section-title">
+                    Notre offre
+                </h2>
+                {% for service in services %}
+                    <twig:ServiceCard service="{{ service }}"></twig:ServiceCard>
+                {% endfor %}
+            </div>
+            <div class="image-column">
+                <div class="parallax-image" style="background-image: url('https://picsum.photos/seed/agency/800/600');">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section3" class="section section-with-image">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2 class="section-title">
+                    Nos réalisations
+                </h2>
+                <p>
+                    bla<br>
+                    blabla
+                </p>
+                <p>blablabla</p>
+            </div>
+            <div class="image-column">
+                <div class="parallax-image" style="background-image: url('https://picsum.photos/seed/agency/800/600');">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="section4" class="section section-with-image flex-row-reverse">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2 class="section-title">
+                    Les derniers articles du blog
+                </h2>
+                <p>
+                    bla<br>
+                    blabla
+                </p>
+                <p>blablabla</p>
+            </div>
+            <div class="image-column">
+                <div class="parallax-image" style="background-image: url('https://picsum.photos/seed/agency/800/600');">
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
 {{ include('_modules/_contact.html.twig') }}
 
-<section id="section2">
-    <div class="grid__2">
-        <div class="grid__ch_droite">
-            <h2>
-                Notre offre
-            </h2>
-            <p>
-                bla<br>
-                blabla
-            </p>
-            <p>blablabla</p>
-        </div>
-        <img class="grid__ch_gauche" src="{{ asset('img/home/section1.jpg')}}" alt="le texte alternatif de l'image de la section 1">
-    </div>
-</section>
-{{ include('_modules/_contact.html.twig') }}
-<section id="section3"></section>
-{{ include('_modules/_contact.html.twig') }}
-<section id="section4"></section>
+
 
 <script>
- // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 
 
-        const sections = document.querySelectorAll('section');
-        const indexes = document.querySelectorAll('.index_navBar');
+    const sections = document.querySelectorAll('section');
+    const indexes = document.querySelectorAll('.index_navBar');
 
     const options = {
         root: null,
@@ -91,33 +140,70 @@
     };
 
     const intersectionCallback = (entries) => {
-        
+
         entries.forEach((entry) => {
-            
+
             if (entry.isIntersecting) {
-                let elem = '#'+entry.target.id+'_navBar';
-                console.log("go" + elem);
+                let elem = '#' + entry.target.id + '_navBar';
+                //console.log("go" + elem);
                 if (entry.intersectionRatio >= 0.5) {
                     indexes.forEach((element) => {
                         element.classList.remove("select");
                     });
-                    
+
                     document.querySelector(elem).classList.add("select");
-                    }
                 }
-            else{
-                //document.querySelector(latest).classList.remove("select");
-                console.log("retire");
-                }
-            });
-        };
+            }
+        });
+    };
 
     const observer = new IntersectionObserver(intersectionCallback, options);
 
-      sections.forEach((element ) => {
-                        console.log(element.id);
-                        observer.observe(element);
-                    });
+    sections.forEach((element) => {
+        console.log(element.id);
+        observer.observe(element);
+    });
+
+    /**
+ * Parallaxe JS Léger et Subtil
+ * Déplace l'arrière-plan de l'élément .parallax-image
+ */
+
+    // 1. Définition des constantes
+    const parallaxElements = document.querySelectorAll('.parallax-image');
+    // Le taux de défilement : 0.2 signifie que l'image bouge 5 fois plus lentement que la page.
+    const scrollRate = 0.2;
+
+    // 2. Fonction principale de calcul
+    function applyParallax() {
+        // Optimisation : Utiliser requestAnimationFrame pour un défilement plus fluide
+        window.requestAnimationFrame(() => {
+
+            // Pour chaque élément ayant la classe .parallax-image
+            parallaxElements.forEach(el => {
+
+                // Récupère la position de l'élément dans le viewport
+                const rect = el.getBoundingClientRect();
+
+                // Calcule la distance de l'élément par rapport au haut du viewport
+                // Si l'élément est au centre du viewport, value sera proche de 0
+                // (hauteur_fenêtre / 2) - (position_haut + hauteur_élément / 2)
+                const distanceCenter = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+
+                // Applique le taux de défilement pour un mouvement subtil
+                const yPos = distanceCenter * scrollRate;
+
+                // Applique le style pour ajuster la position verticale de l'arrière-plan
+                el.style.backgroundPositionY = `calc(50% + ${yPos}px)`;
+            });
+        });
+    }
+
+    // 3. Écouteurs d'événements
+    // Déclencher le calcul au chargement de la page et à chaque défilement
+    window.addEventListener('scroll', applyParallax);
+    window.addEventListener('resize', applyParallax); // Pour ajuster en cas de redimensionnement
+    applyParallax(); // Exécuter une fois au chargement initial
 
 </script>
 {% endblock %}

@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale= 1.0">
-        <title>{% block title %}Up'n'Com{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Road+Rage&display=swap" rel="stylesheet">
-        {% block stylesheets %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+    <title>{% block title %}Up'n'Com{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Road+Rage&display=swap"
+        rel="stylesheet">
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+
+</head>
+
+<body>
+    {% for message in app.flashes('message') %}
+    <div class="alert alert-success" style="background-color: yellow;">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% block bodyheader %}
+    <header class="frostedGlass header">
+        <div class="logo">
+            <a href="{{ path('home') }}" class="logo">Up'n'Com</a>
+        </div>
+        <div id="navbar" class="textCenter">
+
+            <input type="checkbox" id="burgerQuizz">
+            <label for="burgerQuizz" class="burgerSign">
+                <div class="burgerLine"></div>
+                <div class="burgerLine"></div>
+                <div class="burgerLine"></div>
+            </label>
+
+            <div>
+            <nav class="nav-menu">
+                <ul>
+                    <li>
+                        <a href="{{ path('home')}}">ACCUEIL</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_service_index')}}">SERVICES</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_article_index')}}">BLOG</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_contact')}}">CONTACT</a>
+                    </li>
+                    <li>
+                        <a href="#galerie">A PROPOS</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_realisation')}}">REALISATIONS</a>
+                    </li>
+                    <li class="socials">
+                        <a href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class:
+                            'socialsIcon'}) }}</a>
+                        <a href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class:
+                            'socialsIcon'}) }}</a>
+                        <a href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class:
+                            'socialsIcon'}) }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {% endblock %}
+    <main>
+        {% block body %}
+        <p>No...body</p>
         {% endblock %}
+    </main>
+    <footer class="footer">
+        <a href="{{ path('home') }}" class="logo">
+            Up'n'Com
+        </a>
+        <div class="footer-links">
+            <a>mentions legales</a>
+            <a>RGPD et confidentialité</a>
+            <a>plan du site</a>
+            <small>© Up'n'Com 2025 - tous droits réservés</small>
+        </div>
+    </footer>
+</body>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-
-    </head>
-    <body>
-        {% for message in app.flashes('message') %}
-            <div class="alert alert-success" style="background-color: yellow;">
-                {{ message }}
-            </div>
-        {% endfor %}
-        {% block bodyheader %}                    
-            <header class="frostedGlass">
-                <div id="fullHeader"  class="frostedGlass">
-
-                <div class="mainLogo">
-                    <a href="{{ path('home') }}" class="upncom_top">Up'n'Com</a>    
-                </div>
-                <div id="navbar" class="textCenter">
-
-                    <input type="checkbox" id="burgerQuizz">
-                    <label for="burgerQuizz" class="burgerSign" >
-                        <div class="burgerLine"></div>
-                        <div class="burgerLine"></div>
-                        <div class="burgerLine"></div>
-                    </label>
-
-                    <div id="toggleMenu">
-                        <nav class="menu">
-                            <ul>
-                                <li>
-                                    <a href="{{ path('home')}}">ACCUEIL</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_service_index')}}">SERVICES</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_article_index')}}">BLOG</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_contact')}}">CONTACT</a>
-                                </li>
-                                <li>
-                                    <a href="#galerie">A PROPOS</a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('app_realisation')}}">REALISATIONS</a>
-                                </li>
-                            </ul>
-                            <div class="socials">
-                                <a href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class: 'socialsIcon'}) }}</a>
-                                <a href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class: 'socialsIcon'}) }}</a>
-                                <a href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class: 'socialsIcon'}) }}</a>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            </header>
-            {% endblock %}
-            <main>
-            {% block body %}
-            <p>No...body</p>
-            {% endblock %}
-            </main>
-            <footer>
-                <a href="{{ path('home') }}">
-                        <img class="footer__img" src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com: une explosion de poudres de différentes couleurs avec le nom Up'n'Com écrit en jaune, façon pierre">
-                </a>   
-                <div class="footer__content">
-                    <a>mentions legales</a>
-                    <a>RGPD et confidentialité</a>
-                    <a>plan du site</a>
-                    <small>© Up'n'Com 2025 - tous droits réservés</small>
-                </div>
-                <a href="{{ path('app_contact') }}">
-                        <img class="footer__img micLeft"src="{{ asset('icons/mics/microIncline.svg') }}" alt="Logo d'un micro fortement inspiré du Shure 55'">
-                </a>   
-            </footer> 
-    </body>
 </html>
