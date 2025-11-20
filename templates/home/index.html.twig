@@ -48,11 +48,13 @@
                 <p>
                     Après plusieurs années passées dans la gestion d’entreprise, j’ai créé Up’n’Com pour mettre ma
                     créativité et mon sens stratégique au service des dirigeants.
-                    </p>    <p>
+                </p>
+                <p>
                     Ma mission : vous aider à prendre du recul, vous démarquer et gagner en visibilité grâce à une
                     communication originale, personnalisée… et ancrée dans la réalité de votre quotidien.
-                    </p>    <p>
-                    <strong>Grell-Wirtz, fondatrice d'Up’n’Com</strong> 
+                </p>
+                <p>
+                    <strong>Grell-Wirtz, fondatrice d'Up’n’Com</strong>
                 </p>
             </div>
             <div class="image-column">
@@ -62,20 +64,20 @@
         </div>
     </div>
 </section>
-<section id="section2" class="section section-with-image flex-row-reverse">
+<section id="section2" class="section">
     <div class="container">
         <div class="content-wrapper">
             <div class="text-column">
                 <h2 class="section-title">
                     Notre offre
                 </h2>
-                {% for service in services %}
-                    <twig:ServiceCard service="{{ service }}"></twig:ServiceCard>
-                {% endfor %}
             </div>
-            <div class="image-column">
-                <div class="parallax-image" style="background-image: url('https://picsum.photos/seed/agency/800/600');">
-                </div>
+            <div class="service-card-wrapper">
+                {% for service in services %}
+                <a href="{{ path('app_service_index')}}">
+                    <twig:ServiceCard service="{{ service }}"></twig:ServiceCard>
+                </a>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -100,22 +102,21 @@
         </div>
     </div>
 </section>
-<section id="section4" class="section section-with-image flex-row-reverse">
+<section id="section4" class="section">
     <div class="container">
         <div class="content-wrapper">
             <div class="text-column">
                 <h2 class="section-title">
-                    Les derniers articles du blog
+                    Les derniers article de notre blog
                 </h2>
-                <p>
-                    bla<br>
-                    blabla
-                </p>
-                <p>blablabla</p>
             </div>
-            <div class="image-column">
-                <div class="parallax-image" style="background-image: url('https://picsum.photos/seed/agency/800/600');">
-                </div>
+            <div class="service-card-wrapper">
+                {% for article in articles %}
+                    <twig:ArticleComponent article='{{article}}' class="{{loop.index}}" id="{{loop.index}}"></twig:ArticleComponent>
+                {% endfor %}
+            </div>
+            <div class="text-column">
+                <a href="{{ path('app_article_index')}}">Voir tout nos articles</a>
             </div>
         </div>
     </div>

@@ -84,11 +84,12 @@ h1 {
     margin-block: 0.5em;
 }
 
-h2 {
+h2 , h3 , h4 , h5, h6 {
     font-size: var(--fs-lg);
     margin-bottom: 1.5rem;
     letter-spacing: 0.1em;
 }
+
 
 p {
     margin-bottom: 1.25rem;
@@ -216,6 +217,7 @@ a:hover {
     margin-inline: auto;
     position: sticky;
     top: var(--menuHeight);
+    z-index: 50;
     border-inline: none !important;
 
     ul {
@@ -363,70 +365,50 @@ a:hover {
 
 
 /*services------------------------------------------------------------------------------------------------------------------------------------*/
-#servicesContainer {
-    margin-inline: clamp(var(--fs-xxl), 10vw, 300px);
-    display: flex;
-    flex-direction: column;
-    gap: 5vw;
-}
-
-.services__card {
-    transition: transform 0.2s ease-out;
+.service-card-wrapper{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
 }
-
-.services__svg {
-    width: 300px;
-    aspect-ratio: 1;
-    background-color: var(--gris);
-    border-radius: 50%;
+.service-card{
+    flex-grow: 1.1;
+    flex-shrink: 1.1;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "serviceStack";
     place-items: center;
-    box-shadow: 5px 5px 5px var(--noir);
-    transition: transform 0.3s ease-out;
-
-    &:hover {
-        transform: scale(1.05) translateY(-3px);
-    }
+    grid-template-rows: 1fr;
+    border: 3px solid red;
 }
 
-.services__icon {
-    grid-area: serviceStack;
-    max-width: 70%;
-    object-fit: cover;
+.service-card-title{
+    display: grid;
+    place-items: center;
+    height: 3lh;    
+    *{
+        max-width: 30ch;
+        color: var(--orange);
+        padding-inline: 1rem;
+        text-align: center;
+    }
+    }
 
+.service-card-body{
+    align-self: flex-end;
+    height: calc(200px + 3lh);
+    transition: transform 0.3s ease-out;
     filter: invert(63%) sepia(70%) saturate(537%) hue-rotate(247deg) brightness(55%) contrast(101%);
     transition: transform 0.2s ease-out;
-
-    &:focus-hover {
+    &:hover {
+        transform: scale(1.05) translateY(-3px);
         filter: invert(63%) sepia(70%) saturate(537%) hue-rotate(347deg) brightness(101%) contrast(101%);
         transform: scale(1.1) translateY(-10px);
     }
-
 }
 
-.services__title {
-    text-justify: center;
-}
-
-.services__content {
-    grid-column: 2/3;
-}
-
-@keyframes sliding {
-    0% {
-        height: 800%;
-    }
-
-    100% {
-        height: 100%;
-    }
-
+.service-card-image {
+    max-height: 200px;
+    min-height: 150px;
 }
 
 /*articles-------------------------------------------------------------------------------------------------------------------------------------*/
@@ -497,16 +479,14 @@ aside {
     }
 }
 
-#articleContainer {
-    grid-area: article;
+.article-container {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
-    align-content: center;
+    justify-content: space-between;
     gap: 1rem;
 }
 
-.articleCard {
+.article-card {
     width: clamp(400px, 25dvw, 600px);
     border: 3px var(--grisAlpha) outset;
     border-radius: var(--radius);
@@ -520,6 +500,11 @@ aside {
     grid-template-areas:
         "meinheader"
         "article__body";
+}
+.article-card.inline{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas: "meinheader article__body";
 }
 
 .article__header {

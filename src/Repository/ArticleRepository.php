@@ -53,4 +53,14 @@ class ArticleRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findLastArticles(int $number = 3): array
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->distinct()
+            ->where('a.estPublie = 1')
+            ->orderBy('a.dateCreation', 'DESC')
+            ->setMaxResults($number)
+            ->getQuery();
+        return $qb->getResult() ?? [];
+    }
 }

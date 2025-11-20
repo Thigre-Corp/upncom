@@ -58,3 +58,6 @@ retravailler la fonction de recherche:
 
 
 searchType dans form -> plus nécessaire.
+
+
+ImageComponent: offir la possibilité de l'afficher en image-parallax.

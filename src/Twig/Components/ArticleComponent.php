@@ -9,7 +9,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class ArticleComponent
 {
     public Article $article;
-    public string $class;
+    public string $class ='';
     public string $id;
 
     public function getArticle(): Article

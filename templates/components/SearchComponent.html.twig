@@ -16,14 +16,15 @@
             {% endif %} #}
             {% set lastItem = 0 %}
             
-                {# <div data-live-ignore="true"> #}
+                <div class="article-container">
                     {% for article in this.articles %}
                     {# <div id="page--{{ this.page }}"> #}
-                    <twig:ArticleComponent article='{{article}}' class="{{loop.index}}"
+                    <twig:ArticleComponent article='{{article}}' class="inline" id=""></twig:ArticleComponent>
                         id="article--page-{{page}}-{{loop.index}}" />
                     {% set lastItem = lastItem + loop.index %}
                     {# </div> #}
                     {% endfor %}
+                
                 
                 {# c'est là que la magie opère... prévoire une petite animation !
                 avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les
@@ -48,8 +49,8 @@
                     <p>Plus d'autres articles en stock !!!</p>
                 </div>
                 {% endif %}
-                {#
-            </div> #}
+                
+            </div>
         </div>
     </div>
 </div>

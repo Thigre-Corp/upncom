@@ -2,6 +2,7 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Article;
 use App\Entity\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,9 +15,11 @@ final class HomeController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $services = $em->getRepository(Service::class)->findAll();
+        $articles = $em->getRepository(Article::class)->findLastArticles();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'services' => $services,
+            'articles' => $articles,
         ]);
     }
 }

@@ -30,7 +30,7 @@ class Service
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
-    private ?Image $imageService = null;
+    private ?Image $image = null;
 
     public function __construct()
     {
@@ -90,14 +90,14 @@ class Service
         return $this;
     }
 
-    public function getImageService(): ?Image
+    public function getImage(): ?Image
     {
-        return $this->imageService;
+        return $this->image;
     }
 
     public function setImageService(?Image $imageService): static
     {
-        $this->imageService = $imageService;
+        $this->image = $imageService;
 
         return $this;
     }
