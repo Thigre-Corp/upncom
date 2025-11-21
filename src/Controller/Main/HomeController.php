@@ -15,7 +15,7 @@ final class HomeController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $services = $em->getRepository(Service::class)->findAll();
-        $articles = $em->getRepository(Article::class)->findLastArticles();
+        $articles = $em->getRepository(Article::class)->findLastArticles(4);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'services' => $services,

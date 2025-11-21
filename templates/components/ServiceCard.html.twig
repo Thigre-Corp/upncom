@@ -1,8 +1,25 @@
+{% set id = 0 %}
 <div{{ attributes }} class="service-card">
-    <div class="service-card-title">
-        <h3>{{ service.titre }}</h3>
-    </div>
+        <h3  class="service-card-title">
+            <svg height="500" width="500" title="service" role="heading" xmlns="http://www.w3.org/2000/svg"
+                class="service-card-svg"
+                viewBox="0 0 500 500"
+                >
+                <path id="service-path-{{id}}" pathLength="2" d="
+                M 0, 250
+                a 250,250 0 1,1 500,0
+                a 250,250 0 1,1 -500,0
+                " fill="blue"></path>
+                <text>
+                    <textPath href="#service-path-{{id}}" startOffset="50%" text-anchor="middle"
+                        dominant-baseline="middle">
+                        {{ service.titre }}
+                    </textPath>
+                </text>
+            </svg>
+        </h3>
     <div class="service-card-body">
-        <twig:ImagesComponent image='{{service.image}}' class="service-card-image"></twig:ImagesComponent>
+        {# <twig:ImagesComponent image='{{service.image}}' class="service-card-image"></twig:ImagesComponent> #}
     </div>
-</div>
+    </div>
+

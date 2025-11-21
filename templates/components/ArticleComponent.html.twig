@@ -1,42 +1,35 @@
 <div{{ attributes }}>
-    <article tabindex="0" class="article-card {{class}}" id="{{id}}">
-        <div class="article__header">
-            <div class="article__headerBg"
-                style="--bgImg: url({{ asset('assets/uploads/'~ article.imagePrincipale)}});">
-            </div>
+    
+    <article class="blog-card {{class}}">
 
-            {% if article.imagePrincipale is defined %}
-                {% if article.imagePrincipale is null %}
-                    {% set image = null %}
+        <div class="meta">
+            <div class="photo" style="--bgImg: url({{ asset('assets/uploads/'~ article.imagePrincipale)}}) ">
+            </div>
+            <ul class="details frostedGlass">
+                <li class="author"><a href="#">{{article.auteur.prenom}}&nbsp{{article.auteur.nom}}</a></li>
+                <li class="date">
+                    <time>
+                        {{ article.dateCreation | format_datetime('short', 'none', locale: 'fr') }}</li>
+                    </time>
+                {% if article.tags is null or article.tags is empty %}
+                {# ne rien faire #}
                 {% else %}
-                    {% set image = article.imagePrincipale %}
+                <li class="tags">
+                    <ul>
+                        {% for tag in article.tags | slice(0, 3) %}
+                        <li><a href="#">{{tag}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
                 {% endif %}
-            <twig:ImagesComponent image='{{image}}' class="article__headerImg"></twig:ImagesComponent>
-            {% endif %}
-            <div class="article__headerBandeau">
-                <img src="{{ asset('img/upncom.png') }}" class="miniIMG">
-                <div class="article__headerTitre">
-                    <h2>{{ article.titre }}</h2>
-                </div>
-                {# <img src=" {{ asset('icons/mics/micro.svg') }} " class="miniIMG miniMIC"> #}
-            </div>
+            </ul>
         </div>
-        <div class="article__body">
-
-            <div class="article__resume">
-                {{ article.contenu | raw }}
-            </div>
-
-            <div class="article__cta">
-                <a class="cta button" href="{{path(name = 'app_article_show', parameters = {id : article.id} )}}">lire
-                    la suite</a>
-            </div>
-
-            <cite>
-                <span>{{article.auteur.prenom}}&nbsp{{article.auteur.nom}}</span>
-                <small>{{article.auteur.fonction}}</small>
-                <time>{{ article.dateCreation ? article.dateCreation|date('d/m/Y') : '' }}</time>
-            </cite>
+        <div class="description">
+            <h3>{{ article.titre }}</h3>
+            <p>{{ article.contenu | raw }}</p>
+            <p class="read-more">
+                <a href="{{path(name = 'app_article_show', parameters = {id : article.id} )}}">Read More</a>
+            </p>
         </div>
-    </article>
     </div>
+</article>
