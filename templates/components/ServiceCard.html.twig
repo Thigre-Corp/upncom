@@ -1,25 +1,40 @@
 {% set id = 0 %}
-<div{{ attributes }} class="service-card">
-        <h3  class="service-card-title">
-            <svg height="500" width="500" title="service" role="heading" xmlns="http://www.w3.org/2000/svg"
-                class="service-card-svg"
-                viewBox="0 0 500 500"
-                >
+{% set FullCircle = 400 %}
+{% set RatioCircle = 0.9 %}
+{% set BaseCircle = FullCircle * RatioCircle %}
+{% set OffsetCircle = ( FullCircle - BaseCircle) / 2 %}
+{% set BgImage = 'https://picsum.photos/seed/agency/800/600' %}
+
+<div{{ attributes }} class="service-card " style="
+        --size-from-service-card-component: {{ FullCircle }}px;
+        --ratio-from-service-card-component: {{ RatioCircle }};
+    ">
+    <a href="{{ path('app_service_index')}}">
+        <div class="service-card-bg parallax-image " style="background-image: url('{{ BgImage }}');">
+
+        </div>
+        <h3 class="service-card-title frostedGlass ">
+            <svg height="{{ FullCircle }}" width="{{ FullCircle }}" title="service" role="heading"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {{ FullCircle }} {{ FullCircle }}">
                 <path id="service-path-{{id}}" pathLength="2" d="
-                M 0, 250
-                a 250,250 0 1,1 500,0
-                a 250,250 0 1,1 -500,0
-                " fill="blue"></path>
+                M 0, 0
+                a {{ BaseCircle / 2 }},{{ BaseCircle / 2}} 0 1,1 {{ BaseCircle }}, 0
+                a {{ BaseCircle / 2 }},{{ BaseCircle / 2}}  0 1,1 {{ BaseCircle * -1}}, 0
+                " fill="none" transform="translate( {{ OffsetCircle }}, {{ FullCircle/2 }} )"></path>
                 <text>
-                    <textPath href="#service-path-{{id}}" startOffset="50%" text-anchor="middle"
+                    <textPath href="#service-path-{{id}}" startOffset="25%" text-anchor="middle"
                         dominant-baseline="middle">
                         {{ service.titre }}
                     </textPath>
                 </text>
             </svg>
         </h3>
-    <div class="service-card-body">
-        {# <twig:ImagesComponent image='{{service.image}}' class="service-card-image"></twig:ImagesComponent> #}
-    </div>
-    </div>
+        <div class="service-card-body parallax-image" style="
+            background-image: url('{{ BgImage }}');
+        ">
+        </div>
 
+    </a>
+
+    {# <twig:ImagesComponent image='{{service.image}}' class="service-card-image"></twig:ImagesComponent> #}
+    </div>

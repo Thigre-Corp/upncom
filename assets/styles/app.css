@@ -392,58 +392,59 @@ a:hover {
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: space-between;
+    transition: all 0.2s;        
 }
 
 .service-card {
+    --size: var(--size-from-service-card-component, 300px);
+    --ratio: var(--ratio-from-service-card-component, 0.9);
     flex-grow: 1.1;
     flex-shrink: 1.1;
     position: relative;
-    width: 500px;
-    height: 500px;
-    h3, * {
+    width: var(--size);
+    height: var(--size);
+    z-index: 0; 
+    clip-path: circle(calc(var(--size) /2 + 1 px ) at center );
+    background-color: transparent;
+    *, *>* {
         position: absolute;
+        width: var(--size);
+        height: var(--size);
         inset: 0;
-        margin: 0;
+        clip-path: circle(calc(var(--size) /2) at center );
+        background-color: transparent !important;
+        border : none !important;
     }
+
+    &:hover{
+        *:is(.service-card-title ){
+            transform: rotateZ(45deg) scale(1.05);
+        }
+        
+    }
+}
+
+.service-card-bg{
+    z-index: 1;
+    clip-path: circle(calc(var(--size) * var(--ratio) / 1.95 - 20px ) at center );
 }
 
 .service-card-title {
-
+    transition: all 0.7s;
+    transform-origin: center center;
     z-index: 2;
-       / clip-path: circle(farthest-side);
-       / offset-distance: 1em;
-        background-color: red;
-
-}
-
-.service-card-svg {
-    text{
-        /* font-size: 100%; */
-        fill:var(--color-accent);
-        /font-size-adjust: 50%;
-    }
-    
+    fill:var(--color-accent);
+        position: absolute;
+        inset: 0;
+        margin: 0;
 
 }
 
 .service-card-body {
-    z-index:0;
-    background-color: blue;
-    transition: transform 0.3s ease-out;
-    /filter: invert(63%) sepia(70%) saturate(537%) hue-rotate(247deg) brightness(55%) contrast(101%);
-    transition: transform 0.2s ease-out;
-
-    &:hover {
-        transform: scale(1.05) translateY(-3px);
-        filter: invert(63%) sepia(70%) saturate(537%) hue-rotate(347deg) brightness(101%) contrast(101%);
-        transform: scale(1.1) translateY(-10px);
-    }
+    clip-path: circle(calc(var(--size) * (var(--ratio)) /2 -  (var(--fs-lg))) at center );
+    z-index:3;
 }
 
-.service-card-image {
-    max-height: 200px;
-    min-height: 150px;
-}
 
 /*articles-------------------------------------------------------------------------------------------------------------------------------------*/
 .blog-card {
