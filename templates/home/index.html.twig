@@ -10,6 +10,7 @@
         </video>
     </div>
 </section>
+
 <div id="sections_Navbar">
     <ul class="frostedGlass">
         <li>
@@ -22,22 +23,18 @@
             <a id="section3_navBar" class="index_navBar" href="#section3">Nos réalisations</a>
         </li>
         <li>
-            <a id="section4_navBar" class="index_navBar" href="#section4">Derniers Articles</a>
-        </li>
-        {# <li>
-            <a id="section5_navBar" class="index_navBar" href="#section5">Section 5</a>
+            <a id="section4_navBar" class="index_navBar" href="#section4">Ils nous font confiance</a>
         </li>
         <li>
-            <a id="section6_navBar" class="index_navBar" href="#section6">Section 6</a>
+            <a id="section5_navBar" class="index_navBar" href="#section5">Derniers Articles</a>
         </li>
-        <li>
-            <a id="section7_navBar" class="index_navBar" href="#section7">Section 7</a>
-        </li> #}
     </ul>
 </div>
+
 <h1>
     Bienvenue dans votre agence
 </h1>
+
 <section id="section1" class="section section-with-image">
     <div class="container">
         <div class="content-wrapper">
@@ -64,6 +61,7 @@
         </div>
     </div>
 </section>
+
 <section id="section2" class="section">
     <div class="container">
         <div class="content-wrapper">
@@ -74,14 +72,15 @@
             </div>
             <div class="service-card-wrapper">
                 {% for service in services %}
-                
-                    <twig:ServiceCard service="{{ service }}"></twig:ServiceCard>
+
+                <twig:ServiceCard service="{{ service }}"></twig:ServiceCard>
                 </a>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
+
 <section id="section3" class="section section-with-image">
     <div class="container">
         <div class="content-wrapper">
@@ -102,7 +101,44 @@
         </div>
     </div>
 </section>
+
+
 <section id="section4" class="section">
+    <div class="container">
+        <div class="content-wrapper">
+            <div class="text-column">
+                <h2 class="section-title">
+                    Ils nous font confiance
+                </h2>
+            </div>
+
+            <div class="client-card-carousel" {% for client in clients %} {% set timing=loop.index * 20 %}
+                style="--spin: {{timing}};" {% endfor %}>
+                <div class="client-card-carousel-mask">
+                </div>
+                {% set timing = 0 %}
+                {% for client in clients %}
+                {% set timing = loop.index * 2 %}
+                {% endfor %}
+
+                <div class="client-card-wrapper">
+                    {% for client in clients %}
+                    <twig:ClientCard client="{{ client }}" class="{{ cycle(['', 'alt'], loop.index) }}">
+                    </twig:ClientCard>
+                    {% endfor %}
+                </div>
+                <div class="client-card-wrapper" aria-label="hidden">
+                    {% for client in clients %}
+                    <twig:ClientCard client="{{ client }}" class="{{ cycle(['', 'alt'], loop.index) }}">
+                    </twig:ClientCard>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section5" class="section">
     <div class="container">
         <div class="content-wrapper">
             <div class="text-column">
@@ -110,15 +146,17 @@
                     Les derniers article de notre blog
                 </h2>
             </div>
-            <div class="service-card-wrapper">
+            <div class="article-card-wrapper">
                 {% for article in articles %}
-                    <twig:ArticleComponent article='{{article}}' class="{{ cycle(['', 'alt'], loop.index) }}" id="{{loop.index}}"></twig:ArticleComponent>
+                <twig:ArticleComponent article='{{article}}' class="{{ cycle(['', 'alt'], loop.index) }}"
+                    id="{{loop.index}}"></twig:ArticleComponent>
                 {% endfor %}
             </div>
-            <div class="text-column">
-                <a href="{{ path('app_article_index')}}">Voir tout nos articles</a>
-            </div>
+
         </div>
+    </div>
+    <div class="see-all-articles">
+        <a href="{{ path('app_article_index')}}">Voir tout nos articles</a>
     </div>
 </section>
 

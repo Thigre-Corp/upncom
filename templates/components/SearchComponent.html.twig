@@ -15,17 +15,19 @@
 
             {% endif %} #}
             {% set lastItem = 0 %}
-            
-                <div class="article-container">
-                    {% for article in this.articles %}
-                    {# <div id="page--{{ this.page }}"> #}
-                    <twig:ArticleComponent article='{{article}}' class="inline" id=""></twig:ArticleComponent>
-                        id="article--page-{{page}}-{{loop.index}}" />
+
+            <div class="article-container">
+                {% for article in this.articles %}
+                {# <div id="page--{{ this.page }}"> #}
+                    <twig:ArticleComponent article='{{article}}' class="{{ cycle(['', 'alt'], loop.index) }}"
+                        id="article--page-{{page}}-{{loop.index}}"></twig:ArticleComponent>
+
                     {% set lastItem = lastItem + loop.index %}
-                    {# </div> #}
-                    {% endfor %}
-                
-                
+                    {#
+                </div> #}
+                {% endfor %}
+
+
                 {# c'est là que la magie opère... prévoire une petite animation !
                 avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les
                 nouvelles infos reçues.#}
@@ -33,7 +35,7 @@
                 {# <div id="page--{{ this.page + 1 }}"> #}
                     {# {% for i in 1..per_page %} #}
                     <div>
-                        <article id="article--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {# {% if loop.first
+                        <article class="blog-card" id="article--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {# {% if loop.first
                             %} #} data-appear-target="loader" data-action="appear->live#action"
                             data-live-action-param="more" {# {% endif %} #}>
                             {# 🐹 - Loading bar #}
@@ -42,15 +44,15 @@
                         </article>
                     </div>
                     {# {% endfor %} #}
-                {# </div> #}
+                    {#
+                </div> #}
                 {% endif %}
                 {% if not this.hasMore %}
                 <div>
                     <p>Plus d'autres articles en stock !!!</p>
                 </div>
                 {% endif %}
-                
+
             </div>
         </div>
     </div>
-</div>

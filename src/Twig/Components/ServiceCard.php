@@ -9,6 +9,8 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class ServiceCard
 {
     public ?Service $service;
+    public ?string $page = "";
+    public string $class= "";
 
     
 }

@@ -16,7 +16,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class ImagesComponent
 {
     public ?Image $image;
-    public ?string $class;
+    public string $class="";
 
     public function getImage(): string
     {

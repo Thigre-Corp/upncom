@@ -1,35 +1,50 @@
-<div{{ attributes }}>
-    
+<div {{ attributes }}>
+
     <article class="blog-card {{class}}">
 
         <div class="meta">
-            <div class="photo" style="--bgImg: url({{ asset('assets/uploads/'~ article.imagePrincipale)}}) ">
+            <div class="photo" style="--bgImg : url({{ asset('assets/uploads/'~ article.imagePrincipale)}}) ;">
             </div>
+
             <ul class="details frostedGlass">
-                <li class="author"><a href="#">{{article.auteur.prenom}}&nbsp{{article.auteur.nom}}</a></li>
+                <li class="author">
+                    <a href="#">{{article.auteur.prenom}}&nbsp{{article.auteur.nom}}
+
+                    </a>
+                </li>
                 <li class="date">
                     <time>
-                        {{ article.dateCreation | format_datetime('short', 'none', locale: 'fr') }}</li>
+                        {{ article.dateCreation | format_datetime('short', 'none', locale: 'fr') }}
                     </time>
+                </li>
+                
                 {% if article.tags is null or article.tags is empty %}
-                {# ne rien faire #}
                 {% else %}
                 <li class="tags">
                     <ul>
                         {% for tag in article.tags | slice(0, 3) %}
-                        <li><a href="#">{{tag}}</a></li>
+                        <li>
+                            <a href="#">{{tag}}</a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </li>
                 {% endif %}
             </ul>
         </div>
+
         <div class="description">
-            <h3>{{ article.titre }}</h3>
-            <p>{{ article.contenu | raw }}</p>
+            <h3>
+                {{ article.titre }}
+            </h3>
+            <p>
+                {{ article.contenu | raw }}
+            </p>
             <p class="read-more">
-                <a href="{{path(name = 'app_article_show', parameters = {id : article.id} )}}">Read More</a>
+                <a href="{{path(name = 'app_article_show', parameters = {id : article.id} )}}">
+                    Read More
+                </a>
             </p>
         </div>
-    </div>
-</article>
+    </article>
+</div>

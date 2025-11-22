@@ -3,28 +3,61 @@
 {% block title %}Up'n'Com : Nos Services{% endblock %}
 
 {% block body %}
-    <div class="heroImg">
+<section class="hero">
+    <div class="hero-content">
+        <video autoplay muted loop>
+            {# <source src="{{ asset('videos/herovideo.mp4') }}" type="video/mp4" /> #}
+        </video>
     </div>
-    <div>
-        <h1>Nos Services</h1>
-
-        <div id="servicesContainer">
-
+</section>
+<div>
+    <div class="container">
+    <h1>Nos Services</h1>
+        <div class="service-card-wrapper">
             {% for service in services %}
-                <div tabindex="{{loop.index0 + 2 }}" class="serviceCard {{ cycle(['gauche', 'droite'], loop.index0) }}">
-                    <div class="services__card">
-                        <div class="services__svg">
-                            <twig:ImagesComponent image='{{service.image}}' class="services__icon"></twig:ImagesComponent>
-                        </div>
-                        <div classe="services__title">
-                            <h2>{{ service.titre }}</h2>
-                        </div>
-                        <div classe="services__content">
-                            <p>{{ service.contenu | raw }}</p>
-                        </div>
-                    </div>
-                </div>
+                <twig:ServiceCard service="{{ service }}" page="service-index" class="{{ cycle(['', 'alt'], loop.index0) }}"></twig:ServiceCard>
             {% endfor %}
         </div>
     </div>
+</div>
+
+<script>
+        // 1. Définition des constantes
+    const parallaxElements = document.querySelectorAll('.parallax-image');
+    // Le taux de défilement : 0.2 signifie que l'image bouge 5 fois plus lentement que la page.
+    const scrollRate = 0.2;
+
+    // 2. Fonction principale de calcul
+    function applyParallax() {
+        // Optimisation : Utiliser requestAnimationFrame pour un défilement plus fluide
+        window.requestAnimationFrame(() => {
+
+            // Pour chaque élément ayant la classe .parallax-image
+            parallaxElements.forEach(el => {
+
+                // Récupère la position de l'élément dans le viewport
+                const rect = el.getBoundingClientRect();
+
+                // Calcule la distance de l'élément par rapport au haut du viewport
+                // Si l'élément est au centre du viewport, value sera proche de 0
+                // (hauteur_fenêtre / 2) - (position_haut + hauteur_élément / 2)
+                const distanceCenter = (window.innerHeight / 2) - (rect.top + rect.height / 2);
+
+                // Applique le taux de défilement pour un mouvement subtil
+                const yPos = distanceCenter * scrollRate;
+
+                // Applique le style pour ajuster la position verticale de l'arrière-plan
+                el.style.backgroundPositionY = `calc(50% + ${yPos}px)`;
+            });
+        });
+    }
+
+    // 3. Écouteurs d'événements
+    // Déclencher le calcul au chargement de la page et à chaque défilement
+    window.addEventListener('scroll', applyParallax);
+    window.addEventListener('resize', applyParallax); // Pour ajuster en cas de redimensionnement
+    applyParallax(); // Exécuter une fois au chargement initial
+
+</script>
+
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Main;
 
+use App\Entity\Client;
 use App\Entity\Article;
 use App\Entity\Service;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,10 +17,12 @@ final class HomeController extends AbstractController
     {
         $services = $em->getRepository(Service::class)->findAll();
         $articles = $em->getRepository(Article::class)->findLastArticles(4);
+        $clients = $em->getRepository(Client::class)->findAll();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'services' => $services,
             'articles' => $articles,
+            'clients' => $clients,
         ]);
     }
 }
