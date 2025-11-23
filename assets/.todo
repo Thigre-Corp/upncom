@@ -20,8 +20,6 @@ SVG:
 HOME:
   - revoir JS intersection observer.
 
-MESSAGE FLASH:
-  - mise en forme
 
 EZADMIN:
   - mise en forme/theme
@@ -44,7 +42,7 @@ TEST SVG Corrompu:
   - OK
 
 liimpImage:
-  - à implémenter ou pas.
+  - à implémenter ou pas. -> Joli_code media bundle
 =====================================================================================
 -------------------
 réécrire TWIG  articles
@@ -52,12 +50,12 @@ réécrire TWIG  articles
 dans articles/index:
   - faire un truc sympa avec la recherche/nuage de TAG et pagination. 
 
-retravailler la fonction de recherche:
-  - OK dans titre et tag, mais bug - voir csrf/GET (reprendre code <select> villes ??? )
-  - contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
-
-
 searchType dans form -> plus nécessaire.
 
 
 ImageComponent: offir la possibilité de l'afficher en image-parallax.
+
+mise en forme subscibe newsletter
+
+MESSAGE FLASH:
+  - mise en forme

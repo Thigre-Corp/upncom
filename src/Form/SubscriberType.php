@@ -15,12 +15,19 @@ class SubscriberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'Je veux m\'inscrire à la newslettet en inscrivant mon mail ici'
+
+                
+            ])
             ->add('rgpd', CheckboxType::class, [
                 'required' => true,
                 'mapped' =>false,
+                'label' => 'En cochant cette case'
             ])
-            ->add('valider', SubmitType::class)
+            ->add('valider', SubmitType::class, [
+                'label' => 'En enfin, je valide en cliquant ICI !',
+            ])
         ;
     }
 

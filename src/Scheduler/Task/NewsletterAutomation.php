@@ -7,7 +7,7 @@
         - Si au moins une Newsletter est à envoyer ce jour
         - Et Si au moins un Subscriber est valid
         - Alors on générer des SendNewsletterMessage avec les Newsletter::id et Subscriber::id concernées
-    // @TODO - purge les Subscriber qui n'ont pas validé leur mails après 30 jours.
+        - purge les Subscriber qui n'ont pas validé leur mails après 1 jour.
 */
 
 namespace App\Scheduler\Task;
@@ -15,6 +15,7 @@ namespace App\Scheduler\Task;
 use App\Entity\Newsletters\Newsletter;
 use App\Entity\Newsletters\Subscriber;
 use App\Message\SendNewsletterMessage;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Scheduler\Attribute\AsPeriodicTask;
@@ -29,6 +30,18 @@ class NewsletterAutomation
 
     public function __invoke()
     {
+        $nonValidSubscribers = $this->entityManager->getRepository(Subscriber::class)->findBy(['isValid' => false]);
+
+        if ($nonValidSubscribers !== null)
+        {
+            foreach ($nonValidSubscribers as $nonValidSubscriber) {
+                if ($nonValidSubscriber->getDateCreation() < new DateTime('yesterday')){
+                    $this->entityManager->remove($nonValidSubscriber);
+                    $this->entityManager->flush();
+                }
+            }
+        }
+
         $newsletters = $this->entityManager->getRepository(Newsletter::class)->findToBeSentToday();
 
         if ($newsletters == null) {

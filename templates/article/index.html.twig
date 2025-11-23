@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block title %}Up'n'Com : Le Blog{% endblock %}
-
+{% set repository = repo %}
 {% block body %}
-    <div class="heroImg">
-        <img src="{{ asset('img/blog.jpg') }}" style="width: 100svw;">
+<section class="hero">
+    <div class="hero-content">
+        <img src="{{ asset('img/blog.jpg') }}" >
     </div>
+</section>
     <div class="container">
     <h1>Up'n'Com : le Blog</h1>
-
             <twig:SearchComponent/>
         </div>
     </div>

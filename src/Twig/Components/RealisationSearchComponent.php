@@ -11,9 +11,8 @@
 namespace App\Twig\Components;
 
 
-use App\Repository\ArticleRepository;
+use App\Repository\RealisationRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-//use Symfony\Component\ObjectMapper\ObjectMapperInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
@@ -22,7 +21,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
-class SearchComponent
+class RealisationSearchComponent
 {
     use DefaultActionTrait;
     use ComponentToolsTrait;
@@ -35,22 +34,21 @@ class SearchComponent
     #[LiveProp]
     public int $page = 1;
 
-    public array $articlesArray = [];
+    public array $realisationsArray = [];
 
-    private int $nbArticles = 0;
+    private int $nbRealisations = 0;
 
     public function __construct(
-        private ArticleRepository $articleRepository,
-        //private readonly ObjectMapperInterface $objectMapper,
+        private RealisationRepository $realisationRepository,
     ) {
-        $articles = $this->articleRepository
+        $realisations = $this->realisationRepository
             ->findBySearchQb($this->query)
             ->setFirstResult(0)
             ->setMaxResults(self::PER_PAGE);
 
-        $listArticles = new Paginator($articles, true);
-        $this->nbArticles = $listArticles->count();
-        $this->articlesArray  = $listArticles->getQuery()->getResult();
+        $listRealisations = new Paginator($realisations, true);
+        $this->nbRealisations = $listRealisations->count();
+        $this->realisationsArray  = $listRealisations->getQuery()->getResult();
     }
 
     #[LiveAction]
@@ -59,33 +57,33 @@ class SearchComponent
         ++$this->page;
     }
 
-    public function getArticles(): array
+    public function getRealisations(): array
     {
         if ($this->page > 1) {
-            $articles = $this->articleRepository->findBySearchQb($this->query);
+            $realisations = $this->realisationRepository->findBySearchQb($this->query);
 
-            $articles
+            $realisations
                 ->setFirstResult(($this->page - 1) * self::PER_PAGE)
                 ->setMaxResults(self::PER_PAGE);
 
-            $this->articlesArray  = array_merge($this->articlesArray, $articles->getQuery()->getResult());
+            $this->realisationsArray  = array_merge($this->realisationsArray, $realisations->getQuery()->getResult());
         }
-        return $this->articlesArray;
+        return $this->realisationsArray;
     }
 
-    public function onQueryUpdated(): void // méthode pour forcer le rendering de la div contenant les articles lors du changement de $this->query
+    public function onQueryUpdated(): void // méthode pour forcer le rendering de la div contenant les realisations lors du changement de $this->query
     {
         $this->page = 1;
 
-        $articles = $this->articleRepository
+        $realisations = $this->realisationRepository
             ->findBySearchQb($this->query)
             ->setFirstResult(0)
             ->setMaxResults(self::PER_PAGE);
 
-        $listArticles = new Paginator($articles, true);
-        $this->nbArticles = $listArticles->count();
-        // dd($this->nbArticles);
-        $this->articlesArray  = $listArticles->getQuery()->getResult();
+        $listRealisations = new Paginator($realisations, true);
+        $this->nbRealisations = $listRealisations->count();
+        // dd($this->nbRealisations);
+        $this->realisationsArray  = $listRealisations->getQuery()->getResult();
     }
 
     #[ExposeInTemplate('per_page')]
@@ -97,9 +95,9 @@ class SearchComponent
     // #[ExposeInTemplate('hasMore')]
     public function hasMore(): bool
     {
-        dump('nbArticles=' . $this->nbArticles);
+        dump('nbRealisations=' . $this->nbRealisations);
         dump('nbPages=' . $this->page * self::PER_PAGE);
-        return (($this->nbArticles) > ($this->page * self::PER_PAGE));
+        return (($this->nbRealisations) > ($this->page * self::PER_PAGE));
     }
 
 }

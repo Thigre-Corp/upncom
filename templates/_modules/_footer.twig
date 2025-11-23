@@ -3,21 +3,20 @@
 <footer class="footer">
     <div class="home_spacer">
         <div class="home_upncom">
-            <a href="{{ path('home') }}" class="logo">
+            <p><a href="{{ path('home') }}" class="logo">
                 Up'n'Com
-            </a>
-            {{ render(controller('App\\Controller\\Main\\NewslettersController::subscribeForm')) }}
+            </a></p>
         </div>
         <div class="home_slogan">
-            <div>
+            <p>
                 Conseil en Communication et Marketing
-            </div>
-            <div>
+            </p>
+            <p>
                 Gestion d'image sur les réseaux
-            </div>
-            <div>
+            </p>
+            <p>
                 Créations Web / Digitales / Print
-            </div>
+            </p>
         </div>
         <div class="home_adresse">
             <div>
@@ -35,6 +34,7 @@
             </div>
         </div>
     </div>
+    {{ render(controller('App\\Controller\\Main\\NewslettersController::subscribeForm')) }}
     <div class="footer-links">
         <a>mentions legales</a>
         <a>RGPD et confidentialité</a>

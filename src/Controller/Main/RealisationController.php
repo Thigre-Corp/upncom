@@ -3,7 +3,6 @@
 namespace App\Controller\Main;
 
 use App\Entity\Realisation;
-use App\Repository\RealisationRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class RealisationController extends AbstractController
 {
     #[Route(name: 'app_realisation', methods: ['GET'])]
-    public function index(RealisationRepository $realisationRepository): Response
+    public function index(): Response
     {
         return $this->render('realisation/index.html.twig', [
-            'realisations' => $realisationRepository->findAll(),
         ]);
     }
 

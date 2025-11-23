@@ -6,9 +6,9 @@ tout en conservant la mise en cache du navigateur. L'appel à OBJECT empèche la
 
 <figure{{ attributes }}>
     {% if image is null %}
-        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com" class="{{class}}" loading="lazy">
+        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com" loading="lazy" class="{{class}}">
     {% elseif '.webp' in image.mediaURL %}
-        <img src="{{ asset('assets/uploads/'~ image.mediaURL )}}" alt="{{image.altText}}" class="{{class}}" loading="lazy">
+        <img src="{{ asset('assets/uploads/'~ image.mediaURL )}}" alt="{{image.altText}}" loading="lazy" class="{{class}}">
     {% elseif '.svg' in image.mediaURL %}
         <svg title="{{image.altText}}" class="{{class}}" role="img">
             <use href="{{ asset('assets/uploads/'~ image.mediaURL )}}"></use>

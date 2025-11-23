@@ -16,11 +16,11 @@
             {% endif %} #}
             {% set lastItem = 0 %}
 
-            <div class="article-container">
-                {% for article in this.articles %}
+            <div class="realisation-container">
+                {% for realisation in this.realisations %}
                 {# <div id="page--{{ this.page }}"> #}
-                    <twig:ArticleComponent article='{{article}}' class="{{ cycle(['', 'alt'], loop.index) }}"
-                        id="article--page-{{page}}-{{loop.index}}"></twig:ArticleComponent>
+                    <twig:RealisationComponent realisation='{{realisation}}' class="{{ cycle(['', 'alt'], loop.index) }}"
+                        id="realisation--page-{{page}}-{{loop.index}}"></twig:RealisationComponent>
 
                     {% set lastItem = lastItem + loop.index %}
                     {#
@@ -29,19 +29,19 @@
 
 
                 {# c'est là que la magie opère... prévoire une petite animation !
-                avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les
+                avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'realisation "loader" une fois les
                 nouvelles infos reçues.#}
                 {% if this.hasMore %}
                 {# <div id="page--{{ this.page + 1 }}"> #}
                     {# {% for i in 1..per_page %} #}
                     <div>
-                        <article class="blog-card" id="article--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {#
+                        <realisation class="blog-card" id="realisation--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {#
                             {% if loop.first %} #} data-appear-target="loader" data-action="appear->live#action"
                             data-live-action-param="more" {# {% endif %} #}>
                             {# 🐹 - Loading bar #}
                             {# Animated progress bar shown during page load #}
                             <span>LOADING</span>
-                        </article>
+                        </realisation>
                     </div>
                     {# {% endfor %} #}
                     {#
@@ -49,7 +49,7 @@
                 {% endif %}
                 {% if not this.hasMore %}
                 <div>
-                    <p>Plus d'autres articles en stock !!!</p>
+                    <p>Plus d'autres realisations en stock !!!</p>
                 </div>
                 {% endif %}
             </div>

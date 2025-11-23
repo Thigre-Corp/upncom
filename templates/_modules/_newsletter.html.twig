@@ -1,0 +1,31 @@
+{# newsletter d'inscription formulaire #}
+
+<div class="newsletter">
+    
+        {{ form_start(form) }}
+        <div class="newsletter-form">
+
+        <div class="newsletter-form-email">
+            {{form_label(form.email) }}
+            <span class="arrow-right">&#xf061</span>{{form_widget(form.email) }}
+        </div>
+        <div class="newsletter-form-rgpd">
+            {{ form_label(form.rgpd) }}
+            <span class="arrow-right">&#xf061</span>{{ form_widget(form.rgpd) }}
+            <a href="#">J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
+            newsletter conformément à la politique de confidentialité.</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+    <div class="newsletter-form-helper frostedGlass">
+        <p>
+            Veuiller Entrez votre adresse mail pour vous inscrire à notre newsletter.
+            <br>
+            Nous ne partagerons jamais votre adresse email.
+        </p>
+        <p>
+            J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
+            newsletter conformément à la <a href="#">politique de confidentialité</a>.
+        </p>
+    </div>
+</div>

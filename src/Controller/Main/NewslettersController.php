@@ -68,8 +68,7 @@ final class NewslettersController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        return $this->render('newsletters/index.html.twig', [
-            'controller_name' => 'NewslettersController',
+        return $this->render('_modules/_newsletter.html.twig', [
             'form' => $form,
         ]);
     }

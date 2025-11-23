@@ -14,7 +14,8 @@ final class ArticleController extends AbstractController
     public function index(
     ): Response
     {
-        return $this->render('article/index.html.twig');
+        return $this->render('article/index.html.twig',[
+        ]);
     }
 
     #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]

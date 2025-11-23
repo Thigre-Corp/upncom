@@ -1,33 +1,62 @@
 {% extends 'base.html.twig' %}
-
+{% set class='' %}
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
+<section class="hero">
+    <div class="hero-content">
+        <twig:imagesComponent image='{{ article.imagePrincipale }}' class="article-image-principale">
+        </twig:imagesComponent>
+    </div>
+</section>
+<section class="container">
+    <article>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu | raw }}</td>
-            </tr>
-            <tr>
-                <th>MediaURL</th>
-                <td>{{ article.imagePrincipale }}</td>
-            </tr>
-            <tr>
-                <th>DateCreation</th>
-                <td>{{ article.dateCreation ? article.dateCreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="article-meta frostedGlass">
+            <h1>{{ article.titre }}</h1>
 
+
+            <ul class="article-details">
+                <li class="author">
+                    <a href="#">{{article.auteur.prenom}}&nbsp{{article.auteur.nom}}, {{article.auteur.fonction}}
+                    </a>
+                </li>
+                <li class="date">
+                    Publié le
+                    <time>
+                        {{ article.dateCreation | format_datetime('long', 'none', locale: 'fr') }}
+                    </time>
+                </li>
+                {% if article.tags is null or article.tags is empty %}
+                {% else %}
+                <li class="tags">
+                    <ul>
+                        {% for tag in article.tags | slice(0, 3) %}
+                        <li>
+                            <a href="#">{{tag}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+        </div>
+        <div class="article-body">
+            <div class="article-image frostedGlass">
+                <twig:imagesComponent image='{{ article.imageDeux }}' class="article-image-deux">
+                </twig:imagesComponent>
+            </div>
+            <div class="article-image">
+                <twig:imagesComponent image='{{ article.imageTrois }}' class="article-image-trois">
+                </twig:imagesComponent>
+            </div>
+            <div class="article-image">
+                <twig:imagesComponent image='{{ article.imageQuatre }}' class="article-image-quatre">
+                </twig:imagesComponent>
+            </div>
+            <div class="article-content">
+                {{ article.contenu | raw }}
+            </div>
+        </div>
+    </article>
+</section>
 {% endblock %}

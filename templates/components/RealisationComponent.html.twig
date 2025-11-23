@@ -1,0 +1,37 @@
+<div {{ attributes }}>
+
+    <article class="blog-card {{class}}">
+
+        <div class="meta">
+            <div class="photo" style="--bgImg : url({{ asset('assets/uploads/'~ realisation.imageCouverture)}}) ;">
+            </div>
+
+            <ul class="details frostedGlass">
+                <li class="author">
+                    <a href="#">{{realisation.accroche}}
+                    </a>
+                </li>
+                <li class="date">
+                    {{realisation.resumeMission | raw }}
+                </li>
+
+                {% if realisation.tags is null or realisation.tags is empty %}
+                {% else %}
+                <li class="tags">
+                    <ul>
+                        {% for tag in realisation.tags | slice(0, 3) %}
+                        <li>
+                            <a href="#">{{tag}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="description">
+            {{realisation.description | raw}}
+        </div>
+    </article>
+</div>
