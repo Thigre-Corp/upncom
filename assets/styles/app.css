@@ -14,7 +14,7 @@
     --bleu: oklch(from #46A2AC l c h);
     --bleuFonC: oklch(from #003F5D l c h);
     --noir: oklch(from #020202 l c h);
-    --gris: oklch(from #F1E9EE l c h);
+    --gris: oklch(from #f1f1f1 l c h);
     --blanc: oklch(from #EEEEEE l c h);
     --grisAlpha: oklch(from #5c5c5c41 l c h);
     --contour: var(--grisAlpha);

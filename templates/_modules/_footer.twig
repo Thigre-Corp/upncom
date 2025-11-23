@@ -1,0 +1,44 @@
+{# Footer du site, sous forme de module #}
+
+<footer class="footer">
+    <div class="home_spacer">
+        <div class="home_upncom">
+            <a href="{{ path('home') }}" class="logo">
+                Up'n'Com
+            </a>
+            {{ render(controller('App\\Controller\\Main\\NewslettersController::subscribeForm')) }}
+        </div>
+        <div class="home_slogan">
+            <div>
+                Conseil en Communication et Marketing
+            </div>
+            <div>
+                Gestion d'image sur les réseaux
+            </div>
+            <div>
+                Créations Web / Digitales / Print
+            </div>
+        </div>
+        <div class="home_adresse">
+            <div>
+                <p>Agence de Mulhouse</p>
+                <a
+                    href="https://www.google.com/maps/dir//Up'n'Com+-+Sophie+GRELL+WIRTZ,+33+Rue+du+Nordfeld,+68100+Mulhouse/@47.7502729,7.3087032,13z/data=!3m1!4b1!4m9!4m8!1m0!1m5!1m1!1s0x47919b552dd92e0f:0xb27c5dc416b2e7a5!2m2!1d7.3499026!2d47.7502803!3e0?entry=ttu&g_ep=EgoyMDI1MTAyOC4wIKXMDSoASAFQAw%3D%3D">
+                    <p>33 rue du Nordfeld</p>
+                </a>
+            </div>
+            <div>
+                <a href="{{ path('app_contact') }}">🖅: Nous contacter</a>
+            </div>
+            <div>
+                <a href="tel:+33610032799">✆: 06 10 03 27 99</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-links">
+        <a>mentions legales</a>
+        <a>RGPD et confidentialité</a>
+        <a>plan du site</a>
+        <small>© Up'n'Com 2025 - tous droits réservés</small>
+    </div>
+</footer>

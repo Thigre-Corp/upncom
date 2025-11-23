@@ -34,13 +34,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 final class NewslettersController extends AbstractController
 {
     #[Route('/newsletters', name: 'app_newsletters')]
-    public function index(
+    public function subscribeForm(
         Request $request,
         EntityManagerInterface $entityManager,
         MailerInterface $mailer,
-    ): Response {
+        ): Response 
+    {
         $subscriber = new Subscriber();
-        $form = $this->createForm(SubscriberType::class, $subscriber);
+        $form = $this->createForm(SubscriberType::class, $subscriber, [
+            'action' => $this->generateUrl('app_newsletters')
+        ]);
 
         $form->handleRequest($request);
 
@@ -60,6 +63,7 @@ final class NewslettersController extends AbstractController
                 ->context(['subscriber' => $subscriber]);
 
             $mailer->send($email);
+            $this->addFlash('message', 'Surveillez votre boîte mail, vous aller recevoir un email pour confirmer votre inscription à la newsletter d\' Up\'n\'Com');
 
             return $this->redirectToRoute('home');
         }

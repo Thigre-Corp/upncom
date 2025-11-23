@@ -80,17 +80,6 @@
         <p>No...body</p>
         {% endblock %}
     </main>
-    <footer class="footer">
-        <a href="{{ path('home') }}" class="logo">
-            Up'n'Com
-        </a>
-        <div class="footer-links">
-            <a>mentions legales</a>
-            <a>RGPD et confidentialité</a>
-            <a>plan du site</a>
-            <small>© Up'n'Com 2025 - tous droits réservés</small>
-        </div>
-    </footer>
+{{ include('_modules/_footer.twig') }}
 </body>
-
 </html>

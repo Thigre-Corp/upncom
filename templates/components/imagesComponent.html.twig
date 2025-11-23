@@ -3,12 +3,12 @@ ou le title et aria-role
 l'utilisation des balises SVG et USE permettent de conserver une image vectorielle (serait rasterizer dans le cadre
 d'une balise IMG)
 tout en conservant la mise en cache du navigateur. L'appel à OBJECT empèche la mise en cache du browser #}
-<div{{ attributes }}>
 
+<figure{{ attributes }}>
     {% if image is null %}
-        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com" class="{{class}}">
+        <img src="{{ asset('img/upncom.png') }}" alt="Logo d'Up'n'Com" class="{{class}}" loading="lazy">
     {% elseif '.webp' in image.mediaURL %}
-        <img src="{{ asset('assets/uploads/'~ image.mediaURL )}}" alt="{{image.altText}}" class="{{class}}">
+        <img src="{{ asset('assets/uploads/'~ image.mediaURL )}}" alt="{{image.altText}}" class="{{class}}" loading="lazy">
     {% elseif '.svg' in image.mediaURL %}
         <svg title="{{image.altText}}" class="{{class}}" role="img">
             <use href="{{ asset('assets/uploads/'~ image.mediaURL )}}"></use>
@@ -16,4 +16,4 @@ tout en conservant la mise en cache du navigateur. L'appel à OBJECT empèche la
     {% else %}
         <div role="img" aria-label="image absente symbolysée par une croix rouge">❌</div>
     {% endif %}
-</div>
+</figure>
