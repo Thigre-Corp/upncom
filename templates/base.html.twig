@@ -15,17 +15,22 @@
     {% block stylesheets %}
     {% endblock %}
 
-    {% block javascripts %}
     {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% block javascripts %}
+    <script src="{{ asset('/scripts/parallax.js') }}" defer></script>
+    <script src="{{ asset('/scripts/intermediate-nav.js') }}" defer></script>
     {% endblock %}
 
 </head>
 
 <body>
     {% for message in app.flashes('message') %}
-    <div class="alert alert-success" style="background-color: yellow;">
-        {{ message }}
-    </div>
+    <input hidden type="checkbox" id="closeAlert" class="closeAlert">
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+            <label for="closeAlert" class="closeAlertLabel">X</label>
+        </div>
+    </input>
     {% endfor %}
     {% block bodyheader %}
     <header class="frostedGlass header">
@@ -35,14 +40,16 @@
         <div id="navbar" class="textCenter">
 
             <input type="checkbox" id="burgerQuizz">
-            <label for="burgerQuizz" class="burgerSign">
-                <div class="burgerLine"></div>
-                <div class="burgerLine"></div>
-                <div class="burgerLine"></div>
-            </label>
+                <label for="burgerQuizz" class="burgerSign">
+                    <div class="burgerLine"></div>
+                        <div class="burgerLine burgerLine2"></div>
+                        <div class="burgerLine"></div>
 
-            <div>
-            <nav class="nav-menu">
+                </label>
+            </input>
+
+
+            <nav class="nav-menu" id="toggleMenu">
                 <ul>
                     <li>
                         <a href="{{ path('home')}}">ACCUEIL</a>
@@ -57,9 +64,6 @@
                         <a href="{{ path('app_contact')}}">CONTACT</a>
                     </li>
                     <li>
-                        <a href="#galerie">A PROPOS</a>
-                    </li>
-                    <li>
                         <a href="{{ path('app_realisation')}}">REALISATIONS</a>
                     </li>
                     <li class="socials">
@@ -72,14 +76,34 @@
                     </li>
                 </ul>
             </nav>
-        </div>
     </header>
     {% endblock %}
     <main>
+        <div id="burgerMask" class="frostedGlass"></div>
+
         {% block body %}
         <p>No...body</p>
         {% endblock %}
     </main>
 {{ include('_modules/_footer.twig') }}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const burger = document.getElementById('burgerQuizz');
+        const toggleMenu = document.getElementById('toggleMenu');
+        const mask = document.getElementById('burgerMask');
+        mask.innerHTML = toggleMenu.innerHTML;
+        mask.ariaHidden = 'true';
+        mask.classList.add('toggleMenu');
+
+        burger.addEventListener('change', function () {
+            if (this.checked) {
+                mask.style.transform = 'translateX(0)';
+            } else {
+                mask.style.transform = 'translateX(101vw)';
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

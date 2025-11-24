@@ -3,9 +3,10 @@
 (e.g. a <div>) where the attributes are applied to #}
 
     <div {{ attributes.defaults(stimulus_controller('appear')) }}>
-
-        <input type="search" data-model="debounce(1000)|query" name="recherche">
-
+        <div class="barre-recherche-wrapper frostedGlass">
+            <label for="recherche">Rechercher:</label>
+            <input id="recherche" type="search" data-model="debounce(1000)|query" name="recherche">
+        </div>
         <div id="results--{{ this.query }}">
             {# {% if page > 1 %}
             {# 🦊 #}
@@ -35,7 +36,7 @@
                 {# <div id="page--{{ this.page + 1 }}"> #}
                     {# {% for i in 1..per_page %} #}
                     <div>
-                        <realisation class="blog-card" id="realisation--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {#
+                        <realisation class="blog-card loading frostedGlass" id="realisation--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {#
                             {% if loop.first %} #} data-appear-target="loader" data-action="appear->live#action"
                             data-live-action-param="more" {# {% endif %} #}>
                             {# 🐹 - Loading bar #}
@@ -48,8 +49,10 @@
                 </div> #}
                 {% endif %}
                 {% if not this.hasMore %}
-                <div>
-                    <p>Plus d'autres realisations en stock !!!</p>
+                <div class="blog-card nomore frostedGlass">
+                    {% if not lastItem %}
+                        aucun résultat pour votre recherche...
+                    {% endif %}
                 </div>
                 {% endif %}
             </div>

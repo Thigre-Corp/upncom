@@ -44,6 +44,9 @@ class Contact
     #[ORM\Column]
     private ?\DateTime $dateCreation = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $token = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,7 +129,7 @@ class Contact
         return $this->emailValide;
     }
 
-    public function setEmailValide(bool $emailValide): static
+    public function setIsValid(bool $emailValide): static
     {
         $this->emailValide = $emailValide;
 
@@ -165,6 +168,18 @@ class Contact
     public function setDateCreation(\DateTime $dateCreation): static
     {
         $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): static
+    {
+        $this->token = $token;
 
         return $this;
     }

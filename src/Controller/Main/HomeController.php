@@ -25,4 +25,5 @@ final class HomeController extends AbstractController
             'clients' => $clients,
         ]);
     }
+
 }

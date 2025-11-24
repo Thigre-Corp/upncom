@@ -39,6 +39,7 @@
     --font-heading: "Cabin", sans-serif;
     --font-txt: "Nunito Sans", sans-serif;
     --font-logo: "Road Rage", sans-serif;
+    --frostedBlur: 7px;
 
     /*scroll behavior*/
     scroll-behavior: smooth;
@@ -64,7 +65,7 @@ body {
     color: var(--color-text-primary);
     background-color: var(--color-bg-primary);
     line-height: 1.6;
-    overflow-x: hidden;
+    position: relative;
 }
 
 /* Conteneur principal pour centrer le contenu */
@@ -77,7 +78,7 @@ body {
 
 .frostedGlass {
     background-color: var(--grisAlpha);
-    backdrop-filter: blur(7px);
+    backdrop-filter: blur(var(--frostedBlur));
     border: 2px outset oklch(from var(--gris) l c h / 0.2);
 }
 
@@ -122,6 +123,29 @@ a:hover {
     color: var(--color-accent);
     fill: var(--color-accent);
     /* Effet discret au survol */
+}
+
+/*flash message---------------------------------*/
+
+.alert {
+    position: absolute;
+    top: var(--menuHeight);
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background-color: var(--color-bg-primary);
+    text-align: center;
+    padding: 1em;
+}
+
+.closeAlertLabel {
+    padding-inline: 0.5em;
+    border: solid var(--color-text-primary) 2px;
+    border-radius: 2px;
+}
+
+input[type=checkbox]:checked+.alert {
+    display: none;
 }
 
 /*Header----------------------------------------------------------------------------------------------------------------------------------*/
@@ -206,7 +230,9 @@ a:hover {
 
 /*main-------------------------------------------------------*/
 
-
+main {
+    position: relative;
+}
 
 /*footer--------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -406,17 +432,9 @@ a:hover {
     height: 100%;
     background-size: cover;
     background-position: center center;
-    /* Définition initiale du centre */
-
-    /* MODIFICATION CLÉ : Retirer 'fixed' pour laisser le JS gérer la position */
     background-attachment: scroll;
-
     background-repeat: no-repeat;
-
-    /* Optionnel : transition pour un effet plus fluide si les calculs JS sont trop rapides */
-    /* transition: background-position-y 0.1s linear; */
 }
-
 
 .home_spacer {
     border-block: 3px solid var(--noir);
@@ -449,8 +467,6 @@ a:hover {
     gap: 1rem;
     justify-content: space-around;
 }
-
-
 
 .service-card {
     align-self: center;
@@ -512,7 +528,6 @@ a:hover {
     position: absolute;
     inset: 0;
     margin: 0;
-
 }
 
 .service-card-body {
@@ -568,7 +583,8 @@ a:hover {
     .photo {
         position: absolute;
         inset: 0;
-        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: contain;
         background-position: center;
         transition: transform .2s;
         background-image: var(--bgImg), linear-gradient(var(--grisAlpha) 0 0);
@@ -830,17 +846,18 @@ a:hover {
 
     display: grid;
     place-items: center;
-    grid-template-columns: repeat(auto-fit,minmax(max(200px, calc(100% / var(--max-nb-columns) - var(--gap))) , 1fr));
-    grid-auto-flow: row  ;
+    grid-template-columns: repeat(auto-fit, minmax(max(200px, calc(100% / var(--max-nb-columns) - var(--gap))), 1fr));
+    grid-auto-flow: row;
     gap: var(--gap);
 
 }
 
-.article-image:nth-child(n+1){
+.article-image:nth-child(n+1) {
     width: 100%;
     height: auto;
 }
-.article-image:first-child{
+
+.article-image:first-child {
     grid-row: 1 / 2;
     grid-column: 1 / -1;
     width: 100%;
@@ -860,28 +877,83 @@ a:hover {
 .article-image-trois {
     width: 100%;
     height: auto;
-    border-radius: 5em 0 ;
+    border-radius: 5em 0;
 }
 
 .article-image-quatre {
     width: 100%;
     height: auto;
     border-radius: 0 5em;
-    }
+}
 
 .article-content {
-    padding: 1em; 
+    padding: 1em;
     width: 100%;
     grid-column: 1/-1;
     order: -1;
     text-align: justify;
-    &:nth-child(n){
-        img{
+
+    &:nth-child(n) {
+        img {
             max-width: 100%;
             aspect-ratio: 1/1;
         }
-       
     }
+}
+
+*+.loading {
+    width: 100%;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        color: var(--color-accent);
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+        --loading: 0 deg;
+        transform: translate(-50%, -50%) rotateZ(var(--loading));
+        content: '\f110';
+        font-family: FontAwesome;
+        animation: is-loading 1s infinite linear;
+    }
+}
+
+*+.nomore {
+    width: 100%;
+    height: 3lh;
+    padding: 1em;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        color: var(--color-accent);
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+        transform: translate(-50%, -50%);
+        content: 'pas d\'autre élément à afficher';
+
+    }
+}
+
+@keyframes is-loading {
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+.barre-recherche-wrapper {
+    margin-block: 1em;
+    margin-inline: auto;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    border-radius: 0 0 1em 1em;
+    position: sticky;
+    top: var(--menuHeight);
+    z-index: 1000;
+    gap: 1em;
 }
 
 /*tags-----------------------------------*/
@@ -960,71 +1032,142 @@ a:hover {
 /*contact----------------------------------*/
 
 .contactContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    --gap: 1rem;
+    --max-nb-columns: 2;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(max(250px, calc(100% / var(--max-nb-columns) - var(--gap))), 1fr));
+    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-auto-flow: row;
+    gap: var(--gap);
+}
 
+.required::after {
+    content: '*';
+    color: red;
+}
+
+.mb-3 {
+    margin-bottom: .5lh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+    min-width: 100%;
+    gap: var(--gap);
+}
+
+.mb-3:last-of-type {
+    max-width: 50%;
+    justify-content: flex-end;
+    margin-bottom: 0;
+}
+
+.form-check {
+    display: inherit;
+    width: 100%;
+    justify-content: space-between;
+    gap: var(--gap);
+}
+
+.form-check-label {
+    flex: 1 1 auto;
+    order: -1;
+}
+
+.form-label {
+    order: -1;
+    max-width: 50%;
+}
+
+.form-control {
+    min-width: 50%;
+
+}
+
+.btn {
+    width: 100%;
+    background-color: var(--color-accent);
 }
 
 .contactForm {
-    width: 30%;
     padding: 1em;
+    place-self: stretch stretch;
     display: flex;
     flex-direction: column;
-    line-height: 150%;
-
-    button {
-        color: var(--noir);
-    }
+    order: -1;
+    border-block: 1px solid black;
 }
 
 .contactMap {
-    width: 30%;
-    overflow: scroll;
+    place-self: stretch stretch;
 
     iframe {
+        width: 100%;
+        height: 100%;
         border-radius: 1em;
         box-shadow: 3px 3px 3px black;
     }
 }
 
-.contactCoordonnees {
-    width: 30%;
+/*-----RESPONSIVE------*/
+#burgerMask {
+    display: none;
 }
 
-/*-----RESPONSIVE------*/
 @media only screen and (max-width : 1000px) {
 
+    #burgerMask {
+        display: block;
+        z-index: 1000;
+        position: absolute;
+        inset: 0;
+        top: var(--menuHeight);
+        transform: translateX(101vw);
+    }
 
     #toggleMenu {
+        transform: translateY(calc(var(--menuHeight) * -1));
+    }
 
-        transition: transform 1.5s ease;
-        position: static;
-        top: 0;
+    .toggleMenu {
+        transition: transform 1s linear;
+        position: absolute;
+        top: var(--menuHeight);
         left: 0;
-        width: 100svw;
-        background: inherit;
+        right: 0;
+        bottom: 0;
+        z-index: 300000;
+        height: calc(100svh - var(--menuHeight));
 
-        ul {
+        ul,
+        li,
+        li>a {
+            background-color: transparent;
             display: flex;
+            height: stretch;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-evenly;
             width: 100svw;
+            text-align: center;
             border-radius: 0;
-
+            /* 
             li>a {
                 display: block;
                 width: 100svw;
                 text-align: center;
-            }
-
+                border-block: 2px solid green;
+            } */
         }
 
         .socials {
-            position: static;
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: justify;
+
+            a {
+                display: inline;
+            }
         }
     }
 
@@ -1047,40 +1190,56 @@ a:hover {
     }
 
     .burgerLine {
+        top:0;
+        left: 0;
+        position: relative;
         background-color: var(--gris);
         z-index: 16;
         margin: 11% auto;
         width: 90%;
         border: .2em solid var(--noir);
         border-radius: 1em;
+        /transform-origin: center;
+        /height: 1px;
     }
+
+    .burgerLine2 {
+        position: relative;
+        &::after{
+            content:'';
+            position: absolute;
+            background-color: red;
+        border: .2em solid var(--color-accent);
+        border-radius: 1em;
+            inset: 0;
+            z-index: 10000;
+        }
+    }
+
+
+
+
+
 
     #burgerQuizz {
         opacity: 0;
         cursor: pointer;
     }
 
-
-
-    #burgerQuizz:checked~header {
-        --menuPosition: 100svh;
-    }
-
-    #burgerQuizz:checked~.burgerSign .burgerLine:nth-child(1) {
-        border-color: var(--violet);
-        transform-origin: center;
-        transform: translate(0, .6em) rotate(45deg);
-    }
-
-    #burgerQuizz:checked~.burgerSign .burgerLine:nth-child(2) {
+    #burgerQuizz:checked ~ .burgerSign .burgerLine:first-of-type ,
+    #burgerQuizz:checked ~ .burgerSign .burgerLine:last-of-type {
         opacity: 0;
     }
 
-    #burgerQuizz:checked~.burgerSign .burgerLine:nth-child(3) {
-        border-color: var(--violet);
-        transform-origin: center;
-        transform: translate(0em, -.6em)rotate(-45deg);
+    #burgerQuizz:checked~.burgerSign .burgerLine2 {
+        transform: rotateZ(45deg);
+        &::after{
+            transform: rotateZ(-90deg);
+        }
     }
+
+
+
 }
 
 
