@@ -112,8 +112,10 @@
                 </h2>
             </div>
 
-            <div class="client-card-carousel" {% for client in clients %} {% set timing=loop.index * 20 %}
-                style="--spin: {{timing}} ;" {% endfor %}>
+            <div class="client-card-carousel" 
+                {% for client in clients %} {% set timing=loop.index * 20 %}
+                    style="--spin: {{timing}} ;" 
+                {% endfor %}>
                 <div class="client-card-carousel-mask">
                 </div>
                 {% set timing = 0 %}
