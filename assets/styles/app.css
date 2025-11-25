@@ -6,7 +6,6 @@
         url("../fonts/fontawesome-webfont.woff2") format("woff2");
 }
 
-
 :root {
     /*Couleurs*/
     --violet: oklch(from #982873 l c h);
@@ -24,7 +23,7 @@
     /* couleur BG*/
     --color-text-primary: var(--noir);
     /* couleur TXT*/
-    --color-accent: var(--orange);
+    --color-accent: var(--bleuFonC);
     /*couleur Accent*/
     /*Dimensions*/
     --menuHeight: 3rem;
