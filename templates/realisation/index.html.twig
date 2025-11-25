@@ -2,10 +2,14 @@
 
 {% block title %}Up'n'Com : Le Blog{% endblock %}
 
+    {% block meta_description %}
+    <meta name="description" content="Up'n'Com, vous trouverez ici les articles de notre BLOG. Plein de bon tuyau pour une communication impactante!">
+    {% endblock %}
+
 {% block body %}
 <section class="hero">
     <div class="hero-content">
-        <img src="{{ asset('img/blog.jpg') }}" >
+        <img src="{{ asset('img/blog.jpg') }}" alt="une table en boix avec des pièces de Scrabble, écrivant le mot BLOG">
     </div>
 </section>
     <div class="container">

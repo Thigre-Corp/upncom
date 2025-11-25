@@ -1,23 +1,33 @@
 {# newsletter d'inscription formulaire #}
-
+<button id="open-newsletter-dialog">Je veux m'inscrire à la newsletter!</button>
 <div class="newsletter">
-    
-        {{ form_start(form) }}
-        <div class="newsletter-form">
 
-        <div class="newsletter-form-email">
-            {{form_label(form.email) }}
-            <span class="arrow-right">&#xf061</span>{{form_widget(form.email) }}
+
+
+    
+    <dialog id="newsletter-dialog" closedby="any">
+
+        <div class="newsletter-form">
+                    <div class="logo">
+            <a href="{{ path('home') }}" class="logo">Up'n'Com</a>
         </div>
-        <div class="newsletter-form-rgpd">
-            {{ form_label(form.rgpd) }}
-            <span class="arrow-right">&#xf061</span>{{ form_widget(form.rgpd) }}
-            <a href="#">J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
-            newsletter conformément à la politique de confidentialité.</a>
+            <button class="close-newsletter" autofocus>X</button>
+            {{ form_start(form) }}
+            <div class="newsletter-form-email">
+                {{form_label(form.email) }}
+                <span class="arrow-right">&#xf061</span>{{form_widget(form.email) }}
+            </div>
+            <div class="newsletter-form-rgpd">
+                {{ form_label(form.rgpd) }}
+                <span class="arrow-right">&#xf061</span>{{ form_widget(form.rgpd) }}
+                <a href="#">J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
+                    newsletter conformément à la politique de confidentialité.</a>
+            </div>
+            {{ form_end(form) }}
         </div>
-        {{ form_end(form) }}
-    </div>
-    <div class="newsletter-form-helper frostedGlass">
+        
+    </dialog>
+    {# <div class="newsletter-form-helper frostedGlass">
         <p>
             Veuiller Entrez votre adresse mail pour vous inscrire à notre newsletter.
             <br>
@@ -27,5 +37,5 @@
             J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
             newsletter conformément à la <a href="#">politique de confidentialité</a>.
         </p>
-    </div>
+    </div> #}
 </div>

@@ -23,13 +23,13 @@ class ServiceCrudController extends AbstractCrudController
         yield TextField::new('titre', 'Titre');
         yield TextEditorField::new('contenu', 'Contenu');
         // Afficher les images en back-office (liste)
-        yield ImageField::new('imageService', 'Logo')
+        yield ImageField::new('image', 'Logo')
             ->setUploadDir('public\assets\uploads')
             ->setBasePath('assets\uploads')
             ->onlyOnIndex()
         ;
         // afficher le choix depuis la banque d'image dans les formulaires
-        yield AssociationField::new('imageService', 'Logo')
+        yield AssociationField::new('image', 'Logo')
             ->onlyOnForms();
 
     }

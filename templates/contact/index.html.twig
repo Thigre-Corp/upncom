@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Up'n'Com: Contactez-nous!{% endblock %}
-
+    {% block meta_description %}
+    <meta name="description" content="Up'n'Com, pour prendre contact avec nous et organiser votre communication !">
+    {% endblock %}
 
 {% block javascripts %}
 <script src="{{ asset('/scripts/api-geo.js') }}" defer></script>

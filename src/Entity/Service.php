@@ -95,9 +95,9 @@ class Service
         return $this->image;
     }
 
-    public function setImageService(?Image $imageService): static
+    public function setImage(?Image $image): static
     {
-        $this->image = $imageService;
+        $this->image = $image;
 
         return $this;
     }

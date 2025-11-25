@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+    <meta name="robots" content="index">
+    {% block meta_description %}
+    <meta name="description" content="Up'n'Com, agence de communication digitale et print, vous accompagne dans la création de votre site internet, la gestion de vos réseaux sociaux, la création de vos supports de communication et bien plus encore !">
+    {% endblock %}
     <title>{% block title %}Up'n'Com{% endblock %}</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
@@ -19,6 +23,9 @@
     {% block javascripts %}
     <script src="{{ asset('/scripts/parallax.js') }}" defer></script>
     <script src="{{ asset('/scripts/intermediate-nav.js') }}" defer></script>
+    <script src="{{ asset('/scripts/burger-quizz.js') }}" defer></script>
+    <script src="{{ asset('/scripts/dialog-newsletter.js') }}" defer></script>
+
     {% endblock %}
 
 </head>
@@ -26,10 +33,10 @@
 <body>
     {% for message in app.flashes('message') %}
     <input hidden type="checkbox" id="closeAlert" class="closeAlert">
-        <div class="alert alert-success" role="alert">
-            {{ message }}
-            <label for="closeAlert" class="closeAlertLabel">X</label>
-        </div>
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+        <label for="closeAlert" class="closeAlertLabel">X</label>
+    </div>
     </input>
     {% endfor %}
     {% block bodyheader %}
@@ -39,14 +46,15 @@
         </div>
         <div id="navbar" class="textCenter">
 
-            <input type="checkbox" id="burgerQuizz">
-                <label for="burgerQuizz" class="burgerSign">
-                    <div class="burgerLine"></div>
-                        <div class="burgerLine burgerLine2"></div>
-                        <div class="burgerLine"></div>
-
-                </label>
-            </input>
+            <label class="burger-quizz" for="burger-quizz">
+                <input type="checkbox" id="burger-quizz" name="burger-quizz" hidden></input>
+                <div class="burger-sign">
+                    <div class="burger-line"></div>
+                    <div class="burger-line burger-line2"></div>
+                    <div class="burger-line burger-line2"></div>
+                    <div class="burger-line"></div>
+                </div>
+            </label>
 
 
             <nav class="nav-menu" id="toggleMenu">
@@ -67,11 +75,11 @@
                         <a href="{{ path('app_realisation')}}">REALISATIONS</a>
                     </li>
                     <li class="socials">
-                        <a href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class:
+                        <a aria-label="lien vers la page Facebook de Up'n'Com" href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class:
                             'socialsIcon'}) }}</a>
-                        <a href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class:
+                        <a aria-label="lien vers la page Instagram de Up'n'Com" href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class:
                             'socialsIcon'}) }}</a>
-                        <a href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class:
+                        <a aria-label="lien vers la page LindekIn de Up'n'Com" href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class:
                             'socialsIcon'}) }}</a>
                     </li>
                 </ul>
@@ -85,25 +93,8 @@
         <p>No...body</p>
         {% endblock %}
     </main>
-{{ include('_modules/_footer.twig') }}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const burger = document.getElementById('burgerQuizz');
-        const toggleMenu = document.getElementById('toggleMenu');
-        const mask = document.getElementById('burgerMask');
-        mask.innerHTML = toggleMenu.innerHTML;
-        mask.ariaHidden = 'true';
-        mask.classList.add('toggleMenu');
+    {{ include('_modules/_footer.twig') }}
 
-        burger.addEventListener('change', function () {
-            if (this.checked) {
-                mask.style.transform = 'translateX(0)';
-            } else {
-                mask.style.transform = 'translateX(101vw)';
-            }
-        });
-    });
-
-</script>
 </body>
+
 </html>

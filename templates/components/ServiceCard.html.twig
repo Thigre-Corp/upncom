@@ -3,20 +3,20 @@
 {% set RatioCircle = 0.9 %}
 {% set BaseCircle = FullCircle * RatioCircle %}
 {% set OffsetCircle = ( FullCircle - BaseCircle) / 2 %}
-{% set BgImage = 'https://picsum.photos/seed/agency/800/600' %}
 
 <div{{ attributes }} class="service-card {{ page }} {{class}}" style="
         --size-from-service-card-component: {{ FullCircle }}px;
         --ratio-from-service-card-component: {{ RatioCircle }};
     ">
-      <a href="{{ path('app_service_index')}}" class="frostedGlass">
+    {% set BgImage = asset('assets/uploads/'~ service.image ) %}
+    <a href="{{ path('app_service_index')}}" class="frostedGlass">
 
-       <div class="service-card-bg parallax-image " style="background-image: url('{{ BgImage }}');">
+        <div class="service-card-bg parallax-image " style="background-image: url('{{ BgImage }}');">
 
-    </div>
+        </div>
 
         <h3 class="service-card-title frostedGlass ">
-            <svg height="{{ FullCircle }}" width="{{ FullCircle }}" title="service" role="heading"
+            <svg height="{{ FullCircle }}" width="{{ FullCircle }}" title="service"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {{ FullCircle }} {{ FullCircle }}">
                 <path id="service-path-{{id}}" pathLength="2" d="
                 M 0, 0
@@ -42,5 +42,4 @@
         {{ service.contenu | raw }}
     </div>
     {% endif %}
-    {# <twig:ImagesComponent image='{{service.image}}' class="service-card-image"></twig:ImagesComponent> #}
-</div>
+    </div>

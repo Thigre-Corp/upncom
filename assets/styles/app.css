@@ -122,7 +122,15 @@ a {
 a:hover {
     color: var(--color-accent);
     fill: var(--color-accent);
-    /* Effet discret au survol */
+}
+
+/*accessibility---------------------------------*/
+@media (prefers-contrast: more) {
+    :root{
+        background-color: black;
+        color: white;
+
+    }
 }
 
 /*flash message---------------------------------*/
@@ -166,7 +174,7 @@ input[type=checkbox]:checked+.alert {
     border-bottom: 2px solid oklch(from var(--gris) l c h / 0.3) !important;
 }
 
-#burgerQuizz {
+.burger-quizz {
     display: none;
 }
 
@@ -253,21 +261,36 @@ main {
 }
 
 .newsletter {
+    position: relative;
     display: flex;
     flex-direction: column;
     position: relative;
     justify-content: center;
 }
 
-.newsletter:hover {
-    .newsletter-form-helper {
-        display: block;
-    }
+.close-newsletter{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#newsletter-dialog{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+
+::backdrop {
+    background-color: var(--grisAlpha);
+    backdrop-filter: blur(var(--frostedBlur));
+    border: 2px outset oklch(from var(--gris) l c h / 0.2);
 }
 
 .newsletter-form {
     display: flex;
-    background-color: #FFA825;
+    background-color: var(--gris);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1119,7 +1142,7 @@ main {
 
     #burgerMask {
         display: block;
-        z-index: 1000;
+        z-index: 100;
         position: absolute;
         inset: 0;
         top: var(--menuHeight);
@@ -1127,7 +1150,7 @@ main {
     }
 
     #toggleMenu {
-        transform: translateY(calc(var(--menuHeight) * -1));
+        transform: translateY(calc(var(--menuHeight) * -2));
     }
 
     .toggleMenu {
@@ -1137,27 +1160,20 @@ main {
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 300000;
+        z-index: 1000;
         height: calc(100svh - var(--menuHeight));
 
         ul,
         li,
         li>a {
+            font-weight: bolder;
             background-color: transparent;
             display: flex;
             height: stretch;
             flex-direction: column;
             justify-content: space-evenly;
-            width: 100svw;
             text-align: center;
-            border-radius: 0;
-            /* 
-            li>a {
-                display: block;
-                width: 100svw;
-                text-align: center;
-                border-block: 2px solid green;
-            } */
+            border-bottom: 2px solid oklch(from var(--gris) l c h / 0.3);
         }
 
         .socials {
@@ -1172,74 +1188,67 @@ main {
     }
 
     /*-----MENU BURGER-----*/
-    .burgerSign {
-        position: fixed;
+
+    .burger-quizz {
+        --size: calc(var(--menuHeight) *0.8);
+        --offset: calc(var(--menuHeight) * 0.1);
         display: block;
-
-        z-index: 15;
-        background-color: #ffffff55;
-        border: outset 2px #ffffff55;
-        backdrop-filter: blur(10px);
-
-        height: 2em;
-        width: 2em;
-        top: calc(var(--menuHeight)/2 - 1em);
-        right: calc(var(--menuHeight)/2 - 1em);
-        border-radius: .4em;
-        box-shadow: 2px 2px 2px black;
-    }
-
-    .burgerLine {
-        top:0;
-        left: 0;
-        position: relative;
-        background-color: var(--gris);
-        z-index: 16;
-        margin: 11% auto;
-        width: 90%;
-        border: .2em solid var(--noir);
-        border-radius: 1em;
-        /transform-origin: center;
-        /height: 1px;
-    }
-
-    .burgerLine2 {
-        position: relative;
-        &::after{
-            content:'';
-            position: absolute;
-            background-color: red;
-        border: .2em solid var(--color-accent);
-        border-radius: 1em;
-            inset: 0;
-            z-index: 10000;
-        }
-    }
-
-
-
-
-
-
-    #burgerQuizz {
-        opacity: 0;
+        position: fixed;
+        top: var(--offset);
+        right: calc(var(--size) *0.1);
+        height: calc(var(--size) *0.8);
+        aspect-ratio: 3/2;
         cursor: pointer;
     }
 
-    #burgerQuizz:checked ~ .burgerSign .burgerLine:first-of-type ,
-    #burgerQuizz:checked ~ .burgerSign .burgerLine:last-of-type {
-        opacity: 0;
+    .burger-sign {
+        display: grid;
+        grid-template: 1 2 / repeat(3, 1fr);
+        place-content: center;
+        gap: var(--offset);
     }
 
-    #burgerQuizz:checked~.burgerSign .burgerLine2 {
-        transform: rotateZ(45deg);
-        &::after{
-            transform: rotateZ(-90deg);
+    .burger-line {
+        width: calc(var(--size) * .8);
+        height: calc(var(--size) / 5);
+        background-color: black;
+        grid-column: 1 / 2;
+        transition: transform 0.2s linear, opacity 0.4s linear;
+
+        &:first-of-type {
+            border-radius: calc(var(--size) / 5) calc(var(--size) / 5) 0 0;
+        }
+
+        &:last-of-type {
+            border-radius: 0 0 calc(var(--size) / 5) calc(var(--size) / 5);
         }
     }
 
+    .burger-line2 {
+        grid-row: 2 / span 1;
+        border-radius: calc(var(--size) / 5)
+    }
 
+    input:checked~.burger-sign {
 
+        div:first-of-type,
+        div:last-of-type {
+            opacity: 0;
+        }
+
+        div:nth-of-type(2) {
+            transform: rotateZ(45deg);
+        }
+
+        div:nth-of-type(3) {
+            transform: rotateZ(-45deg);
+        }
+
+        .burger-line {
+            transition: transform 0.4s linear, opacity 0.2s linear;
+        }
+
+    }
 }
 
 
