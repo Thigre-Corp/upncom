@@ -36,7 +36,7 @@
     --fs-sm: calc(0.8*var(--fs-nm));
     /*fonts*/
     --font-heading: "Cabin", sans-serif;
-    --font-txt: "Nunito Sans", sans-serif;
+    --font-sans: "Nunito Sans", sans-serif;
     --font-logo: "Road Rage", sans-serif;
     --frostedBlur: 7px;
 
