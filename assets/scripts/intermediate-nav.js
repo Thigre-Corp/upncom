@@ -19,7 +19,7 @@ const intersectionCallback = (entries) => {
         if (entry.isIntersecting) {
             let elem = '#' + entry.target.id + '_navBar';
             if (entry.intersectionRatio >= 0.5) {
-                if (!firstTime) {
+                if (!firstTime && !document.querySelector(elem).classList.contains("select")) {
                     indexes.forEach((element) => {
                         element.classList.remove("select");
                     });

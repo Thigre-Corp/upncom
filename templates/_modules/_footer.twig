@@ -37,7 +37,7 @@
     {{ render(controller('App\\Controller\\Main\\NewslettersController::subscribeForm')) }}
     <div class="footer-links">
         <span>mentions legales</span>
-        <span>RGPD et confidentialité</span>
+        <a href="{{ path('rgpd') }}">RGPD et confidentialité</a>
         <span>plan du site</span>
         <small>© Up'n'Com 2025 - tous droits réservés</small>
     </div>

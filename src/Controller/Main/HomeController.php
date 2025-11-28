@@ -19,10 +19,18 @@ final class HomeController extends AbstractController
         $articles = $em->getRepository(Article::class)->findLastArticles(4);
         $clients = $em->getRepository(Client::class)->findAll();
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            // 'controller_name' => 'HomeController',
             'services' => $services,
             'articles' => $articles,
             'clients' => $clients,
+        ]);
+    }
+
+    #[Route('/privacy', name: 'rgpd')]
+    public function rgpd(): Response
+    {
+        return $this->render('home/privacy.html.twig', [
+            'meta' => 'Politique de Confidentialité relative au données collectées - RGPD',
         ]);
     }
 

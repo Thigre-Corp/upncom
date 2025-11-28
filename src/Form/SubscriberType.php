@@ -17,8 +17,6 @@ class SubscriberType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'label' => 'Je veux m\'inscrire à la newslettet en inscrivant mon mail ici'
-
-                
             ])
             ->add('rgpd', CheckboxType::class, [
                 'required' => true,
@@ -26,7 +24,7 @@ class SubscriberType extends AbstractType
                 'label' => 'En cochant cette case'
             ])
             ->add('valider', SubmitType::class, [
-                'label' => 'En enfin, je valide en cliquant ICI !',
+                'label' => 'Je valide en cliquant ICI !',
             ])
         ;
     }

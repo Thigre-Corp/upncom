@@ -92,7 +92,7 @@ final class ContactController extends AbstractController
             $subscriber = $entityManager->getRepository(Subscriber::class)->findOneByEmail($contact->getEmail());
             $subscriber->setIsValid(true);
             $entityManager->persist($subscriber);
-            $flashMessage .= '<br>Et bravo pour votre inscrition à la newsletter';
+            $flashMessage .= 'Et bravo pour votre inscrition à la newsletter';
         }
         $entityManager->flush();
         // en enfin , envoyé le message à la patrone

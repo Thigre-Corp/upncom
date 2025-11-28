@@ -2,16 +2,83 @@
 <html lang="fr">
 
 <head>
+    <script src="{{ asset('/tarteaucitron.js') }}"></script>
+
+    <script type="text/javascript">
+        tarteaucitron.init({
+            "privacyUrl": "", /* Url de la politique de confidentialité */
+            "bodyPosition": "top", /* top place le bandeau de consentement au début du code html, mieux pour l'accessibilité */
+
+            "hashtag": "#tarteaucitron", /* Hashtag qui permet d'ouvrir le panneau de contrôle  */
+            "cookieName": "tarteaucitron", /* Nom du cookie (uniquement lettres et chiffres) */
+
+            "orientation": "middle", /* Position de la bannière (top - bottom - popup - banner) */
+
+            "groupServices": false, /* Grouper les services par catégorie */
+            "showDetailsOnClick": true, /* Cliquer pour ouvrir la description */
+            "serviceDefaultState": "wait", /* Statut par défaut (true - wait - false) */
+
+            "showAlertSmall": false, /* Afficher la petite bannière en bas à droite */
+            "cookieslist": false, /* Afficher la liste des cookies via une mini bannière */
+            "cookieslistEmbed": false, /* Afficher la liste des cookies dans le panneau de contrôle */
+
+            "closePopup": true, /* Afficher un X pour fermer la bannière */
+
+            "showIcon": true, /* Afficher un cookie pour ouvrir le panneau */
+            //"iconSrc": "", /* Optionnel: URL ou image en base64 */
+            "iconPosition": "BottomLeft", /* Position de l'icons: (BottomRight - BottomLeft - TopRight - TopLeft) */
+
+            "adblocker": false, /* Afficher un message si un Adblocker est détecté */
+
+            "DenyAllCta": true, /* Afficher le bouton Tout refuser */
+            "AcceptAllCta": true, /* Afficher le bouton Tout accepter */
+            "highPrivacy": true, /* Attendre le consentement */
+            "alwaysNeedConsent": false, /* Demander le consentement même pour les services "Privacy by design" */
+
+            "handleBrowserDNTRequest": false, /* Refuser tout par défaut si Do Not Track est activé sur le navigateur */
+
+            "removeCredit": false, /* Retirer le lien de crédit vers tarteaucitron.io */
+            "moreInfoLink": true, /* Afficher le lien En savoir plus */
+
+            "useExternalCss": false, /* Mode expert : désactiver le chargement des fichiers .css tarteaucitron */
+            "useExternalJs": false, /* Mode expert : désactiver le chargement des fichiers .js tarteaucitron */
+
+            //"cookieDomain": ".my-multisite-domaine.fr", /* Optionnel: domaine principal pour partager le consentement avec des sous domaines */
+
+            "readmoreLink": "", /* Changer le lien En savoir plus par défaut */
+
+            "mandatory": true, /* Afficher un message pour l'utilisation de cookies obligatoires */
+            "mandatoryCta": false, /* Afficher un bouton pour les cookies obligatoires (déconseillé) */
+
+            //"customCloserId": "", /* Optionnel a11y: ID personnalisé pour ouvrir le panel */
+
+            "googleConsentMode": true, /* Activer le Google Consent Mode v2 pour Google ads & GA4 */
+            "bingConsentMode": true, /* Activer le Bing Consent Mode pour Clarity & Bing Ads */
+            "pianoConsentMode": true, /* Activer le Consent Mode pour Piano Analytics */
+            "pianoConsentModeEssential": false, /* Activer par défaut le mode Essential de Piano */
+            "softConsentMode": false, /* Soft consent mode (le consentement est requis pour charger les tags) */
+
+            "dataLayer": false, /* Envoyer un événement dans dataLayer avec le statut des services */
+            "serverSide": false, /* Server side seulement, les tags ne sont pas chargé côté client */
+
+            "partnersList": true /* Afficher le détail du nombre de partenaires sur la bandeau */
+        });
+    </script>
+    <script>
+        (tarteaucitron.job = tarteaucitron.job || []).push('maps_noapi');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale= 1.0">
     <meta name="robots" content="index">
     {% block meta_description %}
-    <meta name="description" content="Up'n'Com, agence de communication digitale et print, vous accompagne dans la création de votre site internet, la gestion de vos réseaux sociaux, la création de vos supports de communication et bien plus encore !">
+    <meta name="description"
+        content="Up'n'Com, agence de communication digitale et print, vous accompagne dans la création de votre site internet, la gestion de vos réseaux sociaux, la création de vos supports de communication et bien plus encore !">
     {% endblock %}
     <title>{% block title %}Up'n'Com{% endblock %}</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-    {# <link rel="preconnect" href="https://fonts.googleapis.com">
+    {#
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Road+Rage&display=swap"
@@ -30,15 +97,7 @@
 
 </head>
 
-<body>
-    {% for message in app.flashes('message') %}
-    <input hidden type="checkbox" id="closeAlert" class="closeAlert">
-    <div class="alert alert-success" role="alert">
-        {{ message }}
-        <label for="closeAlert" class="closeAlertLabel">X</label>
-    </div>
-    </input>
-    {% endfor %}
+<body id="body">
     {% block bodyheader %}
     <header class="frostedGlass header">
         <div class="logo">
@@ -75,20 +134,46 @@
                         <a href="{{ path('app_realisation')}}">REALISATIONS</a>
                     </li>
                     <li class="socials">
-                        <a aria-label="lien vers la page Facebook de Up'n'Com" href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class:
+                        <a aria-label="lien vers la page Facebook de Up'n'Com"
+                            href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class:
                             'socialsIcon'}) }}</a>
-                        <a aria-label="lien vers la page Instagram de Up'n'Com" href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class:
+                        <a aria-label="lien vers la page Instagram de Up'n'Com"
+                            href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class:
                             'socialsIcon'}) }}</a>
-                        <a aria-label="lien vers la page LindekIn de Up'n'Com" href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class:
+                        <a aria-label="lien vers la page LindekIn de Up'n'Com"
+                            href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class:
                             'socialsIcon'}) }}</a>
                     </li>
                 </ul>
             </nav>
     </header>
     {% endblock %}
-    <main>
-        <div id="burgerMask" class="frostedGlass"></div>
 
+    {% set flashMessages = app.flashes('message') %}
+    {% if flashMessages is not empty %}
+    <div id="flash-message">
+        <dialog class="flash-dialog" closedby="any">
+            {# contournement de turbo UX #}
+            <script>
+                const flashDialog = document.querySelector(".flash-dialog");
+                flashDialog.showModal();
+            </script>
+            {# fin de contournement de turbo UX #}
+            <div class="newsletter-form">
+                <div class="logo">
+                    <a href="{{ path('home') }}" class="logo">Up'n'Com</a>
+                </div>
+                <button class="close-flash" autofocus>X</button>
+                {% for message in flashMessages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        </dialog>
+    </div>
+    {% endif %}
+
+    <div id="burger-mask" class="frostedGlass"></div>
+    <main>
         {% block body %}
         <p>No...body</p>
         {% endblock %}

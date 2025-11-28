@@ -22,12 +22,16 @@ class ContactType extends AbstractType
         $builder
             ->add('raisonSociale', TextType::class, [
                 'label' => 'Raison Sociale de votre entreprise',
+                'required' => false,
+
             ])
             ->add('nomContact', TextType::class, [
                 'label' => 'Votre nom',
             ])
             ->add('telephone', TextType::class, [
                 'label' => 'Votre numéro de téléphone',
+                'required' => false,
+
             ])
             ->add('email', EmailType::class , [
                 'label' => 'Votre eMail',
@@ -37,16 +41,18 @@ class ContactType extends AbstractType
             ])
             ->add('accepteNewsletter', CheckboxType::class, [
                 'label' => 'J\'en profite pour m\'abonner à la newsletter',
+                'required' => false,
+
             ])
             ->add('rgpd', CheckboxType::class, [
                 'label' => 'J\'accepte que mes données soient utilisées
-                    dans le cadre de l\'envoi de la newsletter conformément
+                    conformément
                     à la politique de confidentialité.',
                 'mapped' => false,
                 'required' => true,
             ])
             ->add('cp', NumberType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Votre code postal',
             ])
             ->add('ville', ChoiceType::class,[
@@ -54,6 +60,8 @@ class ContactType extends AbstractType
                         ],
                 'attr' => ['placeholder' => 'Choisir une ville dans la liste'],
                 'label' => 'Selectionner votre ville dans la liste',
+                'required' => false,
+
             ] )
             ->add('envoyer', SubmitType::class)
             ->get('ville')->resetViewTransformers()
