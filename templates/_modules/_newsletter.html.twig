@@ -1,7 +1,9 @@
 {# newsletter d'inscription formulaire #}
-<button class="btn" id="open-newsletter-dialog" popovertarget="newsletter">Je veux m'inscrire à la newsletter!</button>
-<div class="newsletter" id="newsletter" popover>
-    <dialog id="newsletter-dialog" closedby="any">
+
+<button class="btn" id="open-newsletter-dialog">Je veux m'inscrire à la newsletter!</button>
+{# <div class="newsletter" id="newsletter"> #}
+    <dialog id="newsletter-dialog" closedby="any" data-turbo-permanent> 
+
         <div class="newsletter-form">
                     <div class="logo">
             <a href="{{ path('home') }}" class="logo">Up'n'Com</a>
@@ -15,11 +17,21 @@
             <div class="newsletter-form-rgpd">
                 {{ form_label(form.rgpd) }}
                 <span class="arrow-right">&#xf061</span>{{ form_widget(form.rgpd) }}
-                <a href="#">J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
+                <a href="{{ path('rgpd')}}" target="_blank">J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
                     newsletter conformément à la politique de confidentialité.</a>
             </div>
             {{ form_end(form) }}
         </div>
-        
+        {# contournement de turbo UX #}
+                <script>
+                const openNewsletterBtn = document.getElementById("open-newsletter-dialog");
+                const newsDialog = document.querySelector("#newsletter-dialog");
+                const closeNewsBtn = document.querySelector(".close-newsletter");
+                openNewsletterBtn.addEventListener("click", () =>
+                newsDialog.showModal());
+                closeNewsBtn.addEventListener("click", () =>
+                newsDialog.close());
+            </script>
+        {# fin de contournement de turbo UX #}
     </dialog>
-</div>
+{# </div> #}

@@ -153,12 +153,7 @@
     {% if flashMessages is not empty %}
     <div id="flash-message">
         <dialog class="flash-dialog" closedby="any">
-            {# contournement de turbo UX #}
-            <script>
-                const flashDialog = document.querySelector(".flash-dialog");
-                flashDialog.showModal();
-            </script>
-            {# fin de contournement de turbo UX #}
+
             <div class="newsletter-form">
                 <div class="logo">
                     <a href="{{ path('home') }}" class="logo">Up'n'Com</a>
@@ -168,6 +163,15 @@
                 <p>{{ message }}</p>
                 {% endfor %}
             </div>
+            {# contournement de turbo UX #}
+            <script>
+                const flashDialog = document.querySelector(".flash-dialog");
+                flashDialog.showModal();
+                const closeFlashBtn = document.querySelector(".close-flash");
+                closeFlashBtn.addEventListener("click", () =>
+                    flashDialog.close());
+            </script>
+            {# fin de contournement de turbo UX #}
         </dialog>
     </div>
     {% endif %}

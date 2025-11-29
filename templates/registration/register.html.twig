@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
-{% form_theme registrationForm 'form_theme.html.twig' %}
+{# {% form_theme registrationForm 'form_theme.html.twig' %} #}
 
 
 {% block title %}Register{% endblock %}
-{% block bodyheader %} - noheader- {% endblock %}
+{% block bodyheader %} ADMINISTRATION {% endblock %}
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
@@ -14,12 +14,11 @@
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        {{ form_widget(registrationForm.email) }}
+        {{ form_widget(registrationForm.plainPassword.first) }}
+        {{ form_widget(registrationForm.plainPassword.second) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
+        {# {{form_widget(registrationForm.toggle ) }} #}
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

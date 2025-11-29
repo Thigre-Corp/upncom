@@ -122,7 +122,7 @@ a:hover {
 /*accessibility---------------------------------*/
 @media (prefers-contrast: more) {
     :root {
-        background-color: black;
+        background-color: var(--noir);
         color: white;
     }
 }
@@ -268,6 +268,7 @@ main {
 }
 
 #newsletter-dialog {
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -316,27 +317,6 @@ dialog::backdrop {
 .arrow-right {
     font-family: FontAwesome;
     margin-inline: 10px;
-}
-
-/* newsletter form email / rgpd flattened */
-.newsletter-form-email *:has(input[type=checkbox]),
-.newsletter-form-rgpd *:has(input[type=checkbox]) {
-    background-color: red;
-}
-
-.newsletter-form-email > input[type=email],
-.newsletter-form-rgpd > input[type=email] {
-    background-color: red !important;
-}
-
-.newsletter-form-helper {
-    display: none;
-    position: absolute;
-    bottom: 100%;
-    left: 5svw;
-    right: 5svw;
-    border-radius: 1em;
-    z-index: 2;
 }
 
 /*home----------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1026,7 +1006,7 @@ dialog::backdrop {
     display: flex;
     flex-direction: column;
     order: -1;
-    border-block: 1px solid black;
+    border-block: 1px solid var(--noir);
 }
 
 .contactMap {
@@ -1037,15 +1017,15 @@ dialog::backdrop {
     width: 100%;
     height: 100%;
     border-radius: 1em;
-    box-shadow: 3px 3px 3px black;
+    box-shadow: 3px 3px 3px var(--noir);
 }
 
 /*-----RESPONSIVE------*/
 
 @media (prefers-contrast: more) {
     :root {
-        background-color: black;
-        color: white;
+        background-color: var(--noir);
+        color: var(--color-bg-primary);
     }
 }
 
@@ -1172,7 +1152,7 @@ dialog::backdrop {
     .burger-line {
         width: calc(var(--size) * 0.8);
         height: calc(var(--size) / 5);
-        background-color: black;
+        background-color: var(--noir);
         grid-column: 1 / 2;
         transition: transform 0.2s linear, opacity 0.4s linear;
     }

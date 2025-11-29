@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\Extension\TogglePasswordTypeExtension;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -11,6 +12,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -19,51 +21,46 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+                'attr' => [
+                    'placeholder' => 'email@domaine.com',
+                ],
+                ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'Je m\'engage à ne pas communiquer mon mot de passe, sous aucun pretexte !',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Je m\'engage à ne pas communiquer mon mot de passe, sous aucun pretexte !',
                     ]),
                 ],
             ])
-            /*->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])*/
             ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class, 
+                'type' => PasswordType::class,
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'first_options'  => [
                     'toggle' => true,
-                    'label' => 'Password',
+                    'row_attr' => [
+                        'id' => 'the_one',
+                    ],
+                    'label' => 'Saisir un mot de passe',
                     'attr' => [
                         'class' => 'form-control',
-                        'placeholder' => 'Mot de Passe',                        
+                        'placeholder' => 'Saisir un mot de passe',
                     ],
                 ],
                 'second_options' => [
                     'toggle' => true,
-                    'label' => 'Password',
+                    'row_attr' => [
+                        'id' => 'the_two',
+                    ],
+                    'label' => 'Répéter le mot de Passe',
                     'attr' => [
                         'class' => 'form-control',
-                        'placeholder' => 'Répéter le mot de Passe',                        
+                        'placeholder' => 'Répéter le mot de Passe',
                     ],
                 ],
                 'constraints' => [
@@ -75,6 +72,7 @@ class RegistrationFormType extends AbstractType
                     ])
                 ],
             ])
+
         ;
     }
 

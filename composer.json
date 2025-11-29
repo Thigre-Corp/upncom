@@ -6,8 +6,8 @@
     "require": {
         "php": ">=8.2",
         "ext-ctype": "*",
-        "ext-zip": "*",
         "ext-iconv": "*",
+        "ext-zip": "*",
         "doctrine/dbal": "^3.10.3",
         "doctrine/doctrine-bundle": "^2.18.1",
         "doctrine/doctrine-migrations-bundle": "^3.7",
@@ -39,6 +39,7 @@
         "symfony/process": "7.3.*",
         "symfony/property-access": "7.3.*",
         "symfony/property-info": "7.3.*",
+        "symfony/rate-limiter": "7.3.*",
         "symfony/runtime": "7.3.*",
         "symfony/scheduler": "7.3.*",
         "symfony/security-bundle": "7.3.*",
