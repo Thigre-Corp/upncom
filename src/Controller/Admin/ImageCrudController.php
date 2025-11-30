@@ -34,6 +34,7 @@ class ImageCrudController extends AbstractCrudController
                 ->setFormType(DropzoneType::class)
                 ->setFormTypeOptions([
                     'required' => true,
+                    'attr' => ['data-controller' => 'mydropzone'],
                     ])
                     ->onlyOnForms()
                     ;

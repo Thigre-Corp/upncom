@@ -45,6 +45,18 @@ class ImageService{
         //rendre unique le nom de l'image:
         $file = $origine.'-'.uniqid();
 
+        //vérifier le type de fichier uploadé en cas de by-pass de la contrainte sur l'entité
+        if(
+            $image->guessExtension() !== 'svg' &&
+            $image->guessExtension() !== 'webp' &&
+            $image->guessExtension() !== 'png' &&
+            $image->guessExtension() !== 'jpg' &&
+            $image->guessExtension() !== 'jpeg'
+        )
+        {
+            throw new Exception('Format d\'image incorrect, ne pas tenter d\'uploder ce fichier à nouveau: ');
+        }
+
         // si fichier vectoriel
         if($image->guessExtension() === 'svg'){ 
             $file= $file.".svg";
@@ -79,7 +91,7 @@ class ImageService{
                     $imageSource = imagecreatefromwebp($image);
                     break;
                 default:
-                    throw new Exception('Format d\'image incompatible: Seulement jpg, png, webp');
+                    throw new Exception('Une erreur est survenue');
             }
             //récupérer les dimensions de l'image
             $imageSourceWidth = $imageDestWidth = $imageInfos[0];

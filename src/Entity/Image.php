@@ -7,6 +7,8 @@ use App\Repository\ImageRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -18,6 +20,18 @@ class Image
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mediaURL = null;
+
+    #[Assert\File(
+        maxSize: '7M',
+        extensions: [
+            'jpeg',
+            'jpg',
+            'png',
+            'webp',
+            'svg',
+        ],
+        extensionsMessage: 'Merci d\'utiliser une image valide (jpg, png, webp, svg',
+    )]
 
     private ?File $imageFile = null; // non persisté, pour gestion upload via form
 

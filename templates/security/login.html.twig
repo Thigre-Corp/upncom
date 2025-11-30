@@ -1,13 +1,18 @@
-{% extends 'base.html.twig' %} {# {% form_theme loginForm 'form_theme.html.twig'
-%} ----@TODO crée loginForm :) #} {% block title %}Log in!{% endblock %} {%
+{% extends 'base.html.twig' %} 
+
+{# {% form_theme loginForm 'form_theme.html.twig'
+%} ----@TODO crée loginForm :) #}
+
+{% block title %}Log in!{% endblock %} {%
 block bodyheader %} ADMINISTRATION {% endblock %} {% block body %}
 
 <form method="post">
-    {% if error %}
+    {# {% if error %}
     <div class="alert alert-danger">
         {{ error.messageKey|trans(error.messageData, 'security') }}
     </div>
-    {% endif %} {% if app.user %}
+    {% endif %}  #}
+    {% if app.user %}
     <div class="mb-3">
         Tu es connecté en tant que {{ app.user.userIdentifier }},
         <a href="{{ path('app_logout') }}">Se Déconnecter</a>
