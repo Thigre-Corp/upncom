@@ -14,7 +14,6 @@
         "doctrine/orm": "^3.5.7",
         "easycorp/easyadmin-bundle": "^4.27.4",
         "enshrined/svg-sanitize": "^0.22.0",
-        "knplabs/knp-paginator-bundle": "^6.9.1",
         "phpdocumentor/reflection-docblock": "^5.6.4",
         "phpstan/phpdoc-parser": "^2.3",
         "sensiolabs/minify-bundle": "^1.2",
