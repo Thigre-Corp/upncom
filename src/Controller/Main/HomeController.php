@@ -2,6 +2,8 @@
 
 namespace App\Controller\Main;
 
+use Symfony\UX\Dropzone\Form\DropzoneType;
+
 use App\Entity\Client;
 use App\Entity\Article;
 use App\Entity\Service;

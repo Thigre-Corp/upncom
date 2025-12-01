@@ -13,7 +13,6 @@ namespace App\Twig\Components;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-//use Symfony\Component\ObjectMapper\ObjectMapperInterface;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
@@ -41,7 +40,6 @@ class SearchComponent
 
     public function __construct(
         private ArticleRepository $articleRepository,
-        //private readonly ObjectMapperInterface $objectMapper,
     ) {
         $articles = $this->articleRepository
             ->findBySearchQb($this->query)
@@ -94,11 +92,9 @@ class SearchComponent
         return self::PER_PAGE;
     }
 
-    // #[ExposeInTemplate('hasMore')]
+    // #[ExposeInTemplate('hasMore')] nécessaire????
     public function hasMore(): bool
     {
-        dump('nbArticles=' . $this->nbArticles);
-        dump('nbPages=' . $this->page * self::PER_PAGE);
         return (($this->nbArticles) > ($this->page * self::PER_PAGE));
     }
 

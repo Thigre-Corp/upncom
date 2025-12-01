@@ -5,9 +5,9 @@
     <div {{ attributes.defaults(stimulus_controller('appear')) }}>
         <div class="barre-recherche-wrapper frostedGlass">
             <label for="recherche">Rechercher:</label>
-            <input type="search" data-model="debounce(1000)|query" name="recherche" class="barre-recharche">
+            <input type="search" data-model="debounce(750)|query" name="recherche" class="barre-recharche" placeholder="Taper ici les termes de votre recherche.">
         </div>
-        <div id="results--{{ this.query }}">
+        <div id="resultat--{{ this.query }}">
             {# {% if page > 1 %}
             {# 🦊 #}
             {# Adding a fake "previous page" div is enough to trick the system #}
