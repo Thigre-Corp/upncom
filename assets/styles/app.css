@@ -128,7 +128,6 @@ a:hover {
     :root{
         background-color: black;
         color: white;
-
     }
 }
 
@@ -721,7 +720,7 @@ dialog::backdrop {
                 display: inline-block;
                 position: relative;
 
-                &:after {
+                &::after {
                     color: inherit;
                     content: "\f061";
                     font-family: FontAwesome;

@@ -11,6 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
             mask.style.transform = 'translateX(0)';
         } else {
             mask.style.transform = 'translateX(101vw)';
-               }
+}
     });
 });

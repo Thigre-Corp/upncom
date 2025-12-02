@@ -81,28 +81,6 @@
     </div>
 </section>
 
-{# <section id="section3" class="section section-with-image">
-    <div class="container">
-        <div class="content-wrapper">
-            <div class="text-column">
-                <h2 class="section-title">
-                    Nos réalisations
-                </h2>
-                <p>
-                    bla<br>
-                    blabla
-                </p>
-                <p>blablabla</p>
-            </div>
-            <div class="image-column">
-                <div class="parallax-image" style="background-image: url('{{ asset("assets/uploads/Photo-de-Sophie-Grell-Wirtz-a--69257c2085f43.webp") }}');">
-                </div>
-            </div>
-        </div>
-    </div>
-</section> #}
-
-
 <section id="section4" class="section">
     <div class="container">
         <div class="content-wrapper">
@@ -115,7 +93,8 @@
             <div class="client-card-carousel" 
                 {% for client in clients %} {% set timing=loop.index * 20 %}
                     style="--spin: {{timing}} ;" 
-                {% endfor %}>
+                {% endfor %}
+                >
                 <div class="client-card-carousel-mask">
                 </div>
                 {% set timing = 0 %}
