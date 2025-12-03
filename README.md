@@ -1,13 +1,12 @@
 # Symfony 7.3 Project
 
 ## Project Overview
-This is a Symfony 7.3 project built with the latest Symfony framework features and best practices, using AssetMapper for asset management.
+This is a study project showcasing the features of Symfony 7.3.
 
 ## Requirements
-- PHP 8.2 or higher
+- PHP 8.3 or higher
 - Symfony CLI (recommended)
 - Composer
-- Node.js and npm (for asset compilation, if needed)
 - Database (MySQL)
 
 ## Installation
@@ -92,12 +91,6 @@ Create a `.env.local` file with the following variables:
 APP_ENV=prod
 APP_SECRET=<your-secret>
 DATABASE_URL=mysql://user:password@127.0.0.1:3306/database_name
-```
-
-## Testing
-Run the test suite:
-```bash
-php bin/phpunit
 ```
 
 ## Development

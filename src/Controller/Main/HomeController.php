@@ -33,5 +33,4 @@ final class HomeController extends AbstractController
             'meta' => 'Politique de Confidentialité relative au données collectées - RGPD',
         ]);
     }
-
 }

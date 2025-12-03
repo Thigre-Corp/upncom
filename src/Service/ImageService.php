@@ -23,7 +23,7 @@ class ImageService{
     ){
     }
 
-    public function standardizator(UploadedFile $image, ?string $origine='aRenommer', ?int $max_width = 1920 ): string // was Image
+    public function standardizator(UploadedFile $image, ?string $origine='aRenommer', ?int $max_width = 1920 ): string
     {
     /*  -> formater toutes uploader en webp
         -> limiter leur largeur à 1920px max (std full HD) par défaut
@@ -32,19 +32,6 @@ class ImageService{
         -> on les déplace vers le dossier ad-hoc..
         -> on persiste et signe.
     */
-
-        // créer chemin de stockage
-        $path = $this->params->get('uploads_directory');
-
-        //créer dossier si null avec droits
-        if(!file_exists($path)){
-            mkdir($path, 0755, true);
-        }
-        //génére la première partie du nom à partir du texte alternatif, limité à 30 caractères.
-        $origine = substr($this->slugger->slug($origine),0,30);
-        //rendre unique le nom de l'image:
-        $file = $origine.'-'.uniqid();
-
         //vérifier le type de fichier uploadé en cas de by-pass de la contrainte sur l'entité
         if(
             $image->guessExtension() !== 'svg' &&
@@ -56,6 +43,19 @@ class ImageService{
         {
             throw new Exception('Format d\'image incorrect, ne pas tenter d\'uploder ce fichier à nouveau: ');
         }
+
+        //Récupérer chemin de stockage
+        $path = $this->params->get('uploads_directory');
+        //créer dossier si null avec droits
+        if(!file_exists($path)){
+            mkdir($path, 0755, true);
+        }
+        //génére la première partie du nom à partir du texte alternatif, limité à 30 caractères.
+        $origine = substr($this->slugger->slug($origine),0,30);
+        //rendre unique le nom de l'image:
+        $file = $origine.'-'.uniqid();
+
+        
 
         // si fichier vectoriel
         if($image->guessExtension() === 'svg'){ 

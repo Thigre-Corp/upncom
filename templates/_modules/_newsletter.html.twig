@@ -5,18 +5,27 @@
     <dialog id="newsletter-dialog" closedby="any" data-turbo-permanent> 
 
         <div class="newsletter-form">
-                    <div class="logo">
-            <a href="{{ path('home') }}" class="logo">Up'n'Com</a>
+                            <div class="logo">
+            <a href="{{ path('home') }}" class="logo">
+                {{ ux_icon('upncom', {class: 'logo-svg'}) }}
+            </a>
+        </div>
         </div>
             <button class="close-newsletter" autofocus>X</button>
             {{ form_start(form) }}
             <div class="newsletter-form-email">
                 {{form_label(form.email) }}
-                <span class="arrow-right">&#xf061</span>{{form_widget(form.email) }}
+                <span class="arrow-right">
+                    &#xf061
+                </span>
+                {{form_widget(form.email) }}
             </div>
             <div class="newsletter-form-rgpd">
                 {{ form_label(form.rgpd) }}
-                <span class="arrow-right">&#xf061</span>{{ form_widget(form.rgpd) }}
+                <span class="arrow-right">
+                    &#xf061
+                </span>
+                {{ form_widget(form.rgpd) }}
                 <a href="{{ path('rgpd')}}" target="_blank">J'accepte que mes données soient utilisées dans le cadre de l'envoi de la
                     newsletter conformément à la politique de confidentialité.</a>
             </div>

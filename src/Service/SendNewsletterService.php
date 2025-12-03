@@ -14,7 +14,6 @@ use Symfony\Component\Mailer\MailerInterface;
 
 class SendNewsletterService{
     private $mailer;
-    private $bodyRenderer;
 
     public function __construct(
         MailerInterface $mailer,
