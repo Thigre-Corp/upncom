@@ -5,6 +5,7 @@
     https://geo.api.gouv.fr/decouvrir
 */
 
+
 /***************** constantes ******************************/
 const apiURL = 'https://geo.api.gouv.fr/communes?codePostal=';
 const format = '&format=json';

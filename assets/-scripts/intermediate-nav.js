@@ -3,6 +3,7 @@
 
 const sections = document.querySelectorAll('section');
 const indexes = document.querySelectorAll('.index_navBar');
+if (indexes.length > 0) {
 let firstTime = true;
 
 const options = {
@@ -36,3 +37,4 @@ const observer = new IntersectionObserver(intersectionCallback, options);
 sections.forEach((element) => {
     observer.observe(element);
 });
+}

@@ -4,7 +4,7 @@
 <head>
     <script src="{{ asset('/tarteaucitron.js') }}"></script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" id="tarteaucitron-init" data-turbo-reload>
         tarteaucitron.init({
             "privacyUrl": "", /* Url de la politique de confidentialité */
             "bodyPosition": "top", /* top place le bandeau de consentement au début du code html, mieux pour l'accessibilité */
@@ -63,8 +63,6 @@
 
             "partnersList": true /* Afficher le détail du nombre de partenaires sur la bandeau */
         });
-    </script>
-    <script>
         (tarteaucitron.job = tarteaucitron.job || []).push('maps_noapi');
     </script>
     <meta charset="UTF-8">
@@ -76,7 +74,7 @@
     {% endblock %}
     <title>{% block title %}Up'n'Com{% endblock %}</title>
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        href="{{ asset('/icons/rel-icon.svg') }}">
     {% block stylesheets %}
     {% endblock %}
 
@@ -86,7 +84,6 @@
     {% block javascripts %}
         <script src="{{ asset('/scripts/parallax.js') }}" defer></script>
         <script src="{{ asset('/scripts/intermediate-nav.js') }}" defer></script>
-        <script src="{{ asset('/scripts/burger-quizz.js') }}" defer></script>
         <script src="{{ asset('/scripts/dialog-newsletter.js') }}" defer></script>
     {% endblock %}
 
@@ -101,48 +98,9 @@
             </a>
         </div>
         <div id="navbar" class="textCenter">
-
-            <label class="burger-quizz" for="burger-quizz">
-                <input type="checkbox" id="burger-quizz" name="burger-quizz" hidden></input>
-                <div class="burger-sign">
-                    <div class="burger-line"></div>
-                    <div class="burger-line burger-line2"></div>
-                    <div class="burger-line burger-line2"></div>
-                    <div class="burger-line"></div>
-                </div>
-            </label>
-
-
-            <nav class="nav-menu" id="toggleMenu">
-                <ul>
-                    <li>
-                        <a href="{{ path('home')}}">ACCUEIL</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_service_index')}}">SERVICES</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_article_index')}}">BLOG</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_contact')}}">CONTACT</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('app_realisation')}}">REALISATIONS</a>
-                    </li>
-                    <li class="socials">
-                        <a aria-label="lien vers la page Facebook de Up'n'Com"
-                            href="https://www.facebook.com/Upncom.fr/">{{ ux_icon('fa:facebook-square', {class:
-                            'socialsIcon'}) }}</a>
-                        <a aria-label="lien vers la page Instagram de Up'n'Com"
-                            href="https://www.instagram.com/upncom.fr/">{{ ux_icon('fa:instagram', {class:
-                            'socialsIcon'}) }}</a>
-                        <a aria-label="lien vers la page LindekIn de Up'n'Com"
-                            href="https://www.linkedin.com/company/up-n-com/">{{ ux_icon('fa:linkedin-square', {class:
-                            'socialsIcon'}) }}</a>
-                    </li>
-                </ul>
-            </nav>
+                {{ include('_modules/_navlinks.html.twig') }}
+        </div>
+        {{ include('components/Burgermenu.html.twig') }}
     </header>
     {% endblock %}
 
@@ -173,14 +131,14 @@
     </div>
     {% endif %}
 
-    <div id="burger-mask" class="frostedGlass"></div>
+    {# <div id="burger-mask" class="frostedGlass"></div> #}
     <main>
         {% block body %}
         <p>No...body</p>
         {% endblock %}
     </main>
     {% block footer %}
-    {{ include('_modules/_footer.twig') }}
+    {{ include('_modules/_footer.html.twig') }}
     {% endblock %}
 
 </body>

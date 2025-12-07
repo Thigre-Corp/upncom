@@ -1,4 +1,4 @@
-{# templates/components/ProductSearch.html.twig #}
+{# templates/components/SearchComponent.html.twig #}
 
 <div {{ attributes.defaults(stimulus_controller('appear')) }}>
     <div class="barre-recherche-wrapper frostedGlass">
@@ -18,7 +18,7 @@
                 {% set lastItem = lastItem + loop.index %}
             {% endfor %}
             {# c'est là que la magie opère... prévoire une petite animation !
-            avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les
+            Grâce au couple balise/id, remplacer dans le DOM l'article "loader" une fois les
             nouvelles infos reçues.#}
             {% if this.hasMore %}
                     <article class="blog-card loading frostedGlass" id="article--{{ page + 1 }}-{{ lastItem }}"

@@ -33,4 +33,9 @@ final class HomeController extends AbstractController
             'meta' => 'Politique de Confidentialité relative au données collectées - RGPD',
         ]);
     }
+
+    #[Route('/charte', name: 'charte_graphique')]
+    public function charte(): Response{
+        return $this->render('\home\charte-graphique.html.twig');
+    }
 }

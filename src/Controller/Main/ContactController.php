@@ -31,6 +31,8 @@ final class ContactController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $contact = new Contact();
+        $subscriber = new Subscriber;
+
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
@@ -40,7 +42,6 @@ final class ContactController extends AbstractController
             $contact->setToken(Uuid::v4());
             $entityManager->persist($contact);
             if ($contact->isAccepteNewsletter()) {
-                $subscriber = new Subscriber;
                 $subscriber->setEmail($contact->getEmail())
                     ->setDateCreation($contact->getDateCreation())
                     ->setToken($contact->getToken())
@@ -48,17 +49,16 @@ final class ContactController extends AbstractController
                 $entityManager->persist($subscriber);
             }
                 $entityManager->flush();
-            
-            
-
             // generate a signed url and email it to the user
             $email = (new TemplatedEmail())
                 ->from('no-reply@upncom.fr')
                 ->to($contact->getEmail())
                 ->subject($contact->getNomContact() . ', pensez à valider votre adresse mail pour qu\' Up\'n\'Com reçoive votre meessage !')
                 ->htmlTemplate('emails/contactValider.html.twig')
-                ->context(['contact' => $contact],
-                ['subscriber' => $subscriber ?? null]);
+                ->context([
+                    'contact' => $contact,
+                    'subscriber' => $subscriber ?? false,
+                ]);
 
             $this->mailer->send($email);
             $this->addFlash('message', 'Surveillez votre boîte mail, vous aller recevoir un email pour confirmer votre inscription à la newsletter d\' Up\'n\'Com');

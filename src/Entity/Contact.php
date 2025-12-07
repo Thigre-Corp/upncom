@@ -128,6 +128,10 @@ class Contact
     {
         return $this->emailValide;
     }
+    public function getEmailValide(): ?bool
+    {
+        return $this->emailValide;
+    }
 
     public function setIsValid(bool $emailValide): static
     {

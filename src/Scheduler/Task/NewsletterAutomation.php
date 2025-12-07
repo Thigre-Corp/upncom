@@ -21,7 +21,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Scheduler\Attribute\AsPeriodicTask;
 
-#[AsPeriodicTask(frequency: '1 day')] // ( passer à 30 pour appel toute les 30 seconde dans le cadre de la démo)
+#[AsPeriodicTask(frequency: '1 day' )]  // ( passer à 30 pour appel toute les 30 seconde dans le cadre de la démo - '1 day' sinon)
 class NewsletterAutomation
 {
     public function __construct(
@@ -36,7 +36,7 @@ class NewsletterAutomation
         $nonValidSubscribers = $this->entityManager
             ->getRepository(Subscriber::class)->findBy(['isValid' => false]);
         $nonValidContacts =  $this->entityManager
-            ->getRepository(Contact::class)->findBy(['isValid' => false]);
+            ->getRepository(Contact::class)->findBy(['emailValide' => false]);
 
         if ($nonValidSubscribers !== null)
         {

@@ -1,0 +1,19 @@
+{# templates/components/Burgermenu.html.twig #}
+<div class="burger-controller" data-controller="burgerquizz">
+
+    <button class="burger-quizz"  data-burgerquizz-target="toggleMenu"
+        id="burger-quizz" class="burger-checkbox"
+            data-action="click->burgerquizz#toggle" >
+
+        <div class="burger-sign closed" data-burgerquizz-target="burger">
+            <div class="burger-line"></div>
+            <div class="burger-line burger-line2"></div>
+            <div class="burger-line burger-line2"></div>
+            <div class="burger-line"></div>
+        </div>
+    </button>
+
+    <div id="burger-mask" class="frostedGlass" data-burgerquizz-target="mask">
+        {{ include('_modules/_navlinks.html.twig') }}
+    </div>
+ </div>
