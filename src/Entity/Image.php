@@ -32,7 +32,6 @@ class Image
         ],
         extensionsMessage: 'Merci d\'utiliser une image valide (jpg, png, webp, svg',
     )]
-
     private ?File $imageFile = null; // non persisté, pour gestion upload via form
 
     #[ORM\Column(length: 255, nullable: true)]

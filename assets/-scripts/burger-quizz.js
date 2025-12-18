@@ -6,12 +6,11 @@
 //     mask.ariaHidden = 'true';
 //     mask.classList.add('toggleMenu');
 
-//     burger.addEventListener('change', function () {
-//         if (this.checked) {
-//             mask.style.transform = 'translateX(0)';
-//         }
-//         else {
-//             mask.style.transform = 'translateX(101vw)';
-//         }
-//     });
-// });
+    burger.addEventListener('change', function () {
+        if (this.checked) {
+            mask.style.transform = 'translateX(0)';
+        } else {
+            mask.style.transform = 'translateX(101vw)';
+}
+    });
+});

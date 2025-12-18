@@ -1,59 +1,22 @@
-* @TODO list
+dans articles/index:
+- faire un truc sympa avec la recherche/nuage de TAG et pagination.
+
 
 dans articles/new|edit:
-  - mise en page
-  - upload photos ? non -> banque d'image
-  - inclure créateur/éditeur de TAG (form in form) -> service Taggel
+- mise en page
+- ajout éditeur WYSIWYG
+- upload photos ?
+- inclure créateur/éditeur de TAG (form in form)
 
 CSS: 
-  - faire autres page
-  - structurer selon BEM
+- reprendre les containers au format grid/auto responsive
 
 MAIL:
-  - basculer en templated pour la subscription
+- basculer en templated
+
+ENTITIES :
+- contact/datetime à la création
+- tout ce qui reçoit une image: prévoir text alternatif
 
 SVG:
-  - normaliser les viewports des micros -> non, récupérer le micro normalisé, mettre des classes pour les couleurs et utilisé style global
-
-HOME:
-  - revoir JS intersection observer.
-
-
-EZADMIN:
-  - mise en forme/theme
-  - Subscribers : ajout date souscription / scheduler pour renouvellement consentement.
-  - nettoyage des champs / renommer labels
-
------------------------------------------------
-mettre logique suivante:
-EASYAdmin --> image -> new : upload uniquement via dropZone -> réorienter vers le service...
-EASYAdmin --> image -> edit : alt Text seulement (puis Mask_SVG plus tard)
-EASYAdmin --> Articles/service/client : selection d'image depuis banque images existantes.
--> attention: problème 
-
-
-
-LOGIN:
-  - toggle password sur login (pas faire un form!)
-
-TEST SVG Corrompu:
-  - OK
-
-liimpImage:
-  - à implémenter ou pas. -> Joli_code media bundle
-=====================================================================================
--------------------
-réécrire TWIG  articles
-------------------
-dans articles/index:
-  - faire un truc sympa avec la recherche/nuage de TAG et pagination. 
-
-searchType dans form -> plus nécessaire.
-
-
-ImageComponent: offir la possibilité de l'afficher en image-parallax.
-
-mise en forme subscibe newsletter
-
-MESSAGE FLASH:
-  - mise en forme
+- normaliser les viewports des micros.

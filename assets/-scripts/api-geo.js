@@ -1,11 +1,9 @@
-/***************** API GEO ******************************/
 /*
     Récupération des villes en fonction du code postal
     mise en oeuvre de l'API GEO du gouvernement français
-    https://geo.api.gouv.fr/decouvrir
 */
 
-/***************** constantes ******************************/
+/* constantes */
 const apiURL = 'https://geo.api.gouv.fr/communes?codePostal=';
 const format = '&format=json';
 
@@ -13,7 +11,7 @@ const cp = document.getElementById("contact_cp");
 const select = document.getElementById("contact_ville");
 const container = document.querySelector(".ville");
 
-/***************** Event Listener ******************************/
+/* Event Listener */
 cp.addEventListener('input', (e) => {
     let inputCP = e.target.value;
     if (inputCP.length > 4 ) {
@@ -28,7 +26,7 @@ cp.addEventListener('input', (e) => {
     }
 });
 
-/***************** CallBack ******************************/
+/* fonction CallBack */
 function callAPI(url) {
     return fetch(url)
         .then(response => response.json())
@@ -41,7 +39,6 @@ function callAPI(url) {
                 ville.push(data[i].nom);
                 select.add(option);
             }
-            /*sendToBack(ville);*/
         })
         .catch(() => { console.error("fetch error !") })
 }

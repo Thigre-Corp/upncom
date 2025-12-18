@@ -53,14 +53,5 @@ class ImageCrudController extends AbstractCrudController
             ->setPermission(Action::DELETE, 'ROLE_ADMIN')
             ->setPermission(Action::BATCH_DELETE, 'ROLE_ADMIN')
         ;
-    /*        public const BATCH_DELETE = 'batchDelete';
-    public const DELETE = 'delete';
-    public const DETAIL = 'detail';
-    public const EDIT = 'edit';
-    public const INDEX = 'index';
-    public const NEW = 'new';
-    public const SAVE_AND_ADD_ANOTHER = 'saveAndAddAnother';
-    public const SAVE_AND_CONTINUE = 'saveAndContinue';
-    public const SAVE_AND_RETURN = 'saveAndReturn';*/
     }
 }
