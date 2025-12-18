@@ -21,7 +21,7 @@ class Client
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $clientURL = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: 'EAGER')]
     #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imageClient = null;
 

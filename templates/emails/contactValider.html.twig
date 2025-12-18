@@ -27,7 +27,8 @@
         <div>Nom du contact: {{ contact.nomContact }}</div>
         <div>Contenu du message: {{ contact.contenu }}</div>
     </p>
-    {% if contact.accepteNewsletter %}
+
+    {% if subscriber is not null %}
     <p>En cliquant sur le lien précédant, vous valider également votre souhaite de vous abonner à la newsletter</p>
 
     <p>Vous pourrez, si vous le souhaitez, vous désabonner à chaque instant grâce au lien suivant</p>

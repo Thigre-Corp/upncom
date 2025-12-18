@@ -1,42 +1,31 @@
 {# templates/components/SearchComponent.html.twig #}
-{# composant live qui nous permet de faire le lient entre les articles et la fonction de recherche, avec easy loading#}
 
 <div {{ attributes.defaults(stimulus_controller('appear')) }}>
     <div class="barre-recherche-wrapper frostedGlass">
         <label for="recherche">Rechercher:</label>
-        <input type="search" data-model="debounce(750)|query" name="recherche" class="barre-recharche" placeholder="Taper ici les termes de votre recherche.">
+        <input type="search" data-model="debounce(1000)|query" name="recherche" class="barre-recharche">
     </div>
-    <div id="resultat--{{ this.query }}">
+    <div id="results--{{ this.query }}">
+
         {% set lastItem = 0 %}
 
         <div class="article-container">
             {% for article in this.articles %}
-            {# <div id="page--{{ this.page }}"> #}
                 <twig:ArticleComponent article='{{article}}' class="{{ cycle(['', 'alt'], loop.index) }}"
-                    id="article--page-{{page}}-{{loop.index}}"></twig:ArticleComponent>
+                    id="article--page-{{page}}-{{loop.index}}">
+                </twig:ArticleComponent>
 
                 {% set lastItem = lastItem + loop.index %}
-                {#
-            </div> #}
             {% endfor %}
-
-
             {# c'est là que la magie opère... prévoire une petite animation !
-            avec le couple balise/id, il y aurait moyen de remplacer dans le DOM l'article "loader" une fois les
+            Grâce au couple balise/id, remplacer dans le DOM l'article "loader" une fois les
             nouvelles infos reçues.#}
             {% if this.hasMore %}
-            {# <div id="page--{{ this.page + 1 }}"> #}
-                {# {% for i in 1..per_page %} #}
-                    <article class="blog-card loading frostedGlass" id="article--{{ page + 1 }}-{{ lastItem }}" {# 🦁 - The trigger #} {#
-                        {% if loop.first %} #} data-appear-target="loader" data-action="appear->live#action"
-                        data-live-action-param="more" {# {% endif %} #}>
-                        {# 🐹 - Loading bar #}
-                        {# Animated progress bar shown during page load #}
-                        
+                    <article class="blog-card loading frostedGlass" id="article--{{ page + 1 }}-{{ lastItem }}"
+                        data-appear-target="loader" 
+                        data-action="appear->live#action"
+                        data-live-action-param="more">
                     </article>
-                {# {% endfor %} #}
-                {#
-            </div> #}
             {% endif %}
             {% if not this.hasMore %}
             <div class="blog-card nomore frostedGlass">

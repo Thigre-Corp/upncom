@@ -6,6 +6,20 @@
         url("../fonts/fontawesome-webfont.woff2") format("woff2");
 }
 
+@font-face {
+    font-family: "Cabin";
+    src:
+        local("Cabin"),
+        url("../fonts/Cabin-VariableFont.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Nunito Sans";
+    src:
+        local("Nunito-Sans"),
+        url("../fonts/NunitoSans-VariableFont.woff2") format("woff2");
+}
+
 :root {
     /*Couleurs*/
     --violet: oklch(from #982873 l c h);
@@ -13,14 +27,11 @@
     --bleu: oklch(from #46A2AC l c h);
     --bleuFonC: oklch(from #003F5D l c h);
     --noir: oklch(from #020202 l c h);
-    --gris: oklch(from #f1f1f1 l c h);
-    --blanc: oklch(from #EEEEEE l c h);
+    --blanc: oklch(from #f1f1f1 l c h);
     --grisAlpha: oklch(from #5c5c5c41 l c h);
-    --contour: var(--grisAlpha);
-    --bg-gradient: linear-gradient(135deg in oklch, var(--blanc));
-    /*Couleurs choisies*/
-    --color-bg-primary: var(--gris);
-    /* couleur BG*/
+    /*Couleurs BG*/
+    --color-bg-primary: var(--blanc);
+    /* couleur TXT*/
     --color-text-primary: var(--noir);
     /* couleur TXT*/
     --color-accent: var(--bleuFonC);
@@ -35,9 +46,8 @@
     --fs-xxl: calc(2*var(--fs-nm));
     --fs-sm: calc(0.8*var(--fs-nm));
     /*fonts*/
-    --font-heading: "Cabin", sans-serif;
+    --font-heading: "Cabin", serif;
     --font-sans: "Nunito Sans", sans-serif;
-    --font-logo: "Road Rage", sans-serif;
     --frostedBlur: 7px;
 
     /*scroll behavior*/
@@ -52,7 +62,7 @@
     padding: 0;
     color: var(--noir);
     font-size: var(--fs-nm);
-    transition: color 0.3s;
+    transition: color 0.2s;
 }
 
 .inactive {
@@ -78,7 +88,13 @@ body {
 .frostedGlass {
     background-color: var(--grisAlpha);
     backdrop-filter: blur(var(--frostedBlur));
-    border: 2px outset oklch(from var(--gris) l c h / 0.2);
+    border: 2px outset oklch(from var(--color-bg-primary) l c h / 0.2);
+}
+
+.privacy-policy {
+    position: relative;
+    top: var(--menuHeight);
+    left: 0;
 }
 
 /* typo-----------------------*/
@@ -125,9 +141,9 @@ a:hover {
 
 /*accessibility---------------------------------*/
 @media (prefers-contrast: more) {
-    :root{
-        background-color: black;
-        color: white;
+    :root {
+        background-color: var(--noir);
+        color: var(--color-bg-primary);
     }
 }
 
@@ -155,7 +171,6 @@ input[type=checkbox]:checked+.alert {
 }
 
 /*Header----------------------------------------------------------------------------------------------------------------------------------*/
-/*navigation----------------------------------------------------------------------------------------------------------------------------------*/
 
 .header {
     position: fixed;
@@ -172,67 +187,85 @@ input[type=checkbox]:checked+.alert {
     border-bottom: 2px solid oklch(from var(--gris) l c h / 0.3) !important;
 }
 
-.burger-quizz {
+.burger-quizz,
+#burger-mask {
     display: none;
+    position: relative;
 }
 
 .logo {
-    color: var(--color-accent);
     position: relative;
-    top: 0.0rem;
-    left: 1rem;
-    font-size: var(--menuHeight);
-    font-family: var(--font-logo);
-    letter-spacing: -0.02em;
-}
-
-.nav-menu ul {
-    list-style: none;
-    display: flex;
-    gap: 2em;
-    position: relative;
-}
-
-.socials {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    top: calc((var(--menuHeight) /2 - var(--fs-xl)));
+    top: 0;
     left: 0;
+}
 
-    a {
+.logo-svg {
+    fill: var(--bleuFonC);
+    transform: translate(1rem, 0.3lh);
+    transition: fill 0.2s linear;
+
+    &:hover {
+        fill: var(--noir) !important;
+    }
+}
+
+/*navigation----------------------------------------------------------------------------------------------------------------------------------*/
+#navbar{
+    position: fixed;
+    right: 0;
+
+    .nav-menu ul {
+        list-style: none;
+        display: flex;
+        gap: 2em;
+        position: relative;
+        align-items: flex-end;
+    }
+
+    .nav-menu ul li a {
+        font-size: var(--fs-xl);
+        font-weight: 500;
+    }
+
+    /*  social rules */
+    .socials {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        top: calc((var(--menuHeight) /2 - var(--fs-xl)));
+        left: 0;
+    }
+
+    .socials a {
         padding-right: 1em;
+    }
 
-        .socialsIcon {
-            height: var(--fs-xl);
+    .socials .socialsIcon {
+        height: var(--fs-xl);
+    }
 
-            &:hover {
-                * {
-                    color: var(--color-accent);
-                }
-
-            }
-        }
+    .socials .socialsIcon:hover * {
+        color: var(--color-accent);
     }
 }
 
 /*HERO-----------------------------------*/
 
 .hero {
+    margin-top: var(--menuHeight);
     display: block;
     position: relative;
     top: 0;
+    overflow-x: hidden;
+    max-width: 100svw;
 }
 
-.hero-content {
-    video {
-        display: flow-root;
-        width: 100svw;
-    }
+.hero-content video {
+    width: 100%;
+}
 
-    img {
-        width: 100svw;
-    }
+.hero-content img {
+    width: 100%;
 }
 
 /*main-------------------------------------------------------*/
@@ -267,9 +300,8 @@ main {
     justify-content: center;
 }
 
-
-
-.close-newsletter, .close-flash{
+.close-newsletter,
+.close-flash {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -279,14 +311,14 @@ main {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .flash-dialog{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 10000;
 }
 
@@ -302,6 +334,7 @@ dialog::backdrop {
     border: 2px outset oklch(from var(--gris) l c h / 0.2);
 }
 
+/* newsletter form */
 .newsletter-form {
     display: flex;
     background-color: var(--gris);
@@ -309,14 +342,13 @@ dialog::backdrop {
     justify-content: center;
     align-items: center;
 
-    *,
-    *>* {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+.newsletter-form *,
+.newsletter-form *>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .arrow-right {
@@ -354,11 +386,30 @@ dialog::backdrop {
     z-index: 50;
     border-inline: none !important;
 
-    ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    }
+#sections_Navbar li {
+    list-style-type: none;
+    position: relative;
+}
+
+#sections_Navbar li a {
+    font-size: var(--fs-xl);
+    padding-inline: 1rem;
+}
+
+#sections_Navbar li::after {
+    content: '';
+    position: absolute;
+    bottom: -0.2lh;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--noir);
+    transition: width 0.35s ease-in;
+}
+
+#sections_Navbar li:hover::after {
+    width: 100%;
+}
 
     li {
         list-style-type: none;
@@ -516,7 +567,7 @@ dialog::backdrop {
     --size: var(--size-from-service-card-component, 300px);
     --ratio: var(--ratio-from-service-card-component, 0.9);
     grid-auto-flow: column;
-    clip-path: circle(calc(var(--size) /2 + 1 px) at center);
+    /*clip-path: circle(calc(var(--size) /2 + 1px) at center); à reprendre- pas responsive */
     display: flex;
     flex-wrap: wrap;
 
@@ -609,6 +660,61 @@ dialog::backdrop {
     box-shadow:
         2px 2px 0px var(--grisAlpha),
         0 0 2px var(--grisAlpha);
+}
+
+.blog-card:hover .photo {
+    transform: scale(1.3) rotate(3deg);
+}
+
+.blog-card .meta {
+    position: relative;
+    z-index: 0;
+    height: 200px;
+}
+
+.blog-card .photo {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transition: transform .2s;
+    background-image: var(--bgImg), linear-gradient(var(--grisAlpha) 0 0);
+}
+
+/* details and nested styling  */
+.blog-card .details,
+.blog-card .details ul {
+    list-style: none;
+}
+
+.blog-card .details *,
+.blog-card .details *::before,
+.blog-card .details *::after {
+    color: var(--color-accent);
+}
+
+.blog-card .details {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    margin: auto;
+    transition: left .2s;
+    background: transparent;
+    color: var(--color-accent);
+    padding: 10px;
+    width: 100%;
+    font-size: .9rem;
+}
+
+.blog-card .details a {
+    text-decoration: dotted underline;
+}
+
+.blog-card .details ul li {
+    display: inline-block;
+}
 
     &:hover {
         .photo {
@@ -946,18 +1052,17 @@ dialog::backdrop {
     width: 100%;
     position: relative;
 
-    &::after {
-        position: absolute;
-        color: var(--color-accent);
-        top: 50%;
-        left: 50%;
-        transform-origin: center;
-        --loading: 0 deg;
-        transform: translate(-50%, -50%) rotateZ(var(--loading));
-        content: '\f110';
-        font-family: FontAwesome;
-        animation: is-loading 1s infinite linear;
-    }
+*+.loading::after {
+    position: absolute;
+    color: var(--color-accent);
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    --loading: 0deg;
+    transform: translate(-50%, -50%) rotateZ(var(--loading));
+    content: '\f110';
+    font-family: FontAwesome;
+    animation: is-loading 1s infinite linear;
 }
 
 *+.nomore {
@@ -966,16 +1071,14 @@ dialog::backdrop {
     padding: 1em;
     position: relative;
 
-    &::after {
-        position: absolute;
-        color: var(--color-accent);
-        top: 50%;
-        left: 50%;
-        transform-origin: center;
-        transform: translate(-50%, -50%);
-        content: 'pas d\'autre élément à afficher';
-
-    }
+*+.nomore::after {
+    position: absolute;
+    color: var(--color-accent);
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    content: 'pas d\'autre élément à afficher';
 }
 
 @keyframes is-loading {
@@ -993,33 +1096,9 @@ dialog::backdrop {
     border-radius: 0 0 1em 1em;
     position: sticky;
     top: var(--menuHeight);
-    z-index: 1000;
+    z-index: 10;
     gap: 1em;
 }
-
-/*tags-----------------------------------*/
-
-/* .tagButton {
-    border-radius: var(--fs-nm);
-    padding: calc(var(--fs-nm)/2);
-    margin: calc(var(--fs-nm)/8);
-    border: solid var(--noir) 3px;
-    background-color: var(--orange);
-    font-size: var(--fs-nm);
-    color: var(--noir);
-} */
-
-/*search-----------------------------------*/
-/* .nuageTag {
-    display: flex;
-    flex-wrap: wrap;
-    place-items: center;
-}
-
-#search_q,
-#search_submit {
-    color: var(--noir);
-} */
 
 /*client*************************************/
 
@@ -1143,11 +1222,25 @@ dialog::backdrop {
 .contactMap {
     place-self: stretch stretch;
 
-    div > iframe {
-        width: 100%;
-        height: 100%;
-        border-radius: 1em;
-        box-shadow: 3px 3px 3px black;
+.contactMap div>iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 1em;
+    box-shadow: 3px 3px 3px var(--noir);
+}
+
+/*-----RESPONSIVE------*/
+
+@media (prefers-contrast: more) {
+    :root {
+        background-color: var(--noir);
+        color: var(--color-bg-primary);
+    }
+}
+
+@media (max-width: 740px) {
+    #sections_Navbar {
+        display: none;
     }
 }
 
@@ -1156,25 +1249,73 @@ dialog::backdrop {
     display: none;
 }
 
-@media (max-width : 1000px) {
-    #body{
-        overflow-x: clip;
-    }
-
-    #burgerMask {
-        display: block;
-        z-index: 100;
-        position: absolute;
-        inset: 0;
-        top: var(--menuHeight);
-        transform: translateX(101vw);
-    }
-
-    #toggleMenu {
+@media only screen and (max-width: 1000px) {
+    #navbar {
         transform: translateY(calc(var(--menuHeight) * -2));
     }
 
-    .toggleMenu {
+    #body {
+        overflow-x: clip;
+    }
+
+    .burger-controller {
+        position: fixed;
+        top: 0;
+        right: calc(var(--menuHeight) /2 );
+        width: var(--menuHeight);
+        height: var(--menuHeight);
+        z-index: 100;
+    }
+    .burger-label{
+        inset: 0;
+        position: relative;
+    }
+
+    #burger-mask {
+        list-style: none;
+        display: block;
+        z-index: 100000000;
+        background-color: var(--color-bg-primary);
+        width: 100vw;
+        position: fixed;
+        top: calc(var(--menuHeight));
+        height: calc(100svh - var(--menuHeight));
+        left:101vw;
+        transition: left .4s linear;
+
+        /* &::backdrop{
+            background-color: var(--grisAlpha);
+            filter: blur(var(--frostedBlur));
+        } */
+
+        * {
+            font-weight: bolder;
+            background-color: transparent;
+            display: flex;
+            height: stretch;
+            flex-direction: column;
+            justify-content: space-evenly;
+            text-align: center;
+            border-bottom: 2px solid oklch(from var(--color-bg-primary) l c h / 0.3);
+
+            .socials {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+
+                * {
+                    width: 3em;
+                    height: 3em;
+
+                }
+
+                width: fit-content;
+
+            }
+        }
+    }
+
+    /* .toggleMenu {
         transition: transform 1s linear;
         position: absolute;
         top: var(--menuHeight);
@@ -1183,29 +1324,28 @@ dialog::backdrop {
         bottom: 0;
         z-index: 1000;
         height: calc(100svh - var(--menuHeight));
+    } */
 
-        ul,
-        li,
-        li>a {
-            font-weight: bolder;
-            background-color: transparent;
-            display: flex;
-            height: stretch;
-            flex-direction: column;
-            justify-content: space-evenly;
-            text-align: center;
-            border-bottom: 2px solid oklch(from var(--gris) l c h / 0.3);
-        }
+    .toggleMenu>nav>ul {
 
-        .socials {
-            display: flex;
-            flex-direction: row;
-            justify-content: justify;
+        font-weight: bolder;
+        background-color: transparent;
+        display: flex;
+        height: stretch;
+        flex-direction: column;
+        justify-content: space-evenly;
+        text-align: center;
+        border-bottom: 2px solid oklch(from var(--color-bg-primary) l c h / 0.3);
+    }
 
-            a {
-                display: inline;
-            }
-        }
+    .toggleMenu .socials {
+        display: flex;
+        flex-direction: row;
+        justify-content: justify;
+    }
+
+    .toggleMenu .socials a {
+        display: inline;
     }
 
     /*-----MENU BURGER-----*/
@@ -1214,15 +1354,19 @@ dialog::backdrop {
         --size: calc(var(--menuHeight) *0.8);
         --offset: calc(var(--menuHeight) * 0.1);
         display: block;
+        border: none;
+        background-color: transparent;
         position: fixed;
         top: var(--offset);
-        right: calc(var(--size) *0.8);
-        height: calc(var(--size) *0.8);
-        aspect-ratio: 3/2;
+        right: calc(var(--size) * 0.8);
+        height: calc(var(--size) * 0.8);
         cursor: pointer;
     }
 
     .burger-sign {
+        position: relative;
+        height: 100%;
+        width: 100%;
         display: grid;
         grid-template: 1 2 / repeat(3, 1fr);
         place-content: center;
@@ -1230,7 +1374,8 @@ dialog::backdrop {
     }
 
     .burger-line {
-        width: calc(var(--size) * .8);
+
+        width: calc(var(--size) * 0.8);
         height: calc(var(--size) / 5);
         background-color: black;
         grid-column: 1 / 2;
@@ -1250,26 +1395,27 @@ dialog::backdrop {
         border-radius: calc(var(--size) / 5)
     }
 
-    input:checked~.burger-sign {
-
-        div:first-of-type,
-        div:last-of-type {
+    .burger-quizz:has(.open)
+    {
+        .burger-sign
+        {
+            div:first-of-type,
+            div:last-of-type {
             opacity: 0;
-        }
-
-        div:nth-of-type(2) {
+            }
+        div:nth-of-type(2) 
+        {
             transform: rotateZ(45deg);
         }
-
-        div:nth-of-type(3) {
-            transform: rotateZ(-45deg);
+        div:nth-of-type(3) 
+        {
+                transform: rotateZ(-45deg);
         }
-
         .burger-line {
-            transition: transform 0.4s linear, opacity 0.2s linear;
+                transition: transform 0.4s linear, opacity 0.2s linear;
         }
-
     }
+}
 }
 
 

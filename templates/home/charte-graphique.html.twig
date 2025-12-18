@@ -1,0 +1,245 @@
+{# <!-- templates/home/index.html.twig --> #}
+{% extends 'base.html.twig' %}
+{% block importmap %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+{% endblock  %}
+
+{% block bodyheader %}
+    
+{% endblock  %}
+
+{% block title %}Charte graphique Up'n'Com{% endblock %}
+
+{% block body %}
+    <div class="charte-graphique">
+        <div class="main-title">
+            <h1>Charte graphique Up'n'Com</h1>
+        </div>
+        
+        <div class="colors-section">
+            <h2>Couleurs principales</h2>
+            <div class="colors-grid">
+                <div class="color-card bg-bleu">
+                    <div class="color-swatch" style="background-color: #46A2AC;"></div>
+                    <p class="color-name">Bleu principal</p>
+                    <p class="color-code">#46A2AC</p>
+                </div>
+                <div class="color-card bg-bleu-fonc">
+                    <div class="color-swatch" style="background-color: #003F5D;"></div>
+                    <p class="color-name">Bleu foncé</p>
+                    <p class="color-code">#003F5D</p>
+                </div>
+                <div class="color-card bg-noir">
+                    <div class="color-swatch" style="background-color: #020202;"></div>
+                    <p class="color-name">Noir</p>
+                    <p class="color-code">#020202</p>
+                </div>
+                <div class="color-card bg-gris-alpha">
+                    <div class="color-swatch" style="background-color: #5c5c5c41;"></div>
+                    <p class="color-name">Gris alpha</p>
+                    <p class="color-code">#5c5c5c41</p>
+                </div>
+                <div class="color-card bg-bg-primary">
+                    <div class="color-swatch" style="background-color: #f1f1f1;"></div>
+                    <p class="color-name">Fond principal</p>
+                    <p class="color-code">#f1f1f1</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="typography-section">
+            <h2>Typographie Road Rage</h2>
+            <div class="typo-example roadrage">
+                <h1 class="font">H1-ROAD RAGE - AZERTYazerty01234</h1>
+                <h2 class="font">H2-ROAD RAGE - AZERTYazerty01234</h2>
+                <h3 class="font">H3-ROAD RAGE - AZERTYazerty01234</h3>
+                <p class="font">P-ROAD RAGE - AZERTYazerty0123</p>
+            </div>
+        </div>
+        <div class="typography-section cabin">
+            <h2>Typographie Cabin</h2>
+            <div class="typo-example">
+                <h1 class="font">H1-ROAD RAGE - AZERTYazerty01234</h1>
+                <h2 class="font">H2-ROAD RAGE - AZERTYazerty01234</h2>
+                <h3 class="font">H3-ROAD RAGE - AZERTYazerty01234</h3>
+                <p class="font">P-ROAD RAGE - AZERTYazerty0123</p>
+            </div>
+        </div>
+        <div class="typography-section nunito">
+            <h2>Typographie Nunito Sans</h2>
+            <div class="typo-example">
+                <h1 class="font">H1-ROAD RAGE - AZERTYazerty01234</h1>
+                <h2 class="font">H2-ROAD RAGE - AZERTYazerty01234</h2>
+                <h3 class="font">H3-ROAD RAGE - AZERTYazerty01234</h3>
+                <p class="font">P-ROAD RAGE - AZERTYazerty0123</p>
+            </div>
+        </div>
+
+        <div class="logo-section">
+            <h2>Logo</h2>
+            <div class="logo-container">
+                <p class="logo roadrage">Up'n'Com</p>
+            </div>
+        </div>
+    </div>
+
+    {% block footer %}
+        
+    {% endblock %}
+    <style>
+
+
+.charte-graphique {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 2rem;
+    --font-heading: "Cabin", sans-serif;
+    --font-sans: "Nunito Sans", sans-serif;
+    --font-logo: "Road Rage", sans-serif;
+}
+
+.main-title h1 {
+    text-align: center;
+    color: #003F5D;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.colors-section {
+    margin-bottom: 3rem;
+}
+
+.colors-section h2 {
+    color: #003F5D;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.colors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.color-card {
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.color-card:hover {
+    transform: translateY(-5px);
+}
+
+.color-swatch {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.color-name {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #020202;
+}
+
+.color-code {
+    font-family: monospace;
+    background-color: #f1f1f1;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.roadrage{
+    font-family: var(--font-logo);
+}
+.cabin{
+    font-family: var(--font-heading);
+}
+.nunito{
+    font-family: var(--font-sans);
+}
+
+.typography-section {
+    margin-bottom: 3rem;
+}
+
+.typography-section h2 {
+    color: #003F5D;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.typo-example {
+    background-color: #f1f1f1;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.font {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #020202;
+}
+
+.font:last-child {
+    margin-bottom: 0;
+}
+
+.logo-section {
+    text-align: center;
+}
+
+.logo-section h2 {
+    color: #003F5D;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.logo-container {
+    background-color: #f1f1f1;
+    padding: 2rem;
+    border-radius: 8px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo{
+    font-size: 5rem;
+    color: #003F5D;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .charte-graphique {
+        padding: 1rem;
+    }
+    
+    .main-title h1 {
+        font-size: 2rem;
+    }
+    
+    .colors-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .typo-example {
+        padding: 1rem;
+    }
+}
+    </style>
+{% endblock %}

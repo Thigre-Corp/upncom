@@ -34,7 +34,7 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?User $auteur = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: 'EAGER')]
     #[ORM\JoinColumn(onDelete:"SET NULL", nullable:true)]
     private ?Image $imagePrincipale = null;
 

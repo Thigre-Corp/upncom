@@ -36,4 +36,8 @@ final class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/charte', name: 'charte_graphique')]
+    public function charte(): Response{
+        return $this->render('\home\charte-graphique.html.twig');
+    }
 }

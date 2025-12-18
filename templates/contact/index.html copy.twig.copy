@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Up'n'Com: Contactez-nous!{% endblock %}
+{% block meta_description %}
+<meta name="description" content="Up'n'Com, pour prendre contact avec nous et organiser votre communication !">
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('/scripts/api-geo.js') }}" defer></script>
+{% endblock %}
+
+
+{% block body %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+<section class="hero">
+    <div class="hero-content">
+        <video autoplay muted loop poster="{{ asset('videos/herovideo-poster.webp')}}">
+            <source src="{{ asset('videos/herovideo.mp4') }}" type="video/mp4" />
+        </video>
+    </div>
+</section>
+
+<section class="container">
+    <h1>Contactez-nous !!!</h1>
+    <div class="contactContainer">
+        <div class="contactForm">
+            {{ form_start(form )}}
+            {{ form_row(form.raisonSociale) }}
+            {{ form_row(form.nomContact) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.telephone) }}
+            {{ form_row(form.contenu) }}
+            {{ form_row(form.cp) }}
+            <div class="mb-3 ville inactive">
+                {{ form_label(form.ville) }}
+                {{ form_widget(form.ville) }}
+            </div>
+            {{ form_row(form.accepteNewsletter) }}
+            {{ form_row(form.rgpd) }}
+            {{ form_row(form.envoyer, {'label': 'Envoyer le message'}) }}
+            {{ form_end(form) }}
+        </div>
+        <div class="contactMap">
+            <div class="googlemaps_embed" data-width="100%" data-height="100%"
+                id="!1m18!1m12!1m3!1d2682.6069580761!2d7.349902599999998!3d47.7502803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47919b552dd92e0f%3A0xb27c5dc416b2e7a5!2sUp&#39;n&#39;Com%20-%20Sophie%20GRELL%20WIRTZ!5e0!3m2!1sfr!2sfr!4v1759993943813!5m2!1sfr!2sfr">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

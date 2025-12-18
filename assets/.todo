@@ -2,11 +2,6 @@ dans articles/index:
 - faire un truc sympa avec la recherche/nuage de TAG et pagination.
 
 
-
-retravailler la fonction de recherche:
-- OK dans titre et tag, mais bug - voir csrf/GET (reprendre code <select> villes ??? )
-- contrôler Entity/Model/SearchData.... 'page' inutilisé. Nécessaire ?
-
 dans articles/new|edit:
 - mise en page
 - ajout éditeur WYSIWYG
