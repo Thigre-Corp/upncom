@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="250" height="250" version="1.1" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+	<defs>
+		<style>.webappli_svg {
+        fill: none;
+        stroke:inherit;
+    	stroke-miterlimit: 0;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 6px;
+      }</style>
+	</defs>
+	<g transform="matrix(1.0833 0 0 1.0884 -.14558 .15312)">
+		<path class="webappli_svg" d="m227.9 114.71c0-61.771-50.312-111.84-112.38-111.84-62.072 0-112.37 50.068-112.37 111.84 0 61.771 50.312 111.84 112.38 111.84"/>
+		<path class="webappli_svg" d="m125.87 3.56s33.51 44.12 33.51 111.15m-55.85 111.15s-33.51-44.12-33.51-111.15 33.51-111.15 33.51-111.15m-93.5 150.25h104.67m-104.67-78.2h209.34"/>
+		<path class="webappli_svg" d="m199.83 160.39c5.7879 2.9256 6.1366 11.176 0.54161 12.298l-28.294 5.6396-10.631 26.815c-2.1073 5.3254-10.162 3.4734-12.004-2.7344l-19.746-66.904c-1.5592-5.248 2.9679-9.0206 7.8549-6.5411l62.288 31.435-0.01 8.4e-4z"/>
+	</g>
+</svg>

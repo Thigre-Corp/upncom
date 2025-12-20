@@ -9,7 +9,7 @@
 
       .cls-1, .cls-2 {
         fill: none;
-        stroke: #000;
+        stroke:black;
       }
 
       .cls-2 {

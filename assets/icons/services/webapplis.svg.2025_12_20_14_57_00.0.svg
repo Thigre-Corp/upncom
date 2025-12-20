@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Calque_2"
+   data-name="Calque 2"
+   viewBox="0 0 231 229.42"
+   version="1.1"
+   sodipodi:docname="webapplis.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050" />
+  <defs
+     id="defs1">
+    <style
+       id="style1">
+.cls-1 { 
+    stroke-width:4px;
+}
+.cls-1, .cls-2 { fill: none;        stroke: red; }
+.cls-2 { stroke-linecap: round;        stroke-linejoin: round;        stroke-width: 6px; }
+</style>
+  </defs>
+  <g
+     id="Calque_2-2"
+     data-name="Calque 2">
+    <g
+       id="uuid-88202b4b-c9b4-4452-92f9-584ac4b6dd41"
+       data-name="Calque 2-2">
+      <g
+         id="g3">
+        <path
+           class="cls-2"
+           d="M 226.41,114.71 C 226.41,53.01 176.4,3 114.7,3 53,3 3,53.01 3,114.71 c 0,61.7 50.01,111.71 111.71,111.71"
+           id="path1"
+           style="display:inline" />
+        <path
+           class="cls-2"
+           d="m 125.87,3.56 c 0,0 33.51,44.12 33.51,111.15 m -55.85,111.15 c 0,0 -33.51,-44.12 -33.51,-111.15 0,-67.03 33.51,-111.15 33.51,-111.15 M 10.03,153.81 H 114.7 M 10.03,75.61 h 209.34"
+           id="path2"
+           style="display:inline" />
+        <path
+           class="cls-1  cls-2 "
+           d="m 225.05,180.81 c 5.52,3.4 5.17,11.65 -0.5,12.3 l -28.67,3.25 -12.86,25.83 c -2.55,5.13 -10.42,2.61 -11.73,-3.73 l -14.02,-68.32 c -1.11,-5.36 3.72,-8.74 8.38,-5.86 l 59.41,36.54 h -0.01 z"
+           id="path3"
+           style="display:inline" />
+      </g>
+    </g>
+  </g>
+</svg>

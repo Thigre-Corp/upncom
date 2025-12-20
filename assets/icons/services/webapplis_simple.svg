@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="webappli_svg"
+   viewBox="0 0 250 250"
+   version="1.1"
+   width="250"
+   height="250"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="webappli_defs1">
+    <style
+       id="webappli_style1">
+      .webappli_svg {
+        fill: none;
+        stroke:inherit;
+    	stroke-miterlimit: 0;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 6px;
+      }
+</style>
+  </defs>
+  <g
+     id="webappli_Calque_2-2"
+     transform="matrix(1.0832901,0,0,1.0883744,-0.1455812,0.1531238)">
+    <g
+       id="webappli_g3">
+      <path
+         class="webappli_svg"
+         d="m 227.90205,114.70949 c 0,-61.771475 -50.3115,-111.8394084 -112.38347,-111.8394084 -62.07198,0 -112.37342,50.0679334 -112.37342,111.8394084 0,61.77148 50.3115,111.83942 112.38348,111.83942"
+         id="webappli_path1" />
+      <path
+         class="webappli_svg"
+         d="m 125.87,3.56 c 0,0 33.51,44.12 33.51,111.15 m -55.85,111.15 c 0,0 -33.51,-44.12 -33.51,-111.15 0,-67.03 33.51,-111.15 33.51,-111.15 M 10.03,153.81 H 114.7 M 10.03,75.61 h 209.34"
+         id="webappli_path2" />
+      <path
+         class="webappli_svg"
+         d="m 199.828,160.388 c 5.78786,2.92563 6.13655,11.17568 0.54161,12.29825 l -28.29357,5.63965 -10.63072,26.81544 c -2.10727,5.32537 -10.1624,3.47344 -12.00373,-2.73436 l -19.74605,-66.9035 c -1.5592,-5.24803 2.96792,-9.02056 7.85487,-6.54106 l 62.2884,31.4347 -0.01,8.4e-4 z"
+         id="webappli_path3" />
+    </g>
+  </g>
+</svg>
