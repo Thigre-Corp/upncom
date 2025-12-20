@@ -10,31 +10,21 @@
     ">
     {% set BgImage = asset('assets/uploads/'~ service.image ) %}
     <a href="{{ path('app_service_index')}}" class="frostedGlass">
-
-        <div class="service-card-bg parallax-image " style="background-image: url('{{ BgImage }}');">
-
-        </div>
-
-        <h3 class="service-card-title frostedGlass ">
-            <svg height="{{ FullCircle }}" width="{{ FullCircle }}" title="nom du service"
+        <h3 class="service-card-title ">
+            <svg height="{{ FullCircle }}" width="{{ FullCircle }}" title="{{ service.titre }}"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {{ FullCircle }} {{ FullCircle }}">
-                <path id="service-path-{{id}}" pathLength="2" d="
-                M 0, 0
-                a {{ BaseCircle / 2 }},{{ BaseCircle / 2}} 0 1,1 {{ BaseCircle }}, 0
-                a {{ BaseCircle / 2 }},{{ BaseCircle / 2}}  0 1,1 {{ BaseCircle * -1}}, 0
-                " fill="none" transform="translate( {{ OffsetCircle }}, {{ FullCircle / 2 }} )"></path>
-                <text>
-                    <textPath href="#service-path-{{id}}" startOffset="25%" text-anchor="middle"
-                        dominant-baseline="middle">
+                <path id="servicePath{{id}}" d="
+                M {{ FullCircle / 2 - 1 }} {{ FullCircle - OffsetCircle }}
+                A {{ BaseCircle / 2 }} {{ BaseCircle / 2}} 0 1 1 {{ FullCircle / 2 }} {{ FullCircle - OffsetCircle }}
+                " fill-opacity="0"></path>
+                <text text-anchor="middle" dominant-baseline="middle">
+                    <textPath href="#servicePath{{id}}" startOffset="50%">
                         {{ service.titre }}
                     </textPath>
                 </text>
             </svg>
         </h3>
-        <div class="service-card-body parallax-image" style="
-            background-image: url('{{ BgImage }}');
-        ">
-        </div>
+        <twig:imagesComponent image='{{ service.image }}' class="service-card-body"></twig:imagesComponent>
     </a>
     {% if page == 'service-index' %}
     <div class="service-card-content">
