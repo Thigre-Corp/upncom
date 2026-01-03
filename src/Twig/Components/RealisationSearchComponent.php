@@ -95,8 +95,8 @@ class RealisationSearchComponent
     // #[ExposeInTemplate('hasMore')]
     public function hasMore(): bool
     {
-        dump('nbRealisations=' . $this->nbRealisations);
-        dump('nbPages=' . $this->page * self::PER_PAGE);
+        // dump('nbRealisations=' . $this->nbRealisations);
+        // dump('nbPages=' . $this->page * self::PER_PAGE);
         return (($this->nbRealisations) > ($this->page * self::PER_PAGE));
     }
 

@@ -590,7 +590,7 @@ dialog::backdrop {
     .service-card-body {
         grid-area: stack;
         width: auto;
-        height: var(--size);
+        height: calc(var(--size) * var(--ratio));
         inset: 0;
         clip-path: circle(calc(var(--size) * (var(--ratio)) /2 - (var(--fs-lg))) at center);
         z-index: 1;
