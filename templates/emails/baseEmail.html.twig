@@ -4,41 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Up'n'Com - La NewsLetter</title>
+<title>
+    {% block title %}
+            Up'n'Com
+    {% endblock name %}
+</title>
     <style>
         * {
             color: black;
-            background-color: antiquewhite;
+            background-color: white;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        svg {
+            fill: #003F5D;
         }
     </style>
 </head>
 
 <body>
-    <h1>Up'n'Com - Votre demande de contact</h1>
+    <div class="logo">
+        <svg title="{{image.altText}}" class="{{class}}" role="img">
+            <use href="{{ asset('assets/icons/upncom.svg')}}"></use>
+        </svg>
+    </div>
+    {% block body %}
+        
 
-    <p>Merci pour votre message. Il ne reste plus qu'une étape pour que celui-ci nous parvienne.</p>
-    <p>Veuillez cliquer sur le lien ci-dessous pour valider votre adresse mail et envoyer votre message :</p>
-        <a href="{{ absolute_url(path('app_contact_validate', {id: contact.id, token: contact.token } ))}}">{{
-        absolute_url(path('app_contact_validate', {id: contact.id, token:contact.token }))}}</a>
-    </p>
+    <h1>Up'n'Com - erreur lié à notre service de mail automatique</h1>
 
-    <p>
-        Résumé de votre demande:
-        <div>Nom du contact: {{ contact.nomContact }}</div>
-        <div>Contenu du message: {{ contact.contenu }}</div>
-    </p>
+    <p>Merci de prendre contact avec nous par mail en répondant directement à cet email.</p>
 
-    {% if subscriber is not null %}
-    <p>En cliquant sur le lien précédant, vous valider également votre souhaite de vous abonner à la newsletter</p>
+    {% endblock name %}
 
-    <p>Vous pourrez, si vous le souhaitez, vous désabonner à chaque instant grâce au lien suivant</p>
-    <a href="{{ absolute_url( path('app_newsletters_unsubscribe', {id: subscriber.id, token: subscriber.token } ))}}">
-        {{ absolute_url(path('app_newsletters_unsubscribe', {id: subscriber.id, token:subscriber.token } ))}}
-    </a>
-    <p><small>Ce lien ne sera actif qu'après votre validation</small></p> 
-    {% endif %}
-    <p><small>Si vous ne valider pas votre message sous 24h, 
-        ce dernier ainsi que toutes les données transmises seront automatiquement supprimées sous 48h</small></p>
 </body>
 
 </html>
