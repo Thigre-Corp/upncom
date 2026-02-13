@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /*fonts -------------------*/
 @font-face {
     font-family: "fontAwesome";
@@ -74,6 +76,12 @@ body {
     color: var(--color-text-primary);
     background-color: var(--color-bg-primary);
     line-height: 1.6;
+    position: relative;
+    grid-template-columns: 1fr min(90svw, 1200px) 1fr;
+}
+
+body>main{
+    grid-column: 2/-2;
     position: relative;
 }
 
@@ -257,7 +265,7 @@ input[type=checkbox]:checked+.alert {
     position: relative;
     top: 0;
     overflow-x: hidden;
-    max-width: 100svw;
+    max-width: 100%;
 }
 
 .hero-content video {
@@ -272,6 +280,9 @@ input[type=checkbox]:checked+.alert {
 
 main {
     position: relative;
+    display: grid;
+    grid-template-columns:  1fr [margin-left]  ;
+
 }
 
 /*footer--------------------------------------------------------------------------------------------------------------------------------------*/
