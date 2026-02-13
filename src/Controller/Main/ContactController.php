@@ -48,21 +48,23 @@ final class ContactController extends AbstractController
                     ->setIsValid(false);
                 $entityManager->persist($subscriber);
             }
+            else{
+                $subscriber = 'noNews';
+            }
                 $entityManager->flush();
             // generate a signed url and email it to the user
             $email = (new TemplatedEmail())
                 ->from('no-reply@upncom.fr')
                 ->to($contact->getEmail())
-                ->subject($contact->getNomContact() . ', pensez à valider votre adresse mail pour qu\' Up\'n\'Com reçoive votre meessage !')
+                ->subject($contact->getNomContact() . ', Up\'n\'Com attend votre validation pour recevoir votre message !')
                 ->htmlTemplate('emails/contactValider.html.twig')
                 ->context([
                     'contact' => $contact,
-                    'subscriber' => $subscriber ?? false,
+                    'subscriber' => $subscriber,
                 ]);
 
             $this->mailer->send($email);
-            $this->addFlash('message', 'Surveillez votre boîte mail, vous aller recevoir un email pour confirmer votre inscription à la newsletter d\' Up\'n\'Com');
-
+            $this->addFlash('message', 'Surveillez votre boîte mail, vous allez recevoir un email pour confirmer votre demande à Up\'n\'Com');
 
             return $this->redirectToRoute('home');
         }
@@ -78,7 +80,7 @@ final class ContactController extends AbstractController
     {
         if ($contact->getToken() != $token) {
             $this->addFlash('message', 'Votre demande \'a pu être réalisée.
-                Si vous avez cliqué sur un lien, tentez de faire un copie/coller de ce dernier
+                Si vous avez cliqué sur un lien, tentez de faire un copier/coller de ce dernier
                 directement dans la barre d\'adresse de votre navigateur');
             return $this->redirectToRoute('home');
         }

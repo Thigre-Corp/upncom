@@ -1,46 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>
-    {% block title %}
-            Up'n'Com
-    {% endblock name %}
-</title>
+{% apply inline_css %}
     <style>
         * {
             color: black;
             background-color: white;
+            font-family: sans-serif;
         }
-        body{
+
+        body {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        svg {
-            fill: #003F5D;
+
+        h1 {
+            color: #003F5D;
+            font-weight: bold;
         }
     </style>
-</head>
 
-<body>
-    <div class="logo">
-        <svg title="{{image.altText}}" class="{{class}}" role="img">
-            <use href="{{ asset('assets/icons/upncom.svg')}}"></use>
-        </svg>
-    </div>
+    <img src"{{ email.image('@icons/mail_upncom.png') }}" alt="logo d'Up'n'Com" />
+    <h1>Up'n'Com</h1>
+    <br>
     {% block body %}
-        
 
-    <h1>Up'n'Com - erreur lié à notre service de mail automatique</h1>
+    <h2>erreur lié à notre service de mail automatique</h2>
+    <p>Merci de prendre contact avec nous par mail en nous ecrivant à <a href="mailto:contact@upncom.fr">contact@upncom.fr</a> .</p>
 
-    <p>Merci de prendre contact avec nous par mail en répondant directement à cet email.</p>
+    {% endblock %}
 
-    {% endblock name %}
-
-</body>
-
-</html>
+{% endapply %}

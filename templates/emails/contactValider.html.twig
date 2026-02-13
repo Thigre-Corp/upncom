@@ -1,33 +1,30 @@
-{% extends 'baseEmail.html.twig' %}
-
-{% block title %}Up'n'Com : Valider votre mail concernant votre demande de contact{% endblock %}
+{% extends 'emails/baseEmail.html.twig' %}
 
 {% block body %}
-    <h1>Up'n'Com - Votre demande de contact</h1>
+<h2>Up'n'Com - Votre demande de contact</h2>
 
-    <p>Merci pour votre message. Il ne reste plus qu'une étape pour que celui-ci nous parvienne.</p>
-    <p>Veuillez cliquer sur le lien ci-dessous pour valider votre adresse mail et envoyer votre message :</p>
-        <a href="{{ absolute_url(path('app_contact_validate', {id: contact.id, token: contact.token } ))}}">{{
-        absolute_url(path('app_contact_validate', {id: contact.id, token:contact.token }))}}</a>
-    </p>
+<p>Merci pour votre message. Il ne reste plus qu'une étape pour que celui-ci nous parvienne.</p>
+<p>Veuillez cliquer sur le lien ci-dessous pour valider votre adresse mail et envoyer votre message :</p>
+<a href="{{ absolute_url(path('app_contact_validate', {id: contact.id, token: contact.token } ))}}">{{
+    absolute_url(path('app_contact_validate', {id: contact.id, token:contact.token }))}}</a>
+</p>
 
-    <p>
-        Résumé de votre demande:
-        <div>Nom du contact: {{ contact.nomContact }}</div>
-        <div>Contenu du message: {{ contact.contenu }}</div>
-    </p>
-    {% if subrsciber is defined %}
+<p>
+    Résumé de votre demande:
+<div>Nom du contact: {{ contact.nomContact }}</div>
+<div>Contenu du message: {{ contact.contenu }}</div>
+</p>
 
-        {% if subscriber is not null %}
-            <p>En cliquant sur le lien précédant, vous valider également votre souhaite de vous abonner à la newsletter</p>
-
-            <p>Vous pourrez, si vous le souhaitez, vous désabonner à chaque instant grâce au lien suivant</p>
-            <a href="{{ absolute_url( path('app_newsletters_unsubscribe', {id: subscriber.id, token: subscriber.token } ))}}">
-                {{ absolute_url(path('app_newsletters_unsubscribe', {id: subscriber.id, token:subscriber.token } ))}}
-            </a>
-            <p><small>Ce lien ne sera actif qu'après votre validation</small></p> 
-        {% endif %}
-    {% endif %}
-    <p><small>Si vous ne valider pas votre message sous 24h, 
-        ce dernier ainsi que toutes les données transmises seront automatiquement supprimées sous 48h</small></p>
+{% if subscriber != 'noNews' %}
+    <p>En cliquant sur le lien précédant, vous valider également votre souhaite de vous abonner à la newsletter</p>
+    <small>
+        <p>Vous pourrez, si vous le souhaitez, vous désabonner à chaque instant grâce au lien suivant</p>
+        <a href="{{ absolute_url( path('app_newsletters_unsubscribe', {id: subscriber.id, token: subscriber.token } ))}}">
+            {{ absolute_url(path('app_newsletters_unsubscribe', {id: subscriber.id, token:subscriber.token } ))}}
+        </a>
+        <p>Ce lien ne sera actif qu'après votre validation</p>
+    </small>
+{% endif %}
+    <p><small>Si vous ne valider pas votre message sous 24h,
+            ce dernier ainsi que toutes les données transmises seront automatiquement supprimées sous 48h</small></p>
 {% endblock %}

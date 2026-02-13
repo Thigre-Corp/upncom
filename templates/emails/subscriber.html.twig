@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends 'emails/baseEmail.html.twig' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Up'n'Com - La NewsLetter</title>
-    <style>
-        * {
-            color: black;
-            background-color: antiquewhite;
-        }
-    </style>
-</head>
-
-<body>
-    <h1>Up'n'Com - La NewsLetter</h1>
+{% block body %}
+    <h2>Up'n'Com - La NewsLetter</h2>
 
     <p>Merci de vous être inscrit à notre newsletter. Votre inscription sera définitvement validée une fois que vous
         aurez cliqué sur le lien ci-dessous</p>
     <a href="{{ absolute_url(path('app_newsletters_validate', {id: subscriber.id, token: subscriber.token } ))}}">{{
         absolute_url(path('app_newsletters_validate', {id: subscriber.id, token:subscriber.token }))}}</a>
-
+<small>
     <p>Vous pourrez, si vous le souhaitez, vous désabonner à chaque instant grâce au lien suivant</p>
     <a href="{{ absolute_url( path('app_newsletters_unsubscribe', {id: subscriber.id, token: subscriber.token } ))}}">
         {{ absolute_url(path('app_newsletters_unsubscribe', {id: subscriber.id, token:subscriber.token } ))}}</a>
-
-</body>
-
-</html>
+</small>
+{% endblock %}
